@@ -45,7 +45,21 @@ to take part in final battle against powers of evil.
 - **Java v0.11 (recommended to play):** `cd nwr-dist-v0.11.0-win && ./play.sh`
 - **C# source (Mono):** `./play-cs.sh` from repo root (requires `mono-complete`, sibling `BSLib`/`ZRLib`)
 - **A/B test protocol:** [dev_info/ab-test-java-vs-cs.txt](dev_info/ab-test-java-vs-cs.txt)
-  
+
+### C# sound (SDL_mixer)
+
+Audio uses **SDL2_mixer** (via ZRLib) and **NVorbis** for OGG sound effects. Install:
+
+```bash
+sudo apt install libsdl2-mixer-2.0-0
+```
+
+Place game audio next to `NWR.exe` at repo root after staging:
+
+- `sfx/` — sound effects and ambient loops (gitignored; not in this repo)
+- `songs/` — background music tracks referenced as `songs/*.ogg` under `sfx/`
+
+If you have a full release with `sfx/`, copy or symlink it beside `NWR.exe`. `play-cs.sh` can symlink from `nwr-dist-v0.11.0-win/sfx` when that folder exists.
 ## Authors
 
 Project, coding and graphics processing:

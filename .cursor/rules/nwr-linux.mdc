@@ -20,13 +20,13 @@ NWR_FORCE_BUILD=1 ./play-cs.sh   # force rebuild
 cd nwr-dist-v0.11.0-win && ./play.sh   # Java baseline (Wine + JRE 8)
 ```
 
-Log: `Ragnarok.log` at repo root. Sound on Linux is broken until `feature/linux-sound` (FMOD Ex needs `libfmodex.so` + dllmap + `sfx/`).
+Log: `Ragnarok.log` at repo root. Sound uses **SDL2_mixer** (`libsdl2-mixer-2.0-0`) + `sfx/` assets (see README).
 
 ## Code conventions
 
 - File paths: use `Path.Combine` / `Path.Combine(appPath, "languages", …)` — never hardcode `languages\` (breaks on Linux; `\e` etc. are escape sequences).
 - Match existing style in touched files; minimal diffs.
-- `SoundEngine`: guard FMOD calls when `!fSndReady` — missing FMOD must not break gameplay.
+- `SoundEngine`: SDL_mixer backend; guard when `!fSndReady` — missing audio must not break gameplay.
 - NPC scripts: Jint in `NWMainWindow` / `ScriptCreature`; empty script = pass in `NPCWindow.CheckScript`.
 
 ## Do not commit
@@ -39,7 +39,7 @@ Log: `Ragnarok.log` at repo root. Sound on Linux is broken until `feature/linux-
 ## Branches (this fork)
 
 - `master`: landed Linux playability fixes
-- `feature/linux-sound`: experimental FMOD / `NWR.exe.config` dllmap / sfx staging
+- `feature/linux-sound`: SDL_mixer sound backend (replaces FMOD Ex)
 
 ## A/B notes
 
