@@ -126,14 +126,22 @@ namespace NWR.Effects
                         InvokeEffect(eid, null, Source, mode, EffectAction.ea_Instant, ext);
                     } else {
                         NWCreature creature = (NWCreature)Owner;
-                        int lid = (creature.CurrentField).LandID;
+                        NWField field = creature.CurrentField;
+                        if (field == null) {
+                            return;
+                        }
+                        int lid = field.LandID;
                         bool LocusValid = (eid == EffectID.eid_Relocation) && creature.IsPlayer && creature.Effects.FindEffectByID(EffectID.eid_LocusMastery) != null && lid != GlobalVars.Land_Valhalla && lid != GlobalVars.Land_Vigrid && lid != GlobalVars.Land_Bifrost && lid != GlobalVars.Land_Nidavellir && lid != GlobalVars.Land_Niflheim && lid != GlobalVars.Land_Ocean;
                         if (LocusValid) {
                             EffectExt ext = new EffectExt();
                             ext.ReqParams = new EffectParams(EffectParams.ep_Place);
-                            GlobalVars.nwrWin.InitTarget(EffectID.eid_Relocation, null, mode, ext);
+                            GlobalVars.nwrHost.InitTarget(EffectID.eid_Relocation, null, mode, ext);
                         } else {
-                            creature.UseEffect(eid, Source, mode, null);
+                            InvokeMode useMode = mode;
+                            if (eid == EffectID.eid_Relocation && mode == InvokeMode.im_ItSelf) {
+                                useMode = InvokeMode.im_Use;
+                            }
+                            creature.UseEffect(eid, Source, useMode, null);
                         }
                     }
                 }
@@ -204,14 +212,6 @@ namespace NWR.Effects
             }
 
             try {
-                if (creature != null) {
-                    GameEvent @event = new GameEvent(GameSpace.Instance, null);
-                    @event.CLSID = (int)effectID;
-                    @event.SetPos(creature.PosX, creature.PosY);
-                    GlobalVars.nwrWin.DoEvent(EventID.event_EffectSound, null, null, @event);
-                    @event.Dispose();
-                }
-
                 ItemState state;
                 if (source != null && source is Item) {
                     state = ((Item)source).State;
@@ -224,6 +224,18 @@ namespace NWR.Effects
                     IEffectProc proc = EffectsData.dbEffectProcs[(int)effectID].Proc;
                     if (proc != null) {
                         proc.Invoke(effectID, (NWCreature)creature, source, state, invokeMode, ext);
+                    }
+                }
+
+                if (creature != null) {
+                    try {
+                        GameEvent @event = new GameEvent(GameSpace.Instance, null);
+                        @event.CLSID = (int)effectID;
+                        @event.SetPos(creature.PosX, creature.PosY);
+                        GlobalVars.nwrHost.DoEvent(EventID.event_EffectSound, null, null, @event);
+                        @event.Dispose();
+                    } catch (Exception sfxEx) {
+                        Logger.Write("Effect.invokeEffect() sound: " + sfxEx.Message);
                     }
                 }
             } catch (Exception ex) {

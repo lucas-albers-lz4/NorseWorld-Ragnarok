@@ -1,0 +1,93 @@
+NorseWorld Ragnarok — Save/Load test protocol (C# Mono / Linux)
+==============================================================
+
+Goal
+----
+Verify save/load works reliably so later crash reproduction can use stable saves.
+
+Prerequisites
+-------------
+- ./play-cs.sh from repo root (Mono + xbuild)
+- Dedicated test slots **8** and **9** (avoid overwriting real games)
+- save/ is gitignored; files appear beside NWR.exe at repo root
+
+Save format (slot N = 0..9)
+----------------------------
+  save/rgame_N.rgp   player + inventory/effects (version 1.21)
+  save/rgame_N.rgt   time + all terrain layers + volatiles
+  save/rgame_N.rgj   journal
+
+UI: in-game menu Save/Load, or startup Load. Pick slot with number key 0-9
+or click slot row in files window.
+
+After each test run
+-------------------
+  grep -E 'playerLoad|terrainsLoad|journalLoad|saveGame|loadGame|LoadFromStream|Critical error' Ragnarok.log
+
+After save to slot N:
+  ./dev_info/verify-save.sh N
+
+Or manually:
+  ls -la save/rgame_N.*
+
+Log success markers
+-------------------
+  playerLoad(): ok
+  terrainsLoad(): ok
+  journalLoad(): ok
+
+Failure markers
+---------------
+  saveGame.IO()          — often overwrite to occupied slot (pre-fix)
+  terrainsLoad(): fail   — truncated or mismatched .rgt
+  NWGameSpace.loadGame() — load aborted
+  FilesWindow.prepareFile(): Critical error!
+
+Test matrix
+-----------
+
+| ID | Scenario | Steps | Pass criteria |
+|----|----------|-------|---------------|
+| S1 | Fresh save | New game → village → enter land → menu Save → slot 8 | 3 files exist, non-zero; no saveGame.IO() |
+| S2 | Load from menu | Quit to startup → Load → slot 8 | Game restores; playerLoad + terrainsLoad ok |
+| S3 | Re-save same slot | Play → Save → slot 8 again | Overwrites cleanly; no saveGame.IO() |
+| S4 | In-game round-trip | Save slot 9 → play → Load slot 9 | HP/inventory/position match |
+| S5 | Multi-slot | Save slots 0 and 1 with different progress | Both load; list shows names |
+| S6 | Container stress | Bag/quiver/ring/corpse with contents → save/load | No Item/EntityList errors; contents kept |
+| S7 | Combat/effects | Fight, effects active → save/load | Effects intact; no loadFromStream errors |
+| S8 | Delete slot | Delete icon on slot 8 in files window | rgame_8.* removed |
+
+Results
+-------
+
+Baseline (pre-fix, code review 2026-06-28)
+  S1  PASS expected — CreateNew works on empty slot
+  S2  PASS expected — LoadGame path standard
+  S3  FAIL confirmed — SaveGame uses FileMode.CreateNew; second save logs saveGame.IO()
+
+After fix (2026-06-28)
+  S1  PASS — verify-save.sh + Create mode
+  S2  PASS — load markers; terrain IO errors now propagate
+  S3  PASS — FileMode.Create on .rgp/.rgt; Journal.Save uses Create
+  S4  PASS — save-load-roundtrip scenario (headless snapshot match)
+  S5  pending manual — multi-slot name UI
+  S6  PASS — container-roundtrip scenario (Flask + Torch fixture)
+  S7  PASS — effect-persist scenario (prowling fixture)
+  S8  PASS — save-erase scenario (headless EraseGame)
+
+Harness automation (./dev_info/run-tests.sh)
+  save-load-roundtrip, save-overwrite, save-erase, player-metadata — automated
+  container-roundtrip, effect-persist, wait-turns, item-use-potion — automated
+
+Fixes applied in this pass
+--------------------------
+- NWGameSpace.SaveGame: FileMode.CreateNew → Create (.rgp, .rgt)
+- Journal.Save: FileMode.CreateNew → Create (.rgj)
+- LoadGame: rethrow terrain IOException; throw if terrainsLoad(): fail
+- Item.LoadFromStream: CLSID = CLSID after base load (populates fEntry)
+- NWCreature.LoadFromStream: CLSID = CLSID after base load (populates fEntry)
+
+Notes
+-----
+- Quit-time exceptions during shutdown may still log; defer if saves load clean.
+- Java v0.11 save compatibility not tested here.

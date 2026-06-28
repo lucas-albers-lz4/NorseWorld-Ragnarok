@@ -779,7 +779,7 @@ namespace NWR.Items
         {
             string prefix = BaseLocale.GetStr(fEntry.Prefix);
 
-            if (GlobalVars.nwrWin.LangExt.Equals("ru")) {
+            if (GlobalVars.nwrHost.LangExt.Equals("ru")) {
                 Gender wordGender = Gender.gUndefined;
                 switch (kind) {
                     case ItemKind.ik_Potion:
@@ -897,6 +897,7 @@ namespace NWR.Items
         public override void LoadFromStream(BinaryReader  stream, FileVersion version)
         {
             base.LoadFromStream(stream, version);
+            CLSID = CLSID;
 
             Count = (ushort)StreamUtils.ReadWord(stream);
             if (Container) {

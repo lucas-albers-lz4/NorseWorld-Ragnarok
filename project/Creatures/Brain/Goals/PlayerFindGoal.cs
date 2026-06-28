@@ -41,7 +41,7 @@ namespace NWR.Creatures.Brain.Goals
             if (MathHelper.Distance(playerPt, self.Location) == 1) {
                 int idx = RandomHelper.GetBoundedRnd(RS.rs_Diary_First, RS.rs_Diary_Last);
                 string s = BaseLocale.Format(RS.rs_RavenSaid, BaseLocale.GetStr(idx));
-                GlobalVars.nwrWin.ShowText(self, s, new LogFeatures(LogFeatures.lfDialog));
+                GlobalVars.nwrHost.ShowText(self, s, new LogFeatures(LogFeatures.lfDialog));
 
                 self.State = CreatureState.Dead;
                 IsComplete = true;

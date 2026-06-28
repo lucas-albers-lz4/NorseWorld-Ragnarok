@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{B1C2D3E4-F5A6-7890-ABCD-EF1234567890}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NWR.Tests</RootNamespace>
+    <AssemblyName>NWR.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <StartupObject>NWR.Tests.TestProgram</StartupObject>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <Optimize>True</Optimize>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="TestBootstrap.cs" />
+    <Compile Include="TestProgram.cs" />
+    <Compile Include="ScenarioRunner.cs" />
+    <Compile Include="Integration\HarnessBootstrap.cs" />
+    <Compile Include="Integration\LogAssert.cs" />
+    <Compile Include="Integration\PlayerSnapshot.cs" />
+    <Compile Include="Integration\TestWorld.cs" />
+    <Compile Include="Integration\Scenarios\SaveLoadScenarios.cs" />
+    <Compile Include="Integration\Scenarios\GameplayScenarios.cs" />
+    <Compile Include="Integration\Scenarios\FixtureBuilder.cs" />
+    <Compile Include="Serialization\FileHeaderTests.cs" />
+    <Compile Include="Serialization\JournalStreamTests.cs" />
+    <Compile Include="Serialization\ItemStreamTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NWR.csproj">
+      <Project>{6E912A66-571D-4847-A914-23B149068801}</Project>
+      <Name>NWR</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\BSLib\BSLib\BSLib.csproj">
+      <Project>{f657a1b7-c834-420a-b302-88460e3f6283}</Project>
+      <Name>BSLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\ZRLib\ZRLib\ZRLib.csproj">
+      <Project>{da3cb263-9751-421b-8ae5-2915d3e26096}</Project>
+      <Name>ZRLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>

@@ -43,7 +43,7 @@ using ZRLib.Map;
 
 namespace NWR.GUI
 {
-    public sealed class NWMainWindow : BaseMainWindow
+    public sealed class NWMainWindow : BaseMainWindow, INwrHost
     {
         // graphics styles
         public const int RGS_CLASSIC = 0;
@@ -175,6 +175,9 @@ namespace NWR.GUI
         {
             get {
                 return fGameState;
+            }
+            set {
+                fGameState = value;
             }
         }
 
@@ -1253,6 +1256,8 @@ namespace NWR.GUI
                 fLocale = new Locale();
 
                 NWResourceManager.Load();
+
+                GlobalVars.nwrHost = this;
 
                 fGameSpace = new NWGameSpace(this);
 
@@ -2588,6 +2593,10 @@ namespace NWR.GUI
         public void PlaySound(string fileName, int kind, int sX, int sY)
         {
             if (string.IsNullOrEmpty(fileName)) {
+                return;
+            }
+
+            if (fGameSpace == null || fGameSpace.Player == null || fSoundEngine == null) {
                 return;
             }
 

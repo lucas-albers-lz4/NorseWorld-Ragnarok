@@ -40,7 +40,7 @@ namespace NWR.Game
         {
             get {
                 string s;
-                if (GlobalVars.nwrWin.LangExt == "en") {
+                if (GlobalVars.nwrHost.LangExt == "en") {
                     s = " to ";
                 } else {
                     s = " ";

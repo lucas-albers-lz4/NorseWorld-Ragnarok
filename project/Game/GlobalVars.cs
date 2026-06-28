@@ -25,6 +25,7 @@ namespace NWR.Game
 {
     public static class GlobalVars
     {
+        public static INwrHost nwrHost;
         public static NWMainWindow nwrWin;
         public static NWGameSpace nwrGame;
         public static NWDatabase nwrDB;

@@ -45,7 +45,7 @@ namespace NWR.Effects.Rays
 
         public void Exec(NWCreature creature, EffectID effectID, InvokeMode invokeMode, EffectExt ext, string rayMsg)
         {
-            GlobalVars.nwrWin.ShowText(creature, rayMsg);
+            GlobalVars.nwrHost.ShowText(creature, rayMsg);
 
             int i = Effect.GetMagnitude(effectID);
             EffectTarget target = EffectTarget.et_None;

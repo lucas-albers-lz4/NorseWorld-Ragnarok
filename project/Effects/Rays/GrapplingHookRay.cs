@@ -53,7 +53,7 @@ namespace NWR.Effects.Rays
                             self.Effects.Remove(ef);
                         }
                     }
-                    GlobalVars.nwrWin.ShowText(self, BaseLocale.GetStr(RS.rs_YouPullForward));
+                    GlobalVars.nwrHost.ShowText(self, BaseLocale.GetStr(RS.rs_YouPullForward));
                 }
                 aContinue = false;
             }

@@ -232,6 +232,7 @@
     <Compile Include="Game\FileHeader.cs" />
     <Compile Include="Game\GameEvent.cs" />
     <Compile Include="Game\IHost.cs" />
+    <Compile Include="Game\INwrHost.cs" />
     <Compile Include="Game\IntList.cs" />
     <Compile Include="Game\Locale.cs" />
     <Compile Include="Game\NWDateTime.cs" />

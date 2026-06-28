@@ -1,0 +1,90 @@
+NorseWorld Ragnarok — Test Harness Platform
+===========================================
+
+Overview
+--------
+Automated regression tests run headless on Linux/Mono (no SDL video, no sound).
+
+  Tier B — NWR.Tests (NUnit): serialization round-trips in memory
+  Tier C — NWR.Tests scenarios: save/load and gameplay via INwrHost + fixtures
+
+Run everything from repo root:
+
+  ./dev_info/run-tests.sh
+
+Or manually after building:
+
+  mono NWR.Tests.exe              # unit tests only
+  mono NWR.Tests.exe --all        # integration scenarios
+  mono NWR.Tests.exe save-load-roundtrip
+
+Architecture
+------------
+  INwrHost          — host interface (progress, messaging, events, options)
+  GlobalVars.nwrHost — game logic uses this (Player, NWGameSpace, Effects, …)
+  GlobalVars.nwrWin  — GUI only (NWMainWindow)
+  TestHost / HeadlessHost — no-op UI, capture messages, queue InQueue events
+
+Bootstrap order (critical):
+
+  1. new Locale()
+  2. NWResourceManager.Load()
+  3. locale.SetLang("English")
+  4. GlobalVars.nwrHost = TestHost or HeadlessHost
+  5. new NWGameSpace(null)
+
+NWR.exe must live beside resources/ and languages/ at repo root (same as play-cs.sh).
+
+Fixtures (dev_info/fixtures/save/)
+----------------------------------
+Golden saves committed for CI. Slot number in filenames is always 8; scenarios copy
+to save/rgame_8.* at runtime.
+
+  slot8/      — village in-world save (S2, S3, S4, S8)
+  container/  — slot8 + Flask with Torch inside (S6)
+  effects/    — slot8 + prowling effect on player (S7)
+
+Format: RGF version 1.21 (see NWGameSpace.RGF_Version). Re-capture when revision changes.
+
+Capture from manual play
+------------------------
+  1. ./play-cs.sh → new game → slot 8 → ./dev_info/verify-save.sh 8
+  2. cp save/rgame_8.* dev_info/fixtures/save/slot8/
+
+Or regenerate headlessly (non-deterministic world gen):
+
+  mono NWR.Tests.exe build-fixture
+  mono NWR.Tests.exe build-container-fixture
+  mono NWR.Tests.exe build-effects-fixture
+
+Scenarios
+---------
+  save-load-roundtrip   Load fixture → snapshot → save → load → snapshot match
+  save-overwrite        Load → save twice (S3)
+  save-erase            Load → EraseGame(8) (S8)
+  player-metadata       LoadPlayer preview path (S4 partial)
+  container-roundtrip   Container fixture save/load
+  effect-persist        Effects fixture save/load
+  wait-turns            caWait + ProcessGameStep loop
+  item-use-potion       Spawn Potion_Curing, UseItem, HP increases
+
+Log checks (harness.log at repo root during scenarios):
+
+  Success: playerLoad(): ok, terrainsLoad(): ok
+  Failure patterns: saveGame.IO(), loadGame():, terrainsLoad(): fail
+
+Adding a scenario
+-----------------
+  1. Add static method to NWR.Tests/Integration/Scenarios/*.cs
+  2. Register in NWR.Tests/ScenarioRunner.cs
+  3. Use HarnessBootstrap.Init(repoRoot), TestWorld helpers, LogAssert
+  4. Optional: mirror in NWR.Harness for standalone exe
+
+Debug_DevMode
+-------------
+Harness sets GlobalVars.Debug_DevMode = false for realistic inventory limits.
+
+Optional LLM triage (not in CI)
+-------------------------------
+After failure: ./dev_info/triage-failure.sh SCENARIO_NAME
+Packages harness.log tail + git diff for local LLM review. Exit code always 0.

@@ -42,8 +42,8 @@ namespace NWR.Creatures.Brain.Goals
             try {
                 int dist = MathHelper.Distance(self.Location, Debtor.Location);
                 if (dist == 1) {
-                    GlobalVars.nwrWin.ShowText(self, BaseLocale.GetStr(RS.rs_GiveMeTheMoney));
-                    GlobalVars.nwrWin.ShowInventory(self);
+                    GlobalVars.nwrHost.ShowText(self, BaseLocale.GetStr(RS.rs_GiveMeTheMoney));
+                    GlobalVars.nwrHost.ShowInventory(self);
                 } else {
                     ExtPoint next = self.GetStep(Debtor.Location);
                     if (!next.IsEmpty) {
