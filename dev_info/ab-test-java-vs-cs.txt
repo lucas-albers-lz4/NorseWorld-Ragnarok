@@ -1,0 +1,122 @@
+NorseWorld Ragnarok — Java v0.11 vs C# A/B test (Oldman / DemonBane quest)
+============================================================================
+
+Goal
+----
+Run the same NPC quest in both builds and record whether scripting (conditions,
+actions, item transfer) behaves correctly.
+
+Hypothesis
+----------
+Java: javax.script runs dialog JS (NPC.hasItem, NPC.isFieldCleared, transferItem).
+C# (before fix): ExecuteScript() stubbed → conditions/actions do not run.
+C# (after fix):  Jint + ScriptCreature restores dialog scripting on Mono.
+
+Prerequisites
+-------------
+- Linux desktop with display
+- wine, curl, unzip          (Java launcher)
+- mono-complete              (C# launcher; includes xbuild)
+- Sibling repos (auto-cloned by play-cs.sh if missing):
+    ../BSLib
+    ../ZRLib
+
+Launchers
+---------
+  Java (baseline):  cd nwr-dist-v0.11.0-win && ./play.sh
+  C# (Mono):        ./play-cs.sh
+
+Both write Ragnarok.log in their working directory:
+  Java: nwr-dist-v0.11.0-win/Ragnarok.log
+  C#:   ./Ragnarok.log
+
+Use separate save slots or note file names under save/ if you compare mid-game.
+
+Language note
+-------------
+Oldman dialog file is Russian-only: languages/ru_dlg_oldman.xml
+In-game, set language to Russian if the Oldman topics do not appear in English.
+
+Quest script reference (ru_dlg_oldman.xml)
+------------------------------------------
+1. Topic visible only if:  NPC.hasItem('DemonBane')
+   Player phrase:           "Нет ли у тебя задания, Старец?"
+   → Elder offers kill-all-monsters quest
+
+2. After clearing local field:  NPC.isFieldCleared()
+   Player phrase:                "Все монстры убиты!"
+   Action:                       NPC.transferItem(player, 'DemonBane')
+   → Player should receive DemonBane sword
+
+Test protocol (do Java first, then C#, same steps)
+---------------------------------------------------
+Phase 0 — Startup
+  [x] Java starts to main menu / new game (smoke: dbLoad ok, 2026-06-27)
+  [x] C# starts to main menu / new game (smoke: play-cs.sh, 2026-06-27)
+  [ ] Note: sfx/ may be missing; silent play is OK
+
+Phase 1 — Reach village Oldman
+  [ ] New game → pick any class → enter world
+  [ ] Find village elder (Oldman / Старец) in starting area
+  [ ] Open NPC dialog
+
+Phase 2 — Condition: NPC.hasItem('DemonBane')
+  [ ] BEFORE having DemonBane: try "quest" topic
+  [ ] Record: which dialog lines appear
+
+Phase 3 — Accept quest and clear field
+  [ ] Accept kill monsters quest if offered
+  [ ] Clear hostile creatures on the elder's local map/field
+  [ ] Return to elder
+
+Phase 4 — Reward: transferItem
+  [ ] Use phrase "Все монстры убиты!" (all monsters killed)
+  [ ] Confirm DemonBane in inventory after reward dialog
+
+Phase 5 — Logs
+  [x] Java log: dbLoad ok; missing sfx/*.ogg only
+  [x] C# log: sfxInit fails (no Linux fmodex); no executeScript errors after Jint fix
+
+Results table (automated + pending manual confirmation)
+-----------------------------------------------------
+| Step                         | Java | C# | Notes |
+|------------------------------|------|----|-------|
+| Game launches                |  Y   | Y  | Smoke-tested via play.sh / play-cs.sh |
+| NPC dialog opens             |  -   | -  | Manual in-game step |
+| Quest topic w/o DemonBane    |  -   | -  | Manual; C# now runs hasItem via Jint |
+| Quest accepted               |  -   | -  | Manual |
+| Field cleared                |  -   | -  | Manual |
+| Reward dialog shown          |  -   | -  | Manual |
+| DemonBane in inventory       |  -   | -  | Manual; C# transferItem wired |
+
+Scripting verification (automated, 2026-06-27)
+----------------------------------------------
+Jint 2.11.58 evaluates Oldman dialog expressions:
+  NPC.hasItem('DemonBane')           → True (mock host)
+  NPC.isFieldCleared()               → True (mock host)
+  NPC.transferItem(player,'DemonBane') → True + side effect (mock host)
+
+C# code changes for scripting:
+  project/Game/ScriptCreature.cs     — camelCase JS API on NWCreature
+  project/GUI/NWMainWindow.cs        — Jint engine, ExecuteScript/SetScriptVar
+  project/GUI/NPCWindow.cs           — CheckScript: null/false on failed scripts
+  project/libs/Jint.dll              — embedded JS engine (.NET 4.5.2 / Mono)
+
+Findings and recommendation (2026-06-27)
+----------------------------------------
+Playability (automated):
+  - Java v0.11 is the only shipped binary; runs under Wine + Windows JRE 8.
+  - C# builds and runs under Mono; FMOD/sfx still missing on Linux (silent OK).
+
+Scripting gap:
+  - CONFIRMED in original C# (ExecuteScript returned null).
+  - ADDRESSED: Jint + ScriptCreature + CheckScript fix restore dialog scripts.
+  - Full quest flow still needs manual confirmation in both builds.
+
+Version choice:
+  - To PLAY: use Java ./play.sh (official release).
+  - To HACK: use C# ./play-cs.sh (newer source, scripting restored for Mono).
+
+General UX: requires manual play session (Phases 1–4 above).
+
+Rebuild C#: NWR_FORCE_BUILD=1 ./play-cs.sh
