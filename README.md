@@ -39,6 +39,12 @@ to take part in final battle against powers of evil.
 - Flat tiles and isometric views of design.
 - Support for Russian and English (the correctness of the English localization ~90%).
 - Possibility to change side for evil.
+
+## Running on Linux
+
+- **Java v0.11 (recommended to play):** `cd nwr-dist-v0.11.0-win && ./play.sh`
+- **C# source (Mono):** `./play-cs.sh` from repo root (requires `mono-complete`, sibling `BSLib`/`ZRLib`)
+- **A/B test protocol:** [dev_info/ab-test-java-vs-cs.txt](dev_info/ab-test-java-vs-cs.txt)
   
 ## Authors
 
