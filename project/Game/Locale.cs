@@ -41,8 +41,12 @@ namespace NWR.Game
             }
         }
 
-        public const string LANGS_FOLDER = "languages\\";
-        private static readonly string LANGS_XML = LANGS_FOLDER + "langs.xml";
+        public const string LANGS_FOLDER = "languages";
+
+        private static string LangFile(string fileName)
+        {
+            return Path.Combine(NWResourceManager.GetAppPath(), LANGS_FOLDER, fileName);
+        }
 
         static Locale()
         {
@@ -98,11 +102,10 @@ namespace NWR.Game
                 return false;
             } else {
                 try {
-                    string prefix = LANGS_FOLDER + fLangs[idx].Prefix;
-                    string f = NWResourceManager.GetAppPath() + prefix;
-                    LoadLangDB(f + "_db.xml");
-                    LoadLangTexts(f + "_texts.xml");
-                    LoadLangDialogs(f);
+                    string prefix = fLangs[idx].Prefix;
+                    LoadLangDB(LangFile(prefix + "_db.xml"));
+                    LoadLangTexts(LangFile(prefix + "_texts.xml"));
+                    LoadLangDialogs(prefix);
                     return true;
                 } catch (Exception) {
                     return false;
@@ -112,7 +115,7 @@ namespace NWR.Game
 
         private void LoadLangs()
         {
-            var f = new FileStream(NWResourceManager.GetAppPath() + LANGS_XML, FileMode.Open);
+            var f = new FileStream(LangFile("langs.xml"), FileMode.Open);
             try {
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(f);
@@ -214,7 +217,7 @@ namespace NWR.Game
             return null;
         }
 
-        private void LoadLangDialogs(string prefix)
+        private void LoadLangDialogs(string langPrefix)
         {
             int num = GlobalVars.nwrDB.EntriesCount;
             for (int i = 0; i < num; i++) {
@@ -223,7 +226,7 @@ namespace NWR.Game
                     CreatureEntry crEntry = (CreatureEntry)entry;
 
                     if (!string.IsNullOrEmpty(crEntry.Dialog.ExternalFile)) {
-                        string filename = prefix + crEntry.Dialog.ExternalFile;
+                        string filename = LangFile(langPrefix + crEntry.Dialog.ExternalFile);
 
                         try {
                             XmlNode dialogRoot = LoadLangDialog(filename);

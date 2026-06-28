@@ -21,6 +21,7 @@
 using System;
 using System.Text;
 using BSLib;
+using Jint;
 using NWR.Creatures;
 using NWR.Creatures.Brain;
 using NWR.Creatures.Specials;
@@ -109,7 +110,7 @@ namespace NWR.GUI
         private DivinationWindow fDivinationWindow;
 
         private readonly SoundEngine fSoundEngine;
-        //private readonly ScriptEngine FScriptEngine;
+        private Engine fScriptEngine;
 
         private int IP_Top = 150;
         private int IP_Left = 640;
@@ -125,7 +126,6 @@ namespace NWR.GUI
         {
             Caption = StaticData.Rs_GameName;
             fSoundEngine = new SoundEngine();
-            //FScriptEngine = (new ScriptEngineManager()).getEngineByName("JavaScript");
         }
 
         public bool AutoPickup
@@ -2024,14 +2024,18 @@ namespace NWR.GUI
 
                     case EventID.event_Help:
                         {
-                            string helpFile = NWResourceManager.GetAppPath() + Locale.LANGS_FOLDER + LangExt + "_help.htm";
+                            string helpFile = System.IO.Path.Combine(NWResourceManager.GetAppPath(), Locale.LANGS_FOLDER, LangExt + "_help.htm");
                             Help(helpFile);
                             break;
                         }
 
                     case EventID.event_LandEnter:
                         {
-                            LandEntry eLand = (LandEntry)extData;
+                            LandEntry eLand = extData as LandEntry;
+                            if (eLand == null) {
+                                SetScreen(GameScreen.gsMain);
+                                break;
+                            }
                             if (eLand.Song != "") {
                                 PlaySound(eLand.Song, SoundEngine.sk_Song, -1, -1);
                             }
@@ -2313,14 +2317,22 @@ namespace NWR.GUI
             fGameState = GameState.gsDefault;
 
             InitScripts();
+
+            if (fMainScreen != GameScreen.gsMain && fMainScreen != GameScreen.gsVillage) {
+                SetScreen(GameScreen.gsMain);
+            }
         }
 
         public object ExecuteScript(string script)
         {
+            if (string.IsNullOrEmpty(script)) {
+                return null;
+            }
+
             try {
                 InitScripts();
-
-                return null;//FScriptEngine.eval(script);
+                fScriptEngine.Execute(script);
+                return fScriptEngine.GetCompletionValue().ToObject();
             } catch (Exception ex) {
                 Logger.Write("NWMainWindow.executeScript(): " + ex.Message);
                 return null;
@@ -2329,16 +2341,36 @@ namespace NWR.GUI
 
         public void SetScriptVar(string @var, object value)
         {
-            //FScriptEngine.put(@var, value);
+            EnsureScriptEngine();
+
+            if (value is NWCreature) {
+                fScriptEngine.SetValue(@var, new ScriptCreature((NWCreature)value));
+            } else {
+                fScriptEngine.SetValue(@var, value);
+            }
+        }
+
+        private void EnsureScriptEngine()
+        {
+            if (fScriptEngine == null) {
+                fScriptEngine = new Engine();
+            }
         }
 
         private void InitScripts()
         {
-            /*Player player = FGameSpace.Player;
+            EnsureScriptEngine();
 
-            FScriptEngine.put("win", this);
-            FScriptEngine.put("player", player);
-            FScriptEngine.put("PC", player);*/
+            fScriptEngine.SetValue("win", this);
+
+            if (fGameSpace != null) {
+                Player player = fGameSpace.Player;
+                if (player != null) {
+                    ScriptCreature sp = new ScriptCreature(player);
+                    fScriptEngine.SetValue("player", sp);
+                    fScriptEngine.SetValue("PC", sp);
+                }
+            }
         }
 
         public string LangExt
