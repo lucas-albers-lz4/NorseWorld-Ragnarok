@@ -3407,6 +3407,9 @@ namespace NWR.Effects
                     {
                         if (creature.HasAffect(EffectID.eid_Relocation)) {
                             NWField fld = creature.CurrentField;
+                            if (fld == null) {
+                                break;
+                            }
                             if (source is BaseTile && (int)((BaseTile)source).Foreground == PlaceID.pid_TeleportTrap) {
                                 GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSetOffTeleportationTrap));
                             }
@@ -3420,6 +3423,10 @@ namespace NWR.Effects
 
                             if (res) {
                                 pt = creature.SearchRndLocation(fld, fld.AreaRect);
+                            }
+
+                            if (pt.IsEmpty) {
+                                break;
                             }
 
                             creature.CheckTile(false);

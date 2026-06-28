@@ -73,6 +73,10 @@ namespace NWR.Game
 
         public void SfxSetReverb(Reverb reverb)
         {
+            if (GlobalVars.Debug_Silent || !fSndReady || fSystem == null) {
+                return;
+            }
+
             PRESET preset = new PRESET();
             REVERB_PROPERTIES rp = preset.OFF();
             switch (reverb) {
@@ -124,7 +128,7 @@ namespace NWR.Game
         public void SfxDone()
         {
             try {
-                if (GlobalVars.Debug_Silent) {
+                if (GlobalVars.Debug_Silent || fSystem == null) {
                     return;
                 }
 
