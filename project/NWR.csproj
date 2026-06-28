@@ -44,6 +44,10 @@
     <DefineConstants>TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Jint">
+      <HintPath>libs\Jint.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -300,6 +304,7 @@
     <Compile Include="Game\MemoryEntry.cs" />
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\RecallPos.cs" />
+    <Compile Include="Game\ScriptCreature.cs" />
     <Compile Include="Game\SourceForm.cs" />
     <Compile Include="Universe\BaseRoom.cs" />
     <Compile Include="Universe\Building.cs" />

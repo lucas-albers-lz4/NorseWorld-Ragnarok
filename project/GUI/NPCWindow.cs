@@ -216,16 +216,18 @@ namespace NWR.GUI
 
         private bool CheckScript(string script)
         {
-            bool result = true;
-
-            if (!string.IsNullOrEmpty(script)) {
-                object res = GlobalVars.nwrWin.ExecuteScript(script);
-                if (res != null) {
-                    result = (res.Equals(true));
-                }
+            if (string.IsNullOrEmpty(script)) {
+                return true;
             }
 
-            return result;
+            object res = GlobalVars.nwrWin.ExecuteScript(script);
+            if (res == null) {
+                return false;
+            }
+            if (res is bool) {
+                return (bool)res;
+            }
+            return true.Equals(res);
         }
 
         private void OnConversationSelect(object sender, MouseButton button, LBItem item)
