@@ -20,7 +20,7 @@ NWR_FORCE_BUILD=1 ./play-cs.sh   # force rebuild
 cd nwr-dist-v0.11.0-win && ./play.sh   # Java baseline (Wine + JRE 8)
 ```
 
-Log: `Ragnarok.log` at repo root. Sound uses **SDL2_mixer** (`libsdl2-mixer-2.0-0`) + `sfx/` assets (see README).
+Log: `Ragnarok.log` at repo root. Sound uses **SDL2_mixer** (`libsdl2-mixer-2.0-0`), **NVorbis** + `System.Memory` deps, and Tier C `sfx/` from `dev_info/generate-sfx-pack.sh` (see README, `dev_info/sfx-pack.txt`).
 
 ## Code conventions
 
@@ -32,6 +32,7 @@ Log: `Ragnarok.log` at repo root. Sound uses **SDL2_mixer** (`libsdl2-mixer-2.0-
 ## Do not commit
 
 - `sfx/` (gitignored), `Ragnarok.log`, root `*.exe` / `*.dll` (gitignored)
+- `mono_crash.*`, `.cursor/debug-*.log`
 - `languages\` directory (old workaround)
 - Full `nwr-dist-v0.11.0-win/` unless explicitly intended
 - Secrets or local-only artifacts

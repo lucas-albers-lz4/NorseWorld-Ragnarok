@@ -46,6 +46,9 @@ stage_runtime() {
     cp -f "$BUILD/NWR.exe" "$BUILD/BSLib.dll" "$BUILD/ZRLib.dll" "$ROOT/"
     cp -f "$BUILD/Jint.dll" "$ROOT/" 2>/dev/null || cp -f "$PROJECT/libs/Jint.dll" "$ROOT/"
     cp -f "$BUILD/NVorbis.dll" "$ROOT/" 2>/dev/null || cp -f "$PROJECT/libs/NVorbis.dll" "$ROOT/"
+    for dep in System.Memory System.Buffers System.Runtime.CompilerServices.Unsafe; do
+        cp -f "$BUILD/${dep}.dll" "$ROOT/" 2>/dev/null || cp -f "$PROJECT/libs/${dep}.dll" "$ROOT/"
+    done
     cp -f "$BUILD"/*.dll "$ROOT/" 2>/dev/null || true
     cp -f "$BUILD/NWR.exe.config" "$ROOT/" 2>/dev/null || true
     cp -f "$LIBS_DIR/ZRLib/ZRLib/bin/Release/ZRLib.dll.config" "$ROOT/" 2>/dev/null || \
@@ -57,6 +60,10 @@ stage_runtime() {
     fi
     if [[ -d "$ROOT/nwr-dist-v0.11.0-win/songs" && ! -e "$ROOT/songs" ]]; then
         ln -sf "$ROOT/nwr-dist-v0.11.0-win/songs" "$ROOT/songs"
+    fi
+
+    if [[ -z "${NWR_SKIP_SFX_GENERATE:-}" && ! -d "$ROOT/sfx" && -x "$ROOT/dev_info/generate-sfx-pack.sh" ]]; then
+        "$ROOT/dev_info/generate-sfx-pack.sh"
     fi
 
     if [[ ! -d "$ROOT/sfx" ]]; then

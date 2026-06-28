@@ -295,33 +295,22 @@ namespace NWR.Game
         private void PlayAmbient(string path)
         {
             SDL_mixer.Mix_HaltChannel(AmbientChannel);
-
-            IntPtr chunk = OggChunkLoader.LoadChunk(path, true);
-            if (chunk == IntPtr.Zero) {
-                Logger.Write("OggChunkLoader.LoadChunk(): failed for " + path);
-                return;
-            }
-
-            if (SDL_mixer.Mix_PlayChannel(AmbientChannel, chunk, -1) < 0) {
-                Logger.Write("Mix_PlayChannel(ambient): " + SDL.SDL_GetError());
-                return;
-            }
-
-            SDL_mixer.Mix_Volume(AmbientChannel, ToMixVolume(fSndVolume[sk_Ambient]));
-            TrackSlot(sk_Ambient, AmbientChannel, chunk);
+            // Ambient loops disabled (Tier C placeholders mask combat SFX during testing).
         }
 
         private void PlaySoundEffect(string path, int kind, ExtPoint player, ExtPoint sound)
         {
-            if (fSndCount == MaxSounds) {
-                Logger.Write(string.Format("Limit of {0:D} songs reached", new object[] { MaxSounds }));
-                return;
-            }
-
             int slot = FindReplaceSlot(kind);
             if (slot < 0) {
-                slot = fSndCount;
-                fSndCount++;
+                if (fSndCount >= MaxSounds) {
+                    slot = 0;
+                    if (fSndList[slot].Channel >= 0) {
+                        SDL_mixer.Mix_HaltChannel(fSndList[slot].Channel);
+                    }
+                } else {
+                    slot = fSndCount;
+                    fSndCount++;
+                }
             } else if (fSndList[slot].Channel >= 0) {
                 SDL_mixer.Mix_HaltChannel(fSndList[slot].Channel);
             }

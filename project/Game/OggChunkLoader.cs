@@ -21,6 +21,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.InteropServices;
 using NVorbis;
 using SDL2;
 using ZRLib.Core;
@@ -33,6 +34,7 @@ namespace NWR.Game
         public const int TargetChannels = 2;
 
         private static readonly Dictionary<string, IntPtr> fCache = new Dictionary<string, IntPtr>(StringComparer.OrdinalIgnoreCase);
+        private static readonly Dictionary<IntPtr, GCHandle> fPinnedPcm = new Dictionary<IntPtr, GCHandle>();
 
         public static IntPtr LoadChunk(string path, bool cache)
         {
@@ -61,6 +63,13 @@ namespace NWR.Game
                 }
             }
             fCache.Clear();
+
+            foreach (GCHandle handle in fPinnedPcm.Values) {
+                if (handle.IsAllocated) {
+                    handle.Free();
+                }
+            }
+            fPinnedPcm.Clear();
         }
 
         private static IntPtr DecodeToChunk(string path)
@@ -70,7 +79,16 @@ namespace NWR.Game
                 if (pcm == null || pcm.Length == 0) {
                     return IntPtr.Zero;
                 }
-                return SDL_mixer.Mix_QuickLoad_RAW(pcm, (uint)pcm.Length);
+
+                GCHandle handle = GCHandle.Alloc(pcm, GCHandleType.Pinned);
+                IntPtr chunk = SDL_mixer.Mix_QuickLoad_RAW(pcm, (uint)pcm.Length);
+                if (chunk == IntPtr.Zero) {
+                    handle.Free();
+                    return IntPtr.Zero;
+                }
+
+                fPinnedPcm[chunk] = handle;
+                return chunk;
             } catch (Exception ex) {
                 Logger.Write("OggChunkLoader.DecodeToChunk(): " + ex.Message);
                 return IntPtr.Zero;
