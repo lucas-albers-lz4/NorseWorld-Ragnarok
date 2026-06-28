@@ -1,0 +1,34 @@
+Follow-ups (not part of basic SDL_mixer sound support)
+======================================================
+
+Captured from Linux/Mono play testing — defer to future branches.
+
+Gameplay / stability
+--------------------
+- Quit-time logged exceptions (12:38 cluster): Item.get_Container null ref
+  during EntityList.LoadFromStream; Player/NWCreature loadFromStream;
+  ProwlingEnd / eid_Prowling; EffectsList.execute index out of range.
+  Likely teardown ordering on exit — investigate if saves corrupt or if
+  log-only during shutdown.
+- Save/load robustness on Mono (Item container, creature stream).
+
+Sound (later tiers)
+-------------------
+- Re-enable land ambient loops (PlayAmbient currently no-ops; disabled so
+  Tier C placeholder loops do not mask SFX during testing).
+- Obtain or build real soundpak (original v0.10 pack unavailable on SF).
+- Tier B: DOS/Valhalla PC-speaker captures as master clips (optional flavor).
+- generate-sfx-pack.sh --copy mode for Windows Mono (symlinks are Linux-first).
+- Per-spell / per-creature unique assets instead of Tier C category reuse.
+
+Platform / release
+------------------
+- Merge feature/linux-sound to master after rebase review.
+- Continue Java vs C# A/B from dev_info/ab-test-java-vs-cs.txt.
+- README: note Music vs Sounds volume sliders in options.
+
+Misc
+----
+- BaseMainWindow.run(): "Method has zero rva" on Mono startup (benign?).
+- Do not commit: Ragnarok.log, mono_crash.*, .cursor/debug-*.log, sfx/ tree,
+  root staged *.exe/*.dll (gitignored).

@@ -1,0 +1,47 @@
+---
+description: NorseWorld Ragnarok Linux/Mono fork — build, run, paths, and commit hygiene
+alwaysApply: true
+---
+
+# NorseWorld Ragnarok (Linux fork)
+
+## Stack
+
+- C# source: `project/` — .NET Framework 4.5.2, build with **xbuild** (not `dotnet`).
+- Runtime: **Mono** (`mono NWR.exe` from repo root after staging).
+- Sibling deps (clone alongside repo): `../BSLib`, `../ZRLib`.
+- Java v0.11 release: `nwr-dist-v0.11.0-win/` — A/B baseline only, not the C# source tree.
+
+## Build and run
+
+```bash
+./play-cs.sh                  # build if needed + run C# (Mono)
+NWR_FORCE_BUILD=1 ./play-cs.sh   # force rebuild
+cd nwr-dist-v0.11.0-win && ./play.sh   # Java baseline (Wine + JRE 8)
+```
+
+Log: `Ragnarok.log` at repo root. Sound uses **SDL2_mixer** (`libsdl2-mixer-2.0-0`), **NVorbis** + `System.Memory` deps, and Tier C `sfx/` from `dev_info/generate-sfx-pack.sh` (see README, `dev_info/sfx-pack.txt`).
+
+## Code conventions
+
+- File paths: use `Path.Combine` / `Path.Combine(appPath, "languages", …)` — never hardcode `languages\` (breaks on Linux; `\e` etc. are escape sequences).
+- Match existing style in touched files; minimal diffs.
+- `SoundEngine`: SDL_mixer backend; guard when `!fSndReady` — missing audio must not break gameplay.
+- NPC scripts: Jint in `NWMainWindow` / `ScriptCreature`; empty script = pass in `NPCWindow.CheckScript`.
+
+## Do not commit
+
+- `sfx/` (gitignored), `Ragnarok.log`, root `*.exe` / `*.dll` (gitignored)
+- `mono_crash.*`, `.cursor/debug-*.log`
+- `languages\` directory (old workaround)
+- Full `nwr-dist-v0.11.0-win/` unless explicitly intended
+- Secrets or local-only artifacts
+
+## Branches (this fork)
+
+- `master`: landed Linux playability fixes
+- `feature/linux-sound`: SDL_mixer sound backend (replaces FMOD Ex)
+
+## A/B notes
+
+Protocol and results: `dev_info/ab-test-java-vs-cs.txt`. Java and C# are cousins, not the same tree.

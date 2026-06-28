@@ -1768,7 +1768,13 @@ namespace NWR.GUI
             string sMonster = creat.Entry.Sfx;
 
             if (sMonster.CompareTo("") != 0) {
-                PlaySound("creatures\\" + sMonster + "_" + sAct + ".ogg", SoundEngine.sk_Sound, creat.PosX, creat.PosY);
+                int sX = creat.PosX;
+                int sY = creat.PosY;
+                if (creat.IsPlayer) {
+                    sX = -1;
+                    sY = -1;
+                }
+                PlaySound("creatures\\" + sMonster + "_" + sAct + ".ogg", SoundEngine.sk_Sound, sX, sY);
             }
 
             NWField crField = creat.CurrentField;
@@ -2161,7 +2167,10 @@ namespace NWR.GUI
                         {
                             GameEvent effectEvent = (GameEvent)extData;
                             int eid = effectEvent.CLSID;
-                            PlaySound("effects\\" + EffectsData.dbEffects[eid].SFX, SoundEngine.sk_Sound, effectEvent.PosX, effectEvent.PosY);
+                            string sfx = EffectsData.dbEffects[eid].SFX;
+                            if (!string.IsNullOrEmpty(sfx)) {
+                                PlaySound("effects\\" + sfx, SoundEngine.sk_Sound, effectEvent.PosX, effectEvent.PosY);
+                            }
                             break;
                         }
 
@@ -2578,12 +2587,16 @@ namespace NWR.GUI
 
         public void PlaySound(string fileName, int kind, int sX, int sY)
         {
+            if (string.IsNullOrEmpty(fileName)) {
+                return;
+            }
+
             bool res = true;
 
             if (fGameState != GameState.gsWorldGen) {
                 if (kind == SoundEngine.sk_Sound && sX != -1 && sY != -1) {
                     int dist = MathHelper.Distance(sX, sY, fGameSpace.Player.PosX, fGameSpace.Player.PosY);
-                    res = (dist <= (int)fGameSpace.Player.Survey);
+                    res = (dist <= (int)fGameSpace.Player.Hear);
                 }
 
                 if (res) {

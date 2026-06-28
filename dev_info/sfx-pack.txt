@@ -1,0 +1,45 @@
+Tier C — Minimal Playable Sfx Pack
+===================================
+
+The original NorseWorld "soundpak" (v0.10.0 era) is no longer available on
+SourceForge. The full game expects roughly 486 OGG files under sfx/ (creatures,
+items, spells, UI, land songs, ambient loops, faith fanfares).
+
+Tier C provides placeholder audio so the C#/Mono Linux build is audibly playable
+without hunting down the lost pack or recording hundreds of unique clips.
+
+What is included in the repo
+----------------------------
+- dev_info/sfx-src/          ~18 master OGG clips (ffmpeg-generated tones)
+- dev_info/sfx-manifest.json category → master mapping rules
+- dev_info/sfx_pack.py       enumerates required paths from source/XML
+- dev_info/generate-sfx-pack.sh  builds sfx/ at repo root
+
+Generated output (not committed)
+--------------------------------
+- sfx/ at repo root (~486 symlinks to master clips; gitignored)
+
+Regenerate
+----------
+  ./dev_info/generate-sfx-pack.sh --force
+
+Master clips only (needs ffmpeg):
+  ./dev_info/sfx-src/generate-masters.sh
+
+Auto-generation
+---------------
+play-cs.sh runs generate-sfx-pack.sh when sfx/ is missing. Set
+NWR_SKIP_SFX_GENERATE=1 to disable.
+
+Limitations
+-----------
+- Placeholder audio, not original NorseWorld recordings.
+- Menu/land music and ambient loops use quiet pads or noise (not single-tone
+  beeps) because the game loops those tracks indefinitely.
+- Symlink mode targets Linux; use --copy for Windows Mono if needed.
+- One master clip per category (all bears sound like all wolves, etc.).
+
+Official pack
+-------------
+If you obtain the original soundpak, replace sfx/ with the real tree beside
+NWR.exe instead of using Tier C.

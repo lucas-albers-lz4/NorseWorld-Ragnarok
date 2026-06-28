@@ -45,7 +45,27 @@ to take part in final battle against powers of evil.
 - **Java v0.11 (recommended to play):** `cd nwr-dist-v0.11.0-win && ./play.sh`
 - **C# source (Mono):** `./play-cs.sh` from repo root (requires `mono-complete`, sibling `BSLib`/`ZRLib`)
 - **A/B test protocol:** [dev_info/ab-test-java-vs-cs.txt](dev_info/ab-test-java-vs-cs.txt)
-  
+
+### C# sound (SDL_mixer)
+
+Audio uses **SDL2_mixer** (via ZRLib) and **NVorbis** for OGG sound effects. NVorbis needs `System.Memory.dll`, `System.Buffers.dll`, and `System.Runtime.CompilerServices.Unsafe.dll` beside `NWR.exe` (staged automatically by `play-cs.sh`). Install:
+
+```bash
+sudo apt install libsdl2-mixer-2.0-0
+```
+
+Place game audio next to `NWR.exe` at repo root after staging:
+
+- `sfx/` — sound effects, ambient loops, and land songs (`sfx/songs/*.ogg`; gitignored)
+- The official v0.10.0 soundpak is no longer hosted; use the **Tier C** placeholder pack:
+
+```bash
+./dev_info/generate-sfx-pack.sh
+```
+
+`play-cs.sh` auto-generates `sfx/` when missing (set `NWR_SKIP_SFX_GENERATE=1` to skip). See [dev_info/sfx-pack.txt](dev_info/sfx-pack.txt).
+
+If you have a full release with real `sfx/`, copy or symlink it beside `NWR.exe`. `play-cs.sh` can symlink from `nwr-dist-v0.11.0-win/sfx` when that folder exists (the v0.11.0 Java dist does not ship audio).
 ## Authors
 
 Project, coding and graphics processing:

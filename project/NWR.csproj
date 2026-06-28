@@ -48,6 +48,22 @@
       <HintPath>libs\Jint.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="NVorbis">
+      <HintPath>libs\NVorbis.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers">
+      <HintPath>libs\System.Buffers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>libs\System.Memory.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>libs\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -237,6 +253,7 @@
     <Compile Include="Game\Quests\MainQuest.cs" />
     <Compile Include="Game\Scores\Score.cs" />
     <Compile Include="Game\Scores\ScoresList.cs" />
+    <Compile Include="Game\OggChunkLoader.cs" />
     <Compile Include="Game\SoundEngine.cs" />
     <Compile Include="Game\Story\Journal.cs" />
     <Compile Include="Game\Story\JournalItem.cs" />
@@ -322,10 +339,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="libs\fmodex.dll">
-      <Link>fmodex.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="libs\SDL2.dll">
       <Link>SDL2.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
