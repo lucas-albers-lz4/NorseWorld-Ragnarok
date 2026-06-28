@@ -975,6 +975,9 @@ namespace NWR.Game
         {
             try {
                 NWField field = Space.GetField(layerID, fX, fY);
+                if (field == null) {
+                    throw new Exception("Field not found: " + layerID + " " + fX + "," + fY);
+                }
                 bool withoutParty = (field.LandID == GlobalVars.Land_Crossroads) || Sail;
 
                 bool globalMove = (LayerID != layerID || Field.X != fX || Field.Y != fY);

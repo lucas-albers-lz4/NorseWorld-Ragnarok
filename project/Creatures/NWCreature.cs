@@ -1579,6 +1579,9 @@ namespace NWR.Creatures
             try {
                 if (LayerID != layerID || fField.X != fieldX || fField.Y != fieldY || obligatory) {
                     LayerEntry eLayer = (LayerEntry)GlobalVars.nwrDB.GetEntry(layerID);
+                    if (eLayer == null) {
+                        throw new Exception("Layer entry not found: " + layerID);
+                    }
 
                     if (fieldX >= eLayer.W) {
                         fieldX = 0;
@@ -1591,13 +1594,22 @@ namespace NWR.Creatures
                     LayerID = layerID;
                     fField = new ExtPoint(fieldX, fieldY);
                     NWField fld = Space.GetField(LayerID, fField.X, fField.Y);
+                    if (fld == null) {
+                        throw new Exception("Field not found: " + layerID + " " + fieldX + "," + fieldY);
+                    }
                     EnterField(fld);
 
                     if (IsPlayer) {
                         fld.Visited = true;
                         int nextLand = fld.LandID;
                         KnowIt(nextLand);
-                        Space.DoEvent(EventID.event_LandEnter, this, null, GlobalVars.nwrDB.GetEntry(nextLand));
+                        DataEntry landEntry = GlobalVars.nwrDB.GetEntry(nextLand);
+                        if (landEntry != null) {
+                            Space.DoEvent(EventID.event_LandEnter, this, null, landEntry);
+                        } else {
+                            Logger.Write("NWCreature.setGlobalPos(): land entry not found for LandID=" + nextLand);
+                            GlobalVars.nwrWin.SetScreen(GameScreen.gsMain);
+                        }
                     }
                 }
             } catch (Exception ex) {
@@ -4105,6 +4117,21 @@ namespace NWR.Creatures
                         }
                         tries--;
                     } while (!res && tries > 0);
+                }
+
+                if (pX < 0 || pY < 0) {
+                    NWLayer lr = Space.GetLayerByID(layerID);
+                    NWField fld = (lr != null) ? lr.GetField(fX, fY) : null;
+                    if (fld != null) {
+                        ExtPoint pos = SearchRndLocation(fld, area);
+                        if (!pos.IsEmpty) {
+                            pX = pos.X;
+                            pY = pos.Y;
+                        } else {
+                            pX = Math.Max(0, area.Left);
+                            pY = Math.Max(0, area.Top);
+                        }
+                    }
                 }
 
                 Space.DoEvent(EventID.event_Move, this, null, this);

@@ -1131,8 +1131,8 @@ namespace NWR.Game
                     case EventID.event_LandEnter:
                         {
                             Player player = (Player)sender;
-                            LandEntry eLand = (LandEntry)data;
-                            if (player.LandID != eLand.GUID) {
+                            LandEntry eLand = data as LandEntry;
+                            if (eLand != null && player != null && player.LandID != eLand.GUID) {
                                 result = string.Format(BaseLocale.GetStr(RS.rs_EnterInLand), eLand.GetNounDeclension(Number.nSingle, Case.cAccusative));
                                 player.LandID = eLand.GUID;
                             }
@@ -1787,6 +1787,12 @@ namespace NWR.Game
         {
             try {
                 NWField fld = GetField(GlobalVars.Layer_Midgard, 2, 2);
+                if (fld == null) {
+                    Logger.Write("NWGameSpace.InitEnd(): starting field not found");
+                    GlobalVars.nwrWin.SetScreen(GameScreen.gsMain);
+                    return;
+                }
+
                 Village village = fld.FindVillage();
 
                 ExtRect area;
@@ -1799,6 +1805,7 @@ namespace NWR.Game
                 fPlayer.TransferTo(GlobalVars.Layer_Midgard, 2, 2, -1, -1, area, true, true);
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.InitEnd(): " + ex.Message);
+                GlobalVars.nwrWin.SetScreen(GameScreen.gsMain);
             }
         }
 
