@@ -1,0 +1,22 @@
+You are drafting a NorseWorld: Ragnarok headless integration scenario (C# / Mono).
+
+Constraints:
+- Add a static method to NWR.Tests/Integration/Scenarios/*.cs
+- Register the name in NWR.Tests/ScenarioRunner.cs
+- Use HarnessBootstrap.Init(repoRoot) — never NWMainWindow
+- Assert via LogAssert.RequireLogMarkers / RequireNoFailurePatterns
+- Use TestWorld.SpawnItem, SpawnItemInContainer, ApplyEffect, RunTurns
+- Fixtures live under dev_info/fixtures/save/<name>/rgame_8.{rgp,rgt,rgj}
+- Scenario must compile and pass ./dev_info/run-tests.sh before merge
+
+APIs that exist:
+  TestWorld.SpawnItem(player, sign, count, identified) → Item
+  TestWorld.SpawnItemInContainer(container, sign, count)
+  TestWorld.ApplyEffect(player, EffectID.eid_Prowling)
+  TestWorld.RunTurns(game, n)
+  PlayerSnapshot.Capture(player) / AssertMatches
+  SaveLoadScenarios.CopyFixtureToSlot(repoRoot, fixtureName, slot)
+
+Do not invent APIs like GiveItem. Item signs come from RDatabase.xml (e.g. Potion_Curing, Flask, Torch).
+
+Output: complete C# method + ScenarioRunner registration line only.

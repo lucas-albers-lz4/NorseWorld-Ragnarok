@@ -24,8 +24,7 @@ using NWR.Game.Types;
 namespace NWR.Game
 {
     /// <summary>
-    /// Host interface for calls to the main window.
-    /// Object for future development.
+    /// Narrow host interface used by NWGameSpace IHost forwarding.
     /// </summary>
     public interface IHost
     {

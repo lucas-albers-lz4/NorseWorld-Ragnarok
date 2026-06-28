@@ -1608,7 +1608,7 @@ namespace NWR.Creatures
                             Space.DoEvent(EventID.event_LandEnter, this, null, landEntry);
                         } else {
                             Logger.Write("NWCreature.setGlobalPos(): land entry not found for LandID=" + nextLand);
-                            GlobalVars.nwrWin.SetScreen(GameScreen.gsMain);
+                            GlobalVars.nwrHost.SetScreen(GameScreen.gsMain);
                         }
                     }
                 }
@@ -2726,7 +2726,7 @@ namespace NWR.Creatures
                     if (HasTurn()) {
                         // FIXME: move to goal!
                         bool turn_used = false;
-                        if (fEntry.Flags.HasIntersect(CreatureFlags.esMind, CreatureFlags.esUseItems) && (Mercenary || GlobalVars.nwrWin.ExtremeMode)) {
+                        if (fEntry.Flags.HasIntersect(CreatureFlags.esMind, CreatureFlags.esUseItems) && (Mercenary || GlobalVars.nwrHost.ExtremeMode)) {
                             CheckHealth(ref turn_used);
                         }
 
@@ -3566,7 +3566,7 @@ namespace NWR.Creatures
                     } else {
                         tile.Trap_Discovered = true;
                     }
-                } else {
+                } else if (idx >= 0) {
                     string msg = BaseLocale.GetStr(StaticData.dbTraps[idx].EscapeMsgRS);
                     Space.ShowText(this, msg);
                 }
@@ -3778,6 +3778,7 @@ namespace NWR.Creatures
         {
             try {
                 base.LoadFromStream(stream, version);
+                CLSID = CLSID;
 
                 Sex = (CreatureSex)(StreamUtils.ReadByte(stream));
                 fState = (CreatureState)(StreamUtils.ReadByte(stream));

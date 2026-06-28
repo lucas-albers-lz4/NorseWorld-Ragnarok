@@ -342,7 +342,7 @@ namespace NWR.Game
 
                     if (!GlobalVars.Debug_Divinity) {
                         if (fSatiety == 200) {
-                            GlobalVars.nwrWin.ShowText(this, BaseLocale.GetStr(RS.rs_YouHungry));
+                            GlobalVars.nwrHost.ShowText(this, BaseLocale.GetStr(RS.rs_YouHungry));
                         } else {
                             if (fSatiety <= 150 && (int)fSatiety % 50 == 0) {
                                 UseEffect(EffectID.eid_Swoon, null, InvokeMode.im_ItSelf, null);
@@ -362,11 +362,11 @@ namespace NWR.Game
                             int num3 = RandomHelper.GetRandom(2);
                             if (num3 != 0) {
                                 if (num3 == 1) {
-                                    GlobalVars.nwrWin.ShowText(this, BaseLocale.GetStr(RS.rs_YouNumbedByColdOfNiflheim));
+                                    GlobalVars.nwrHost.ShowText(this, BaseLocale.GetStr(RS.rs_YouNumbedByColdOfNiflheim));
                                     Death(BaseLocale.GetStr(RS.rs_FrozeToDeath), null);
                                 }
                             } else {
-                                GlobalVars.nwrWin.ShowText(this, BaseLocale.GetStr(RS.rs_NiflheimFrostDeath));
+                                GlobalVars.nwrHost.ShowText(this, BaseLocale.GetStr(RS.rs_NiflheimFrostDeath));
                                 Death(BaseLocale.GetStr(RS.rs_TurnedToIce), null);
                             }
                             return;
@@ -376,10 +376,10 @@ namespace NWR.Game
                             int num4 = RandomHelper.GetRandom(2);
                             if (num4 != 0) {
                                 if (num4 == 1) {
-                                    GlobalVars.nwrWin.ShowText(this, BaseLocale.GetStr(RS.rs_YouBurntByFlamesOfBifrost));
+                                    GlobalVars.nwrHost.ShowText(this, BaseLocale.GetStr(RS.rs_YouBurntByFlamesOfBifrost));
                                 }
                             } else {
-                                GlobalVars.nwrWin.ShowText(this, BaseLocale.GetStr(RS.rs_BifrostFlameDeath));
+                                GlobalVars.nwrHost.ShowText(this, BaseLocale.GetStr(RS.rs_BifrostFlameDeath));
                             }
                             Death(BaseLocale.GetStr(RS.rs_ConsumedByFire), null);
                             return;
@@ -389,12 +389,12 @@ namespace NWR.Game
                     if (!GlobalVars.Debug_DevMode && LayerID == GlobalVars.Layer_Vanaheim && map.Creatures.Count == 1) {
                         Morality = 0;
                         TransferTo(GlobalVars.Layer_Midgard, 2, 2, -1, -1, StaticData.MapArea, true, false);
-                        GlobalVars.nwrWin.ShowText(this, BaseLocale.GetStr(RS.rs_VanaheimIsEmpty), new LogFeatures(LogFeatures.lfDialog));
+                        GlobalVars.nwrHost.ShowText(this, BaseLocale.GetStr(RS.rs_VanaheimIsEmpty), new LogFeatures(LogFeatures.lfDialog));
                     }
 
                     if (Morality <= -100 && LayerID != GlobalVars.Layer_Niflheim) {
                         TransferTo(GlobalVars.Layer_Niflheim, 1, 1, -1, -1, StaticData.MapArea, true, false);
-                        GlobalVars.nwrWin.ShowText(this, BaseLocale.GetStr(RS.rs_PlayerIsUnworthy), new LogFeatures(LogFeatures.lfDialog));
+                        GlobalVars.nwrHost.ShowText(this, BaseLocale.GetStr(RS.rs_PlayerIsUnworthy), new LogFeatures(LogFeatures.lfDialog));
                     }
                 }
             } catch (Exception ex) {
@@ -592,13 +592,13 @@ namespace NWR.Game
         public override void MoveTo(int newX, int newY)
         {
             if (Effects.FindEffectByID(EffectID.eid_LegsMissing) != null && !HasMovement(Movements.mkFly)) {
-                GlobalVars.nwrWin.ShowText(this, BaseLocale.GetStr(RS.rs_YouHaveNoLegs));
+                GlobalVars.nwrHost.ShowText(this, BaseLocale.GetStr(RS.rs_YouHaveNoLegs));
             } else {
                 if (TotalWeight > MaxItemsWeight) {
-                    GlobalVars.nwrWin.ShowText(this, BaseLocale.GetStr(RS.rs_YouOverburdened));
+                    GlobalVars.nwrHost.ShowText(this, BaseLocale.GetStr(RS.rs_YouOverburdened));
                 } else {
                     base.MoveTo(newX, newY);
-                    if (GlobalVars.nwrWin.AutoPickup) {
+                    if (GlobalVars.nwrHost.AutoPickup) {
                         PickupAll();
                     }
                     Space.ShowPlaceInfo(PosX, PosY, false);
@@ -736,7 +736,7 @@ namespace NWR.Game
                     int fg = tile.ForeBase;
                     if (fg == PlaceID.pid_cr_Disk || fg == PlaceID.pid_cr_Disk_Pressed) {
                         tile.Foreground = PlaceID.pid_Undefined;
-                        GlobalVars.nwrWin.ShowText(this, BaseLocale.GetStr(RS.rs_DiskFalls));
+                        GlobalVars.nwrHost.ShowText(this, BaseLocale.GetStr(RS.rs_DiskFalls));
                     }
                 }
             } catch (Exception ex) {
@@ -752,7 +752,7 @@ namespace NWR.Game
                 int hPrice = (int)mercenary.HirePrice;
                 if (Money < hPrice) {
                     res = false;
-                    GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_NoMoney));
+                    GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_NoMoney));
                 } else {
                     SubMoney(hPrice);
                     collocutor.AddMoney(hPrice);
@@ -842,7 +842,7 @@ namespace NWR.Game
                 FOV.FOV_Prepare(fld, false);
                 if (Effects.FindEffectByID(EffectID.eid_Blindness) == null && !InFog) {
                     int dir;
-                    if (GlobalVars.nwrWin.CircularFOV) {
+                    if (GlobalVars.nwrHost.CircularFOV) {
                         dir = Directions.DtNone;
                     } else {
                         dir = LastDir;
@@ -1020,7 +1020,7 @@ namespace NWR.Game
             if (paramsValid) {
                 base.UseEffect(effectID, source, invokeMode, ext);
             } else {
-                GlobalVars.nwrWin.InitTarget(effectID, source, invokeMode, ext);
+                GlobalVars.nwrHost.InitTarget(effectID, source, invokeMode, ext);
             }
         }
 

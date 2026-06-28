@@ -39,7 +39,7 @@ namespace NWR.Effects.Rays
                 if (tile.ForeBase == PlaceID.pid_Tree) {
                     tile.Foreground = PlaceID.pid_DeadTree;
                     string tmp = BaseLocale.GetStr(StaticData.dbPlaces[5].NameRS);
-                    GlobalVars.nwrWin.ShowText(Creature, BaseLocale.Format(RS.rs_TheXIsFrozen, new object[]{ tmp }));
+                    GlobalVars.nwrHost.ShowText(Creature, BaseLocale.Format(RS.rs_TheXIsFrozen, new object[]{ tmp }));
                 }
                 refContinue = false;
             } else {

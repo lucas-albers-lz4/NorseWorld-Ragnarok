@@ -240,7 +240,7 @@ namespace NWR.Game
 
             if (value > 0 && !isSacrilege) {
                 int idx = GetGodRecord(deityID);
-                GlobalVars.nwrWin.PlaySound(Pantheon[idx].SfxAward, SoundEngine.sk_Sound, -1, -1);
+                GlobalVars.nwrHost.PlaySound(Pantheon[idx].SfxAward, SoundEngine.sk_Sound, -1, -1);
             }
 
             if (deityID == GlobalVars.cid_Freyr) {

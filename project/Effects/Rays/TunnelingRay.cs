@@ -53,7 +53,7 @@ namespace NWR.Effects.Rays
                     break;
 
                 case PlaceID.pid_Tree:
-                    GlobalVars.nwrWin.ShowText(Creature, BaseLocale.GetStr(RS.rs_ThereAreNowHoles));
+                    GlobalVars.nwrHost.ShowText(Creature, BaseLocale.GetStr(RS.rs_ThereAreNowHoles));
                     break;
 
                 case PlaceID.pid_Vortex:

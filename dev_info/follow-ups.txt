@@ -5,12 +5,10 @@ Captured from Linux/Mono play testing — defer to future branches.
 
 Gameplay / stability
 --------------------
-- Quit-time logged exceptions (12:38 cluster): Item.get_Container null ref
-  during EntityList.LoadFromStream; Player/NWCreature loadFromStream;
-  ProwlingEnd / eid_Prowling; EffectsList.execute index out of range.
-  Likely teardown ordering on exit — investigate if saves corrupt or if
-  log-only during shutdown.
-- Save/load robustness on Mono (Item container, creature stream).
+- Quit-time logged exceptions on exit (ProwlingEnd, EffectsList) — defer if saves
+  load clean; see dev_info/save-load-test.txt.
+- Save/load: overwrite + Item fEntry + terrain load fixes landed 2026-06-28; run
+  S4–S8 manually per dev_info/save-load-test.txt.
 
 Sound (later tiers)
 -------------------

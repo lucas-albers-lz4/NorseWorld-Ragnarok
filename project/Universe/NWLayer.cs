@@ -234,7 +234,7 @@ namespace NWR.Universe
                 for (int y = 0; y < fH; y++) {
                     for (int x = 0; x < fW; x++) {
                         fFields[y, x].Clear();
-                        GlobalVars.nwrWin.ProgressStep();
+                        GlobalVars.nwrHost.ProgressStep();
                     }
                 }
 
@@ -256,14 +256,14 @@ namespace NWR.Universe
                 for (int y = 0; y < fH; y++) {
                     for (int x = 0; x < fW; x++) {
                         fFields[y, x].InitField();
-                        GlobalVars.nwrWin.ProgressStep();
+                        GlobalVars.nwrHost.ProgressStep();
                     }
                 }
 
                 for (int y = 0; y < fH; y++) {
                     for (int x = 0; x < fW; x++) {
                         fFields[y, x].Normalize();
-                        GlobalVars.nwrWin.ProgressStep();
+                        GlobalVars.nwrHost.ProgressStep();
                     }
                 }
             } catch (Exception ex) {
@@ -313,7 +313,7 @@ namespace NWR.Universe
                         fld.Clear();
                         fld.LoadFromStream(stream, version);
 
-                        GlobalVars.nwrWin.ProgressStep();
+                        GlobalVars.nwrHost.ProgressStep();
                     }
                 }
 
@@ -337,7 +337,7 @@ namespace NWR.Universe
                 for (int y = 0; y < fH; y++) {
                     for (int x = 0; x < fW; x++) {
                         fFields[y, x].SaveToStream(stream, version);
-                        GlobalVars.nwrWin.ProgressStep();
+                        GlobalVars.nwrHost.ProgressStep();
                     }
                 }
             } catch (Exception ex) {

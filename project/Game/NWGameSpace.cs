@@ -380,7 +380,7 @@ namespace NWR.Game
         private void DoGameTurn()
         {
             try {
-                if (GlobalVars.nwrWin.GameState != GameState.gsWorldGen) {
+                if (GlobalVars.nwrHost.GameState != GameState.gsWorldGen) {
                     // process game time
                     int day = fTime.Day;
                     fTime.Tick((int)(Math.Round(((double)TurnSeconds * (fPlayer.Speed / 10.0)))));
@@ -409,7 +409,7 @@ namespace NWR.Game
                     }
 
                     if (fPlayer.State == CreatureState.Dead) {
-                        GlobalVars.nwrWin.DoEvent(EventID.event_Dead, null, null, null);
+                        GlobalVars.nwrHost.DoEvent(EventID.event_Dead, null, null, null);
                     }
 
                     if (fPlayer.Turn % 200 == 0) {
@@ -456,7 +456,7 @@ namespace NWR.Game
         {
             if (!IsRagnarok) {
                 IsRagnarok = true;
-                GlobalVars.nwrWin.ShowText(fPlayer, BaseLocale.GetStr(RS.rs_RagnarokAppear), new LogFeatures(LogFeatures.lfDialog));
+                GlobalVars.nwrHost.ShowText(fPlayer, BaseLocale.GetStr(RS.rs_RagnarokAppear), new LogFeatures(LogFeatures.lfDialog));
 
                 FinalDisplacement(GlobalVars.cid_Heimdall, false, GlobalVars.Land_Vigrid);
                 FinalDisplacement(GlobalVars.cid_Thor, false, GlobalVars.Land_Vigrid);
@@ -742,7 +742,7 @@ namespace NWR.Game
                         }
                     }
 
-                    GlobalVars.nwrWin.ShowMessage(strs.Text);
+                    GlobalVars.nwrHost.ShowMessage(strs.Text);
                 } finally {
                     strs.Dispose();
                 }
@@ -986,8 +986,8 @@ namespace NWR.Game
                     total += layer.H * layer.W;
                 }
 
-                GlobalVars.nwrWin.ProgressInit(total);
-                GlobalVars.nwrWin.ProgressLabel(BaseLocale.GetStr(RS.rs_LevelsLoading) + " (0/" + Convert.ToString(fLayers.Count) + ")");
+                GlobalVars.nwrHost.ProgressInit(total);
+                GlobalVars.nwrHost.ProgressLabel(BaseLocale.GetStr(RS.rs_LevelsLoading) + " (0/" + Convert.ToString(fLayers.Count) + ")");
 
                 try {
                     FileStream fileStream = new FileStream(GetSaveFile(SAVEFILE_TERRAINS, index), FileMode.Open);
@@ -1004,7 +1004,7 @@ namespace NWR.Game
                         int num2 = fLayers.Count;
                         for (int i = 0; i < num2; i++) {
                             fLayers[i].LoadFromStream(dis, header.Version);
-                            GlobalVars.nwrWin.ProgressLabel(BaseLocale.GetStr(RS.rs_LevelsLoading) + " (" + Convert.ToString(i + 1) + "/" + Convert.ToString(num2) + ")");
+                            GlobalVars.nwrHost.ProgressLabel(BaseLocale.GetStr(RS.rs_LevelsLoading) + " (" + Convert.ToString(i + 1) + "/" + Convert.ToString(num2) + ")");
                         }
                         
                         if (header.Version.Revision >= 3) {
@@ -1029,11 +1029,12 @@ namespace NWR.Game
                             Logger.Write("terrainsLoad(): ok");
                         } else {
                             Logger.Write("terrainsLoad(): fail");
+                            throw new IOException("terrainsLoad(): trailing data in save file");
                         }
                     }
                 } catch (IOException e) {
                     Logger.Write("NWGameSpace.loadGame.io(): " + e.Message);
-                    //throw e;
+                    throw;
                 }
 
                 fJournal.Load(GetSaveFile(SAVEFILE_JOURNAL, index));
@@ -1055,10 +1056,10 @@ namespace NWR.Game
                 }
 
                 fPlayer.TransferTo(fPlayer.LayerID, fPlayer.Field.X, fPlayer.Field.Y, fPlayer.PosX, fPlayer.PosY, StaticData.MapArea, true, false);
-                GlobalVars.nwrWin.ProgressDone();
+                GlobalVars.nwrHost.ProgressDone();
                 fFileIndex = index;
 
-                GlobalVars.nwrWin.PlaySound("game_load.ogg", SoundEngine.sk_Sound, -1, -1);
+                GlobalVars.nwrHost.PlaySound("game_load.ogg", SoundEngine.sk_Sound, -1, -1);
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.loadGame(): " + ex.Message);
                 throw ex;
@@ -1072,7 +1073,7 @@ namespace NWR.Game
             try {
                 try {
                     FileHeader header = new FileHeader();
-                    FileStream fileStream = new FileStream(GetSaveFile(SAVEFILE_PLAYER, index), FileMode.CreateNew);
+                    FileStream fileStream = new FileStream(GetSaveFile(SAVEFILE_PLAYER, index), FileMode.Create);
                     using (var dos = new BinaryWriter(fileStream)) {
                         Array.Copy(RGP_Sign, 0, header.Sign, 0, 3);
                         header.Version = RGF_Version.Clone();
@@ -1086,9 +1087,9 @@ namespace NWR.Game
                         total += (fLayers[i].H * fLayers[i].W);
                     }
 
-                    GlobalVars.nwrWin.ProgressInit(total);
+                    GlobalVars.nwrHost.ProgressInit(total);
 
-                    fileStream = new FileStream(GetSaveFile(SAVEFILE_TERRAINS, index), FileMode.CreateNew);
+                    fileStream = new FileStream(GetSaveFile(SAVEFILE_TERRAINS, index), FileMode.Create);
                     using (var dos = new BinaryWriter(fileStream)) {
                         Array.Copy(RGT_Sign, 0, header.Sign, 0, 3);
                         header.Version = RGF_Version.Clone();
@@ -1099,7 +1100,7 @@ namespace NWR.Game
                         int num2 = fLayers.Count;
                         for (int i = 0; i < num2; i++) {
                             fLayers[i].SaveToStream(dos, header.Version);
-                            GlobalVars.nwrWin.ProgressLabel(BaseLocale.GetStr(RS.rs_LevelsSaving) + " (" + Convert.ToString(i + 1) + "/" + Convert.ToString(num2) + ")");
+                            GlobalVars.nwrHost.ProgressLabel(BaseLocale.GetStr(RS.rs_LevelsSaving) + " (" + Convert.ToString(i + 1) + "/" + Convert.ToString(num2) + ")");
                         }
 
                         SaveVolatiles(dos, header.Version);
@@ -1109,10 +1110,10 @@ namespace NWR.Game
 
                     fFileIndex = index;
                 } finally {
-                    GlobalVars.nwrWin.ProgressDone();
+                    GlobalVars.nwrHost.ProgressDone();
                 }
 
-                GlobalVars.nwrWin.PlaySound("game_save.ogg", SoundEngine.sk_Sound, -1, -1);
+                GlobalVars.nwrHost.PlaySound("game_save.ogg", SoundEngine.sk_Sound, -1, -1);
             } catch (IOException ex) {
                 Logger.Write("NWGameSpace.saveGame.IO(): " + ex.Message);
                 //throw ex;
@@ -1700,13 +1701,13 @@ namespace NWR.Game
                         stages += layerEntry.H * layerEntry.W * 3;
                     }
 
-                    GlobalVars.nwrWin.ProgressInit(stages);
+                    GlobalVars.nwrHost.ProgressInit(stages);
 
                     int num2 = fLayers.Count;
                     for (int i = 0; i < num2; i++) {
-                        GlobalVars.nwrWin.ProgressLabel(BaseLocale.GetStr(RS.rs_LevelsGen) + " (" + Convert.ToString(i + 1) + "/" + Convert.ToString(num2) + ")");
+                        GlobalVars.nwrHost.ProgressLabel(BaseLocale.GetStr(RS.rs_LevelsGen) + " (" + Convert.ToString(i + 1) + "/" + Convert.ToString(num2) + ")");
                         fLayers[i].InitLayer();
-                        GlobalVars.nwrWin.ProgressStep();
+                        GlobalVars.nwrHost.ProgressStep();
                     }
 
                     GenForest();
@@ -1734,7 +1735,7 @@ namespace NWR.Game
 
                     GenGhosts();
                 } finally {
-                    GlobalVars.nwrWin.ProgressDone();
+                    GlobalVars.nwrHost.ProgressDone();
                 }
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.genWorld(): " + ex.Message);
@@ -1743,7 +1744,7 @@ namespace NWR.Game
 
         private void GenGhosts()
         {
-            GhostsList ghostsList = GlobalVars.nwrWin.GhostsList;
+            GhostsList ghostsList = GlobalVars.nwrHost.GhostsList;
 
             for (int i = 0; i < ghostsList.GhostCount; i++) {
                 Ghost ghost = ghostsList.GetGhost(i);
@@ -1789,7 +1790,7 @@ namespace NWR.Game
                 NWField fld = GetField(GlobalVars.Layer_Midgard, 2, 2);
                 if (fld == null) {
                     Logger.Write("NWGameSpace.InitEnd(): starting field not found");
-                    GlobalVars.nwrWin.SetScreen(GameScreen.gsMain);
+                    GlobalVars.nwrHost.SetScreen(GameScreen.gsMain);
                     return;
                 }
 
@@ -1805,7 +1806,7 @@ namespace NWR.Game
                 fPlayer.TransferTo(GlobalVars.Layer_Midgard, 2, 2, -1, -1, area, true, true);
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.InitEnd(): " + ex.Message);
-                GlobalVars.nwrWin.SetScreen(GameScreen.gsMain);
+                GlobalVars.nwrHost.SetScreen(GameScreen.gsMain);
             }
         }
 
@@ -2013,7 +2014,7 @@ namespace NWR.Game
                                 bool withoutCorpse = cr.Entry.WithoutCorpse || cr.Ghost || cr.Illusion;
 
                                 if (cr.Ghost) {
-                                    GlobalVars.nwrWin.GhostsList.Delete(cr.GhostIdx);
+                                    GlobalVars.nwrHost.GhostsList.Delete(cr.GhostIdx);
                                 }
 
                                 if (withoutCorpse) {
@@ -2025,7 +2026,7 @@ namespace NWR.Game
                                     item.SetPos(cr.PosX, cr.PosY);
                                     item.Contents.Add(cr);
                                     if (cr.CanSink()) {
-                                        GlobalVars.nwrWin.ShowText(cr, BaseLocale.Format(RS.rs_TheDeadSinks, new object[]{ item.GetDeclinableName(Number.nSingle, Case.cNominative, false) }));
+                                        GlobalVars.nwrHost.ShowText(cr, BaseLocale.Format(RS.rs_TheDeadSinks, new object[]{ item.GetDeclinableName(Number.nSingle, Case.cNominative, false) }));
                                         item.Dispose();
                                     } else {
                                         fld.Items.Add(item, false);
@@ -2106,7 +2107,7 @@ namespace NWR.Game
                     ShowText(fPlayer, msg, new LogFeatures(LogFeatures.lfDialog));
                 }
 
-                if (GlobalVars.nwrWin.ExtremeMode && !creature.IsPlayer) {
+                if (GlobalVars.nwrHost.ExtremeMode && !creature.IsPlayer) {
                     if (race == RaceID.crHuman) {
                         NWField fld = null;
                         int hero = -1;
@@ -2184,10 +2185,10 @@ namespace NWR.Game
                     bool pnear = MathHelper.Distance(fPlayer.PosX, fPlayer.PosY, aX, aY) == 0;
 
                     if (fld.IsBarrier(aX, aY)) {
-                        GlobalVars.nwrWin.ShowText(fPlayer, BaseLocale.GetStr(RS.rs_YouCannotSeeThere));
+                        GlobalVars.nwrHost.ShowText(fPlayer, BaseLocale.GetStr(RS.rs_YouCannotSeeThere));
                     } else {
                         if (tile.FogID != PlaceID.pid_Undefined) {
-                            GlobalVars.nwrWin.ShowText(fPlayer, BaseLocale.GetStr(RS.rs_ItIsTooFoggy));
+                            GlobalVars.nwrHost.ShowText(fPlayer, BaseLocale.GetStr(RS.rs_ItIsTooFoggy));
                             unseen = true;
                         }
 
@@ -2235,7 +2236,7 @@ namespace NWR.Game
                             } else {
                                 pat = RS.rs_YouSee;
                             }
-                            GlobalVars.nwrWin.ShowText(fPlayer, BaseLocale.Format(pat, new object[]{ s }));
+                            GlobalVars.nwrHost.ShowText(fPlayer, BaseLocale.Format(pat, new object[]{ s }));
                         }
 
                         if (creature != null && fPlayer.GetSkill(SkillID.Sk_Diagnosis) > 0) {
@@ -2315,7 +2316,7 @@ namespace NWR.Game
             Number n_num = Number.nSingle;
             Case n_case = Case.cNominative;
 
-            if (GlobalVars.nwrWin.LangExt == "ru" && hasParams) {
+            if (GlobalVars.nwrHost.LangExt == "ru" && hasParams) {
                 string tok = AuxUtils.GetToken(aToken, "_", 2);
                 char c = tok[0];
                 if (c != 'p') {
@@ -2431,7 +2432,7 @@ namespace NWR.Game
 
         public string GenerateName(NWCreature creature, sbyte method)
         {
-            return fNameLib.GenerateName(GlobalVars.nwrWin.LangExt, StaticData.GenderBySex[(int)creature.Sex], method);
+            return fNameLib.GenerateName(GlobalVars.nwrHost.LangExt, StaticData.GenderBySex[(int)creature.Sex], method);
         }
 
         // Implementing Fisher�"Yates shuffle
@@ -2508,10 +2509,10 @@ namespace NWR.Game
                 if (tile.ForeBase == PlaceID.pid_SmallPit && item.CLSID == GlobalVars.iid_Amulet_SertrudEye) {
                     tile.Foreground = PlaceID.pid_Undefined;
                     item.Dispose();
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_EyeFitsIntoPit) + BaseLocale.GetStr(RS.rs_PitEnclosesEye));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_EyeFitsIntoPit) + BaseLocale.GetStr(RS.rs_PitEnclosesEye));
                     if (CheckGrynrHalls(field)) {
                         Item i = AddItemEx(field.Layer.EntryID, field.Coords.X, field.Coords.Y, tx, ty, GlobalVars.iid_Mjollnir);
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThunderousNoise) + BaseLocale.GetStr(RS.rs_BrightLight) + BaseLocale.Format(RS.rs_YouSeeThatItemAppeared, new object[]{ i.Name }));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThunderousNoise) + BaseLocale.GetStr(RS.rs_BrightLight) + BaseLocale.Format(RS.rs_YouSeeThatItemAppeared, new object[]{ i.Name }));
                     }
                     return;
                 }
@@ -2574,7 +2575,7 @@ namespace NWR.Game
 
         public void DoEvent(EventID eventID, object sender, object receiver, object extData)
         {
-            GlobalVars.nwrWin.DoEvent(eventID, sender, receiver, extData);
+            GlobalVars.nwrHost.DoEvent(eventID, sender, receiver, extData);
         }
 
         public DataEntry GetDataEntry(int uid)
@@ -2589,27 +2590,27 @@ namespace NWR.Game
 
         public void RepaintView(int delayInterval)
         {
-            GlobalVars.nwrWin.Repaint(delayInterval);
+            GlobalVars.nwrHost.Repaint(delayInterval);
         }
 
         public void ShowText(string text)
         {
-            GlobalVars.nwrWin.ShowText(text);
+            GlobalVars.nwrHost.ShowText(text);
         }
 
         public void ShowText(object sender, string text)
         {
-            GlobalVars.nwrWin.ShowText(sender, text);
+            GlobalVars.nwrHost.ShowText(sender, text);
         }
 
         public void ShowText(object sender, string text, LogFeatures features)
         {
-            GlobalVars.nwrWin.ShowText(sender, text, features);
+            GlobalVars.nwrHost.ShowText(sender, text, features);
         }
 
         public void ShowTextAux(string text)
         {
-            GlobalVars.nwrWin.ShowTextAux(text);
+            GlobalVars.nwrHost.ShowTextAux(text);
         }
 
         #endregion

@@ -89,7 +89,7 @@ namespace NWR.Effects
             // check-ok
             bool cursed = (state == ItemState.is_Cursed);
             if (!cursed) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_CeasesAggression));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_CeasesAggression));
             }
 
             ExtRect r = ExtRect.Create(creature.PosX - 1, creature.PosY - 1, creature.PosX + 1, creature.PosY + 1);
@@ -160,17 +160,17 @@ namespace NWR.Effects
 
             if (invokeMode == InvokeMode.im_Use) {
                 creature.SetSkill(SkillID.Sk_Animation, 100);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetAnAnimationSkill));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetAnAnimationSkill));
             } else if (invokeMode == InvokeMode.im_ItSelf) {
                 Item item = (Item)ext.GetParam(EffectParams.ep_Item);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_LifeForceFlows));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_LifeForceFlows));
                 if (item.CLSID == GlobalVars.iid_DeadBody || item.CLSID == GlobalVars.iid_Mummy) {
                     NWCreature cr = AnimateDeadBody(creature, item);
                     cr.Alignment = creature.Alignment;
                     string dummy = cr.GetDeclinableName(Number.nSingle, Case.cAccusative);
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveAnimated) + dummy + ".");
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveAnimated) + dummy + ".");
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_NecessaryToPointACorpse));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_NecessaryToPointACorpse));
                 }
             }
         }
@@ -190,7 +190,7 @@ namespace NWR.Effects
 
             NWField fld = creature.CurrentField;
             if (fld.LandID == GlobalVars.Land_MimerRealm || fld.LandID == GlobalVars.Land_Nidavellir || fld.LandID == GlobalVars.Land_Jotenheim || fld.LandID == GlobalVars.Land_Valhalla || fld.LandID == GlobalVars.Land_GodsFortress || fld.LandID == GlobalVars.Land_Muspelheim || fld.LandID == GlobalVars.Land_Wasteland || fld.LandID == GlobalVars.Land_Bazaar || fld.LandID == GlobalVars.Land_Crypt || fld.LandID == GlobalVars.Land_Vanaheim || fld.LandID == GlobalVars.Land_Armory || fld.LandID == GlobalVars.Land_Ocean || fld.LandID == GlobalVars.Land_Niflheim || fld.LandID == GlobalVars.Land_Temple || fld.LandID == GlobalVars.Land_MimerWell || fld.LandID == GlobalVars.Land_Crossroads || fld.LandID == GlobalVars.Land_Bifrost || fld.LandID == GlobalVars.Land_SlaeterSea || fld.LandID == GlobalVars.Land_Alfheim || fld.LandID == GlobalVars.Land_GiollRiver) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_AnnihilationRayDoesntWorkHere));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_AnnihilationRayDoesntWorkHere));
             } else {
                 AuxUtils.ExStub("todo: 7 этапов через каждые 7 тайлов, на 2 в ширину увеличивается.");
                 AnnihilationRay ray = new AnnihilationRay();
@@ -218,12 +218,12 @@ namespace NWR.Effects
             ExtPoint pt = (ExtPoint)ext.GetParam(EffectParams.ep_Place);
 
             if (!creature.IsNear(pt)) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(StaticData.dbEffectTarget[(int)EffectTarget.et_PlaceNear].Invalid));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(StaticData.dbEffectTarget[(int)EffectTarget.et_PlaceNear].Invalid));
             } else {
                 NWTile tile = (NWTile)creature.CurrentField.GetTile(pt.X, pt.Y);
 
                 if (tile.ForeBase != PlaceID.pid_Tree) {
-                    GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_HereNoTrees));
+                    GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_HereNoTrees));
                 } else {
                     int aID;
                     if (AuxUtils.Chance(50)) {
@@ -232,14 +232,14 @@ namespace NWR.Effects
                         aID = GlobalVars.iid_Bolt;
                     }
                     Item.GenItem(creature, aID, RandomHelper.GetBoundedRnd(3, 17), true);
-                    GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_ArrowsCreated));
+                    GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_ArrowsCreated));
                 }
             }
         }
 
         public static void e_ArrowTrap(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
         {
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveWoundedByTheArrow));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveWoundedByTheArrow));
             creature.ApplyDamage(RandomHelper.GetBoundedRnd(5, 10), DamageKind.Physical, null, BaseLocale.GetStr(RS.rs_KilledByArrowTrap));
         }
 
@@ -297,11 +297,11 @@ namespace NWR.Effects
                         IntBlessing(creature, item);
                     }
                 }
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveBlessedAllItemsInInventory));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveBlessedAllItemsInInventory));
             } else {
                 Item item = (Item)ext.GetParam(EffectParams.ep_Item);
                 if (state != ItemState.is_Cursed) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_YouveBlessed, new object[]{ item.Name }));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_YouveBlessed, new object[]{ item.Name }));
                     IntBlessing(creature, item);
                 }
             }
@@ -361,9 +361,9 @@ namespace NWR.Effects
 
                 if (state == ItemState.is_Cursed) {
                     field.Visited = false;
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_SurroundingsSeemUnfamiliar));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_SurroundingsSeemUnfamiliar));
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSeeALandscape));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSeeALandscape));
                 }
             }
         }
@@ -439,7 +439,7 @@ namespace NWR.Effects
                             aExtItem.SetPos(pt.X, pt.Y);
                             fld.Items.Add(aExtItem, false);
                         }
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_AllYourItemsAreScatteredOnLevel));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_AllYourItemsAreScatteredOnLevel));
                         break;
                     }
                 case 2:
@@ -464,7 +464,7 @@ namespace NWR.Effects
                     }
                 case 5:
                     {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetAPersecutionMania));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetAPersecutionMania));
                         break;
                     }
             }
@@ -490,15 +490,15 @@ namespace NWR.Effects
             switch (state) {
                 case ItemState.is_Normal:
                     creature.Constitution++;
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsPowerAndHealthy));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsPowerAndHealthy));
                     break;
                 case ItemState.is_Blessed:
                     creature.Constitution += 2;
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelTougher));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelTougher));
                     break;
                 case ItemState.is_Cursed:
                     creature.Constitution--;
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsPowerlessAndHealthless));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsPowerlessAndHealthless));
                     break;
             }
         }
@@ -514,16 +514,16 @@ namespace NWR.Effects
                             creature.Death(BaseLocale.GetStr(RS.rs_Degenerated), null);
                         } else {
                             if (e.Duration == 5) {
-                                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouAreDying));
+                                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouAreDying));
                             } else {
                                 if (e.Duration == 10) {
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourSkinIsDecomposes));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourSkinIsDecomposes));
                                 } else {
                                     if (e.Duration == 25) {
-                                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourHairsAreFallsOut));
+                                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourHairsAreFallsOut));
                                     } else {
                                         if (e.Duration == 50) {
-                                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelVerySick));
+                                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelVerySick));
                                         }
                                     }
                                 }
@@ -547,7 +547,7 @@ namespace NWR.Effects
         {
             DungeonRoom room = (DungeonRoom)ext.GetParam(EffectParams.ep_DunRoom);
             if (room != null) {
-                GlobalVars.nwrWin.ShowText(null, BaseLocale.GetStr(RS.rs_CeilingCracks));
+                GlobalVars.nwrHost.ShowText(null, BaseLocale.GetStr(RS.rs_CeilingCracks));
                 CrushRoof(room, true);
             }
         }
@@ -556,7 +556,7 @@ namespace NWR.Effects
         {
             DungeonRoom dunRoom = creature.FindDungeonRoom();
             if (dunRoom != null) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_CeilingCracks));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_CeilingCracks));
                 CrushRoof(dunRoom, false);
             }
         }
@@ -607,7 +607,7 @@ namespace NWR.Effects
             Effect ef = creature.Effects.FindEffectByID(effectID);
             if (ef != null) {
                 creature.Effects.Remove(ef);
-                GlobalVars.nwrWin.ShowText(creature, msg);
+                GlobalVars.nwrHost.ShowText(creature, msg);
             }
         }
 
@@ -635,7 +635,7 @@ namespace NWR.Effects
                     } else {
                         creature.HPCur += RandomHelper.GetBoundedRnd(1, creature.HPMax_Renamed - creature.HPCur);
                     }
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsBetter));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsBetter));
                     break;
 
                 case ItemState.is_Blessed:
@@ -645,7 +645,7 @@ namespace NWR.Effects
                     } else {
                         creature.HPCur = creature.HPMax_Renamed;
                     }
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsMoreBetter));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsMoreBetter));
                     CureEffect(creature, EffectID.eid_Contamination, BaseLocale.GetStr(RS.rs_ContaminationIsCured));
                     CureEffect(creature, EffectID.eid_Burns, BaseLocale.GetStr(RS.rs_BurnsIsCured));
                     CureEffect(creature, EffectID.eid_LegsMissing, BaseLocale.GetStr(RS.rs_LegsMissingIsCured));
@@ -694,7 +694,7 @@ namespace NWR.Effects
             ItemsList list = creature.Items;
 
             if (creature.Confused) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ScrollWasDestroyAllItems));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ScrollWasDestroyAllItems));
                 for (int i = list.Count - 1; i >= 0; i--) {
                     if (AuxUtils.Chance(45)) {
                         Item item = list[i];
@@ -705,7 +705,7 @@ namespace NWR.Effects
             } else {
                 Item item = (Item)ext.GetParam(EffectParams.ep_Item);
                 item.InUse = false;
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_ScrollWasDestroy, new object[]{ item.Name }));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_ScrollWasDestroy, new object[]{ item.Name }));
                 list.Remove(item);
             }
         }
@@ -732,7 +732,7 @@ namespace NWR.Effects
         {
             if (invokeMode == InvokeMode.im_Use) {
                 creature.SetSkill(SkillID.Sk_Diagnosis, creature.GetSkill(SkillID.Sk_Diagnosis) + 1);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetADiagnosisSkill));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetADiagnosisSkill));
             } else if (invokeMode == InvokeMode.im_ItSelf) {
                 GlobalVars.nwrGame.DiagnoseCreature((NWCreature)ext.GetParam(EffectParams.ep_Creature));
             }
@@ -742,7 +742,7 @@ namespace NWR.Effects
         {
             bool result = false;
             if (!(collocutor.Brain is SentientBrain)) {
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_ThisNotCollocutor));
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_ThisNotCollocutor));
             } else {
                 result = true;
             }
@@ -767,7 +767,7 @@ namespace NWR.Effects
             }
 
             if (cr_list.Count == 0) {
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_HereNobody));
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_HereNobody));
             } else {
                 if (cr_list.Count == 1) {
                     col = ((NWCreature)cr_list[0]);
@@ -778,13 +778,13 @@ namespace NWR.Effects
                     ExtPoint pt = (ExtPoint)ext.GetParam(EffectParams.ep_Place);
 
                     if (!creature.IsNear(pt)) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(StaticData.dbEffectTarget[(int)EffectTarget.et_PlaceNear].Invalid));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(StaticData.dbEffectTarget[(int)EffectTarget.et_PlaceNear].Invalid));
                         return;
                     }
 
                     col = ((NWCreature)creature.CurrentField.FindCreature(pt.X, pt.Y));
                     if (col == null) {
-                        GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_HereNobody));
+                        GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_HereNobody));
                     } else {
                         if (!DialogCheck(col)) {
                             col = null;
@@ -796,7 +796,7 @@ namespace NWR.Effects
             cr_list.Dispose();
 
             if (col != null) {
-                GlobalVars.nwrWin.ShowNPCDialog(col);
+                GlobalVars.nwrHost.ShowNPCDialog(col);
             }
         }
 
@@ -804,20 +804,20 @@ namespace NWR.Effects
         {
             // check-ok
             AuxUtils.ExStub("todo: messages   rs_YouAreMesmerized ? ");
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFindInterestingEntry));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFindInterestingEntry));
             string s = BaseLocale.GetStr(RandomHelper.GetBoundedRnd(RS.rs_Diary_First, RS.rs_Diary_Last));
-            GlobalVars.nwrWin.ShowText(creature, s, new LogFeatures(LogFeatures.lfDialog));
+            GlobalVars.nwrHost.ShowText(creature, s, new LogFeatures(LogFeatures.lfDialog));
         }
 
         public static void e_Dig(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
         {
             if (creature.Items.FindByCLSID(GlobalVars.iid_PickAxe) == null) {
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_YouHaventPickaxe));
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_YouHaventPickaxe));
             } else {
                 ExtPoint pt = (ExtPoint)ext.GetParam(EffectParams.ep_Place);
 
                 if (!creature.IsNear(pt)) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(StaticData.dbEffectTarget[(int)EffectTarget.et_PlaceNear].Invalid));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(StaticData.dbEffectTarget[(int)EffectTarget.et_PlaceNear].Invalid));
                 } else {
                     creature.CurrentField.GetTile(pt.X, pt.Y).Foreground = PlaceID.pid_PitTrap;
                 }
@@ -839,7 +839,7 @@ namespace NWR.Effects
                         creature.Death(BaseLocale.GetStr(RS.rs_KilledByRottingDisease), null);
                     } else {
                         if (AuxUtils.Chance(30)) {
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourSkinCrawlsWithDisease));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourSkinCrawlsWithDisease));
                             creature.ApplyDamage(RandomHelper.GetBoundedRnd(1, 7), DamageKind.Physical, null, BaseLocale.GetStr(RS.rs_KilledByRottingDisease));
                         }
                     }
@@ -862,9 +862,9 @@ namespace NWR.Effects
             }
 
             if (confused) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ScrollWasCurseAllItems));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ScrollWasCurseAllItems));
             } else {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ScrollWasDispelHexFromAllItems));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ScrollWasDispelHexFromAllItems));
             }
         }
 
@@ -893,7 +893,7 @@ namespace NWR.Effects
                 }
             }
             creature.TransferTo(id, -1, -1, -1, -1, StaticData.MapArea, true, false);
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFallThroughTrapDoor));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFallThroughTrapDoor));
         }
 
         public static void e_Draining(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
@@ -914,8 +914,8 @@ namespace NWR.Effects
         public static void e_DrawLife(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
         {
             AuxUtils.ExStub("todo: ???");
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_TouchNowDrawsEnergy));
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_SpellAlreadyEmpowers));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_TouchNowDrawsEnergy));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_SpellAlreadyEmpowers));
         }
 
         public static void e_Embalming(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
@@ -927,13 +927,13 @@ namespace NWR.Effects
             Item aExtItem = (Item)ext.GetParam(EffectParams.ep_Item);
 
             if (aExtItem.CLSID != GlobalVars.iid_DeadBody) {
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_ThisNotDeadbody));
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_ThisNotDeadbody));
             } else {
                 NWCreature mon = (NWCreature)aExtItem.Contents[0];
                 aExtItem.CLSID = GlobalVars.iid_Mummy;
                 aExtItem.Weight = (((float)mon.Weight * 0.1f));
                 string cs = mon.GetDeclinableName(Number.nSingle, Case.cGenitive);
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.Format(RS.rs_MummyCreated, new object[]{ cs }));
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.Format(RS.rs_MummyCreated, new object[]{ cs }));
             }
         }
 
@@ -945,7 +945,7 @@ namespace NWR.Effects
             } else {
                 temp = RS.rs_NewfoundBeauty;
             }
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(temp, new object[]{ extItem.Name }));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(temp, new object[]{ extItem.Name }));
             return value;
         }
 
@@ -1077,9 +1077,9 @@ namespace NWR.Effects
 
             if (creature.IsPlayer) {
                 if (cnt >= 0) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsYourselfMoreRobust));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsYourselfMoreRobust));
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsDeadlyWeakness));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsDeadlyWeakness));
                 }
             }
 
@@ -1104,7 +1104,7 @@ namespace NWR.Effects
             ExtPoint pt = creature.GetNearestPlace(2, true);
             if (!pt.IsEmpty) {
                 UniverseBuilder.Gen_Creature(creature.CurrentField, -1, pt.X, pt.Y, true);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_MonsterEvocated));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_MonsterEvocated));
             }
         }
 
@@ -1113,17 +1113,17 @@ namespace NWR.Effects
             // check-ok
             switch (state) {
                 case ItemState.is_Normal:
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_YouFeelsYouselfExperienced, new object[]{ "" }));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_YouFeelsYouselfExperienced, new object[]{ "" }));
                     creature.Experience = creature.Experience + 1;
                     break;
 
                 case ItemState.is_Blessed:
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_YouFeelsYouselfExperienced, new object[]{ BaseLocale.GetStr(RS.rs_Much) }));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_YouFeelsYouselfExperienced, new object[]{ BaseLocale.GetStr(RS.rs_Much) }));
                     creature.Experience = creature.Experience + 2;
                     break;
 
                 case ItemState.is_Cursed:
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsYouselfUnexperienced));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsYouselfUnexperienced));
                     creature.Experience = creature.Experience - 1;
                     if (creature.Experience < 0) {
                         creature.Death(BaseLocale.GetStr(RS.rs_SuckedDry) + ((Item)source).GetDeclinableName(Number.nSingle, Case.cInstrumental, creature.Blindness), null);
@@ -1142,12 +1142,12 @@ namespace NWR.Effects
                 if (id >= 0) {
                     GlobalVars.nwrGame.SetVolatileState(id, VolatileState.None);
                     //CreatureEntry cEntry = (CreatureEntry)GlobalVars.nwrDB.GetEntry(id);
-                    GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_YouAccidentallyCreateRace));
+                    GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_YouAccidentallyCreateRace));
                 }
             } else {
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_YouHavePowerOfGenocide));
-                GlobalVars.nwrWin.HideInventory();
-                GlobalVars.nwrWin.ShowInput(BaseLocale.GetStr(RS.rs_RaceToDestroy), ExtinctionAcceptProc);
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_YouHavePowerOfGenocide));
+                GlobalVars.nwrHost.HideInventory();
+                GlobalVars.nwrHost.ShowInput(BaseLocale.GetStr(RS.rs_RaceToDestroy), ExtinctionAcceptProc);
             }
         }
 
@@ -1202,7 +1202,7 @@ namespace NWR.Effects
             } else {
                 wand.Bonus += wand2.Bonus;
                 creature.Items.Remove(wand2);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_TransferIsSuccesful));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_TransferIsSuccesful));
                 AuxUtils.ExStub(">> They must be similar wands.");
             }
         }
@@ -1222,11 +1222,11 @@ namespace NWR.Effects
                     Effect e = creature.Effects.FindEffectByID(EffectID.eid_Fever);
                     if (e.Source == null) {
                         if (e.Duration == 1) {
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSuccumbToYourIllness));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSuccumbToYourIllness));
                             creature.Death(BaseLocale.GetStr(RS.rs_FelledByDisease), null);
                         } else {
                             if (AuxUtils.Chance(30)) {
-                                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourFeverWeaksYou));
+                                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourFeverWeaksYou));
                                 creature.ApplyDamage(RandomHelper.GetBoundedRnd(1, 7), DamageKind.Physical, null, BaseLocale.GetStr(RS.rs_FelledByDisease));
                             }
                         }
@@ -1244,7 +1244,7 @@ namespace NWR.Effects
             ExtPoint pt = (ExtPoint)ext.GetParam(EffectParams.ep_Place);
 
             if (!creature.IsNear(pt)) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(StaticData.dbEffectTarget[(int)EffectTarget.et_PlaceNear].Invalid));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(StaticData.dbEffectTarget[(int)EffectTarget.et_PlaceNear].Invalid));
             } else {
                 NWTile tile = (NWTile)fld.GetTile(pt.X, pt.Y);
 
@@ -1261,7 +1261,7 @@ namespace NWR.Effects
                 }
 
                 if (!res) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_WaterSourceNotFound));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_WaterSourceNotFound));
                 }
             }
         }
@@ -1299,14 +1299,14 @@ namespace NWR.Effects
         {
             bool ashes = creature.Effects.FindEffectByID(EffectID.eid_Ashes) != null;
             bool resist = !creature.HasAffect(EffectID.eid_FireTrap);
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouEngulfedInFlames));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouEngulfedInFlames));
 
             if (!ashes && !resist) {
                 if (creature.Effects.FindEffectByID(EffectID.eid_Burns) == null) {
                     creature.AddEffect(EffectID.eid_Burns, ItemState.is_Normal, EffectAction.ea_EachTurn, false, BaseLocale.GetStr(RS.rs_YouBurned));
                     creature.ApplyDamage(RandomHelper.GetBoundedRnd(25, 45), DamageKind.Radiation, null, BaseLocale.GetStr(RS.rs_KilledByFireTrap));
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouTooBadlyBurned));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouTooBadlyBurned));
                     creature.Death(BaseLocale.GetStr(RS.rs_KilledByFireTrap), null);
                 }
             }
@@ -1324,7 +1324,7 @@ namespace NWR.Effects
                 }
 
                 if (scrBurns) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_SomeScrollsBurnup));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_SomeScrollsBurnup));
                 }
             }
         }
@@ -1369,7 +1369,7 @@ namespace NWR.Effects
                     s = BaseLocale.GetStr(RS.rs_FlameYellow);
                 }
 
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_FlameComesFromScroll, new object[]{ s }));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_FlameComesFromScroll, new object[]{ s }));
 
                 if (state != ItemState.is_Normal) {
                     if (state != ItemState.is_Blessed) {
@@ -1380,7 +1380,7 @@ namespace NWR.Effects
                         creature.HPMax = creature.HPMax_Renamed + val;
                     }
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveDamagedByFire));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveDamagedByFire));
                     creature.ApplyDamage(val, DamageKind.Radiation, null, BaseLocale.GetStr(RS.rs_BurnedToDeath));
                 }
             }
@@ -1440,9 +1440,9 @@ namespace NWR.Effects
 
             bool good = flute.Bonus > 0;
             if (good) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_PlayQuietTune));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_PlayQuietTune));
             } else {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_PlayRestlessTune));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_PlayRestlessTune));
             }
 
             if (creature.GetAbility(AbilityID.Ab_MusicalAcuity) <= 0 && good) {
@@ -1476,10 +1476,10 @@ namespace NWR.Effects
             Effect ef = creature.Effects.FindEffectByID(EffectID.eid_Stoning);
             if (ef != null) {
                 creature.Effects.Remove(ef);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourGreyColorFades));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourGreyColorFades));
             } else {
                 if (source != null) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_WhyDidYouEatThat));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_WhyDidYouEatThat));
                 }
             }
         }
@@ -1499,7 +1499,7 @@ namespace NWR.Effects
                     } else if (foodSign.Equals("BlackMushroom")) {
                         // check-ok
                         creature.SetSkill(SkillID.Sk_FireVision, 100);
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourEyesBleed));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourEyesBleed));
                         creature.ApplyDamage(RandomHelper.GetBoundedRnd(0, 20), DamageKind.Physical, null, BaseLocale.GetStr(RS.rs_KilledByMushroom));
                     } else if (foodSign.Equals("ClayLump")) {
                         // check-ok
@@ -1508,25 +1508,25 @@ namespace NWR.Effects
                         AuxUtils.ExStub("msg-none");
                     } else if (foodSign.Equals("GreenLump")) {
                         // check-ok
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_LumpTastedWoefullyBad));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_LumpTastedWoefullyBad));
                     } else if (foodSign.Equals("GreenMushroom")) {
                         // check-ok
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_TastedLikeDirt));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_TastedLikeDirt));
                     } else if (foodSign.Equals("MagicCookie")) {
                         AuxUtils.ExStub("msg-none");
                     } else if (foodSign.Equals("MottledMushroom")) {
                         // check-ok
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_WasDelicious, new object[]{ item.Name }));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_WasDelicious, new object[]{ item.Name }));
                         AuxUtils.ExStub("todo: \"приятен на вкус\", но наносит 30-40 повреждений несколько ходов спустя");
                     } else if (foodSign.Equals("RedMushroom")) {
                         // check-ok
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouGoBlind));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouGoBlind));
                     } else if (foodSign.Equals("SpeckledGrowth")) {
                         AuxUtils.ExStub("msg-partially");
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_FungusTastesStrange));
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ShapesMesmerizingFlow));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_FungusTastesStrange));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ShapesMesmerizingFlow));
                         AuxUtils.ExStub("todo: это сообщение вызывается почти каждый ход, пока глюки,используются какие попало предметы, все встречные твари получаютдикие имена и т.п.}");
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouDroolHappily));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouDroolHappily));
                     } else if (foodSign.Equals("SpongyMass")) {
                         AuxUtils.ExStub("msg-none");
                         creature.SetAbility(AbilityID.Ab_SixthSense, 0);
@@ -1540,8 +1540,8 @@ namespace NWR.Effects
                                     if (creature.IsPlayer) {
                                         ((Player)creature).Satiety = (short)(((Player)creature).Satiety + 10);
                                     }
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_GreenPowder));
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAPower));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_GreenPowder));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAPower));
                                     break;
                                 }
                             case 1:
@@ -1552,7 +1552,7 @@ namespace NWR.Effects
                                     if (creature.IsPlayer) {
                                         ((Player)creature).Satiety = (short)(((Player)creature).Satiety + 10);
                                     }
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_OrangePowder));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_OrangePowder));
                                     break;
                                 }
                             case 2:
@@ -1560,7 +1560,7 @@ namespace NWR.Effects
                                     if (creature.IsPlayer) {
                                         ((Player)creature).Satiety = (short)(((Player)creature).Satiety + 0);
                                     }
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_Nothing));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_Nothing));
                                     break;
                                 }
                             case 3:
@@ -1568,7 +1568,7 @@ namespace NWR.Effects
                                     if (creature.IsPlayer) {
                                         ((Player)creature).Satiety = (short)(((Player)creature).Satiety + 200);
                                     }
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_Meat));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_Meat));
                                     break;
                                 }
                             case 4:
@@ -1576,7 +1576,7 @@ namespace NWR.Effects
                                     if (creature.IsPlayer) {
                                         ((Player)creature).Satiety = (short)(((Player)creature).Satiety + 300);
                                     }
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_Food));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_Food));
                                     break;
                                 }
                             case 5:
@@ -1584,7 +1584,7 @@ namespace NWR.Effects
                                     if (creature.IsPlayer) {
                                         ((Player)creature).Satiety = (short)(((Player)creature).Satiety - 10);
                                     }
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_RottenFood) + " " + BaseLocale.GetStr(RS.rs_YouGag));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_RottenFood) + " " + BaseLocale.GetStr(RS.rs_YouGag));
                                     break;
                                 }
                             case 6:
@@ -1592,13 +1592,13 @@ namespace NWR.Effects
                                     if (creature.IsPlayer) {
                                         ((Player)creature).Satiety = (short)(((Player)creature).Satiety + 0);
                                     }
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_SmallerUrn));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisUrnContains) + BaseLocale.GetStr(RS.rs_Urn_SmallerUrn));
                                     break;
                                 }
                         }
                     } else if (foodSign.Equals("YellowMushroom")) {
                         // check-ok
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_Ulch));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_Ulch));
                     }
                 }
             } else {
@@ -1613,22 +1613,22 @@ namespace NWR.Effects
                     // check-ok
                     if (AuxUtils.Chance(30)) {
                         creature.Strength--;
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAWeakness));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAWeakness));
                     }
                 } else if (deadSign.Equals("Anssk")) {
                     // check-ok
                     creature.SetAbility(AbilityID.Ab_SixthSense, creature.GetAbility(AbilityID.Ab_SixthSense) + 1);
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_MinorAcheEmanates));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_MinorAcheEmanates));
                 } else if (deadSign.Equals("Basilisk")) {
                     // check-ok
                     if (creature.GetAbility(AbilityID.Resist_Petrification) <= 0) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouTurnToStone));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouTurnToStone));
                         AuxUtils.ExStub("Cockatrice?");
                         creature.Death(BaseLocale.GetStr(RS.rs_KilledByGluttony), null);
                     }
                 } else if (deadSign.Equals("Bloodslug")) {
                     // check-ok
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_Ughh));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_Ughh));
                 } else if (deadSign.Equals("Blur")) {
                     // check-ok
                     e_Speedup(EffectID.eid_Speedup, creature, null, ItemState.is_Normal, InvokeMode.im_ItSelf, null);
@@ -1636,7 +1636,7 @@ namespace NWR.Effects
                     // check-ok
                     creature.SetSkill(SkillID.Sk_Cartography, creature.GetSkill(SkillID.Sk_Cartography) + 1);
                     creature.SetSkill(SkillID.Sk_DimensionTravel, creature.GetSkill(SkillID.Sk_DimensionTravel) + 1);
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_WorldComesIntoFocus));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_WorldComesIntoFocus));
                 } else if (deadSign.Equals("BrownBat")) {
                     // check-ok
                     AuxUtils.ExStub("msg-none");
@@ -1644,7 +1644,7 @@ namespace NWR.Effects
                 } else if (deadSign.Equals("Cockatrice")) {
                     // check-ok
                     if (creature.GetAbility(AbilityID.Resist_Petrification) <= 0) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_TouchesYourSkin, new object[]{ item.Name }));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_TouchesYourSkin, new object[]{ item.Name }));
                         creature.Death(BaseLocale.Format(RS.rs_Touched, new object[]{ item.Name }), null);
                     }
                 } else if (deadSign.Equals("Corpse")) {
@@ -1652,24 +1652,24 @@ namespace NWR.Effects
                     creature.AddEffect(EffectID.eid_Diseased, state, EffectAction.ea_Persistent, false, "");
                 } else if (deadSign.Equals("Dreg")) {
                     // check-ok
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThatWasPoisonous));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThatWasPoisonous));
                     if (creature.GetAbility(AbilityID.Resist_Acid) <= 0) {
                         e_Confusion(EffectID.eid_Confusion, creature, source, state, invokeMode, null);
                         creature.ApplyDamage(RandomHelper.GetBoundedRnd(2, 15), DamageKind.Physical, null, BaseLocale.GetStr(RS.rs_KilledByGluttony));
                         creature.Strength--;
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAWeakness));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAWeakness));
                     } else {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSeemUnaffected));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSeemUnaffected));
                     }
                 } else if (deadSign.Equals("Faleryn")) {
                     // check-ok
                     creature.DropAll();
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourArmorFallsOff));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourArmorFallsOff));
 
                     int crID = GlobalVars.nwrDB.FindEntryBySign("Faleryn").GUID;
                     creature.InitEx(crID, true, false);
 
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_YouShallNowBeKnownAsX, new object[]{ creature.Name }));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_YouShallNowBeKnownAsX, new object[]{ creature.Name }));
                 } else if (deadSign.Equals("FireDragon")) {
                     AuxUtils.ExStub("msg-none");
                     creature.SetAbility(AbilityID.Resist_Heat, creature.GetAbility(AbilityID.Resist_Heat) + 1);
@@ -1678,15 +1678,15 @@ namespace NWR.Effects
                     if (creature.GetAbility(AbilityID.Resist_Heat) <= 0) {
                         creature.ApplyDamage(RandomHelper.GetBoundedRnd(16, 25), DamageKind.Radiation, null, BaseLocale.GetStr(RS.rs_ItBurnsYourThroat));
                     } else {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSeemUnaffected));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSeemUnaffected));
                     }
                 } else if (deadSign.Equals("Fyleisch")) {
                     // check-ok
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_SwallowingKnives));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_SwallowingKnives));
                     creature.Death(BaseLocale.GetStr(RS.rs_KilledByGluttony), null);
                 } else if (deadSign.Equals("Glard") || deadSign.Equals("Phausq") || deadSign.Equals("Serpent")) {
                     // check-ok
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThatWasPoisonous));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThatWasPoisonous));
                     if (creature.GetAbility(AbilityID.Resist_Poison) <= 0) {
                         if (AuxUtils.Chance(5) && !deadSign.Equals("Serpent")) {
                             creature.Death(BaseLocale.GetStr(RS.rs_KilledByGluttony), null);
@@ -1697,22 +1697,22 @@ namespace NWR.Effects
                             e_Confusion(EffectID.eid_Confusion, creature, source, state, invokeMode, null);
                             creature.ApplyDamage(RandomHelper.GetBoundedRnd(2, 15), DamageKind.Physical, null, BaseLocale.GetStr(RS.rs_KilledByGluttony));
                             creature.Strength--;
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAWeakness));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAWeakness));
                         }
                     } else {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSeemUnaffected));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSeemUnaffected));
                     }
                 } else if (deadSign.Equals("Gorm")) {
                     // check-ok
                     if (creature.GetAbility(AbilityID.Resist_Acid) <= 0) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_NotGoodIdea));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_NotGoodIdea));
                         creature.Death(BaseLocale.GetStr(RS.rs_KilledByGluttony), null);
                     }
                 } else if (deadSign.Equals("HelDragon")) {
                     // check-ok
                     creature.SetAbility(AbilityID.Resist_Petrification, creature.GetAbility(AbilityID.Resist_Petrification) + 1);
                     creature.Constitution += RandomHelper.GetBoundedRnd(1, 5);
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_MeatHumms));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_MeatHumms));
                 } else if (deadSign.Equals("IceDragon") || deadSign.Equals("IceSphere")) {
                     AuxUtils.ExStub("msg-none");
                     creature.SetAbility(AbilityID.Resist_Cold, creature.GetAbility(AbilityID.Resist_Cold) + 1);
@@ -1730,24 +1730,24 @@ namespace NWR.Effects
                 } else if (deadSign.Equals("LowerDwarf")) {
                     // check-ok
                     creature.SetAbility(AbilityID.Resist_Heat, 0);
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_LakeOfFire));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_LakeOfFire));
                 } else if (deadSign.Equals("Mudman")) {
                     // check-ok
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_TastedGritty, new object[]{ dead.GetDeclinableName(Number.nSingle, Case.cGenitive) }));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_TastedGritty, new object[]{ dead.GetDeclinableName(Number.nSingle, Case.cGenitive) }));
                 } else if (deadSign.Equals("PhantomAsp")) {
                     // check-ok
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThatWasPoisonous));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThatWasPoisonous));
                     if (creature.GetAbility(AbilityID.Resist_Poison) <= 0) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_PoisonWasDeadly));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_PoisonWasDeadly));
                         creature.Death(BaseLocale.GetStr(RS.rs_KilledByGluttony), null);
                     }
                 } else if (deadSign.Equals("Preden")) {
                     // check-ok
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_Ughh));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_Ughh));
                 } else {
                     if (deadSign.Equals("Retchweed")) {
                         // check-ok
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouRetch));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouRetch));
                     } else if (deadSign.Equals("Sandiff")) {
                         // check-ok
                         if (creature.GetAbility(AbilityID.Resist_Acid) <= 0) {
@@ -1755,10 +1755,10 @@ namespace NWR.Effects
                         }
                     } else if (deadSign.Equals("Shade")) {
                         // check-ok
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_YouGnawOnBones, new object[]{ dead.GetDeclinableName(Number.nSingle, Case.cGenitive) }));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_YouGnawOnBones, new object[]{ dead.GetDeclinableName(Number.nSingle, Case.cGenitive) }));
                     } else if (deadSign.Equals("Slinn")) {
                         // check-ok
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_MeatRots));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_MeatRots));
                     } else if (deadSign.Equals("Stalker")) {
                         AuxUtils.ExStub("msg-none");
                         e_Confusion(EffectID.eid_Confusion, creature, source, state, invokeMode, ext);
@@ -1770,7 +1770,7 @@ namespace NWR.Effects
                         creature.ApplyDamage(RandomHelper.GetBoundedRnd(11, 20), DamageKind.Radiation, null, BaseLocale.GetStr(RS.rs_YouFeelNumb));
                     } else if (deadSign.Equals("Wight")) {
                         // check-ok
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelHalfDead));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelHalfDead));
                         creature.HPMax = creature.HPMax_Renamed / 2;
                         creature.HPCur = creature.HPMax_Renamed;
                         if (creature.HPCur <= 1) {
@@ -1794,7 +1794,7 @@ namespace NWR.Effects
             bool insul = creature.Effects.FindEffectByID(EffectID.eid_Insulation) != null;
             bool resist = !creature.HasAffect(EffectID.eid_FrostTrap);
 
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCoveredInFrost));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCoveredInFrost));
             AuxUtils.ExStub("todo: rs_KilledByIceTrap!!!");
 
             if (!insul && !resist) {
@@ -1815,7 +1815,7 @@ namespace NWR.Effects
                 }
 
                 if (brk) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_SomePotionsFreeze));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_SomePotionsFreeze));
                 }
             }
         }
@@ -1870,9 +1870,9 @@ namespace NWR.Effects
                 case InvokeMode.im_Use:
                     creature.SetSkill(SkillID.Sk_Terraforming, creature.GetSkill(SkillID.Sk_Terraforming) + 1);
                     if (creature.GetSkill(SkillID.Sk_Terraforming) == 1) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetATerraformingSkill));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetATerraformingSkill));
                     } else {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ReshapePowerGrows));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ReshapePowerGrows));
                     }
                     break;
 
@@ -1903,12 +1903,12 @@ namespace NWR.Effects
 
             Item aExtItem = (Item)ext.GetParam(EffectParams.ep_Item);
             if (aExtItem.CLSID != GlobalVars.iid_DeadBody) {
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_ThisNotDeadbody));
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_ThisNotDeadbody));
             } else {
                 NWCreature mon = AnimateDeadBody(creature, aExtItem);
                 string cs = mon.GetDeclinableName(Number.nSingle, Case.cGenitive);
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.Format(RS.rs_GolemCreated, new object[]{ cs }));
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_GolemUncontrolled));
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.Format(RS.rs_GolemCreated, new object[]{ cs }));
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_GolemUncontrolled));
             }
         }
 
@@ -1948,7 +1948,7 @@ namespace NWR.Effects
                 if (invokeMode == InvokeMode.im_ItSelf) {
                     Effect e = creature.Effects.FindEffectByID(EffectID.eid_Hardening);
                     if (e.Source == null && e.Duration == 1) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouAreStatue));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouAreStatue));
                         creature.Death(BaseLocale.GetStr(RS.rs_ImmortalizedInStone), null);
                     }
                 }
@@ -2009,14 +2009,14 @@ namespace NWR.Effects
                     AuxUtils.ExStub("todo:  this message only for skill \"heat radiation\"");
                     AuxUtils.ExStub("todo:   other skills and effects - other messages");
                     AuxUtils.ExStub("todo:   -> separate ");
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_BurnCloudStrikesNearYou));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_BurnCloudStrikesNearYou));
 
                     for (int y = py - 3; y <= py + 3; y++) {
                         for (int x = px - 3; x <= px + 3; x++) {
                             NWTile tile = (NWTile)f.GetTile(x, y);
                             if (tile != null && tile.ForeBase == PlaceID.pid_Tree) {
                                 tile.Foreground = PlaceID.pid_Undefined;
-                                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_TreeBursts));
+                                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_TreeBursts));
                             }
 
                             NWCreature c = (NWCreature)f.FindCreature(x, y);
@@ -2030,9 +2030,9 @@ namespace NWR.Effects
             } else {
                 creature.SetSkill(SkillID.Sk_HeatRadiation, creature.GetSkill(SkillID.Sk_HeatRadiation) + 1);
                 if (creature.GetSkill(SkillID.Sk_HeatRadiation) == 1) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouGetAHeatRadiationSkill));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouGetAHeatRadiationSkill));
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourBodyGrowsWarmer));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourBodyGrowsWarmer));
                 }
             }
         }
@@ -2042,7 +2042,7 @@ namespace NWR.Effects
             AuxUtils.ExStub("msg-none");
             AuxUtils.ExStub("green mushroom");
             creature.HPMax = creature.HPMax_Renamed + 1;
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveBecomeMoreRobust));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveBecomeMoreRobust));
         }
 
         public static void e_Husbandry(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
@@ -2050,9 +2050,9 @@ namespace NWR.Effects
             NWCreature cr = (NWCreature)ext.GetParam(EffectParams.ep_Creature);
             if (!cr.Equals(creature) && !cr.Entry.Flags.Contains(CreatureFlags.esMind)) {
                 cr.Clone(false);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_BreedingIsSuccesful));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_BreedingIsSuccesful));
             } else {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourAttemptsAreFutile));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourAttemptsAreFutile));
             }
         }
 
@@ -2074,7 +2074,7 @@ namespace NWR.Effects
             } else {
                 if (state != ItemState.is_Normal) {
                     if (state == ItemState.is_Blessed) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_BuzzingSound));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_BuzzingSound));
 
                         int num2 = creature.Items.Count;
                         for (int i = 0; i < num2; i++) {
@@ -2114,7 +2114,7 @@ namespace NWR.Effects
                     break;
             }
 
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_NoHappens));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_NoHappens));
         }
 
         public static void e_IllusorySelf(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
@@ -2123,7 +2123,7 @@ namespace NWR.Effects
             if (illusion != null) {
                 illusion.Illusion = true;
                 ((SentientBrain)illusion.Brain).SetEscortGoal(creature, false);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveMadeAnIllusionOfYourself));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveMadeAnIllusionOfYourself));
             }
         }
 
@@ -2163,20 +2163,20 @@ namespace NWR.Effects
             NWCreature victim = (NWCreature)ext.GetParam(EffectParams.ep_Creature);
 
             if (victim.Entry.Flags.HasIntersect(CreatureFlags.esSwimming, CreatureFlags.esPlant)) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_OrbHasNoPower));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_OrbHasNoPower));
             } else {
                 if (victim.Imprisonable) {
                     victim.TransferTo(GlobalVars.Layer_Vanaheim, 0, 0, -1, -1, StaticData.MapArea, true, false);
                     if (creature.IsPlayer) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_ScreamsAndDisappearsInThickenedAir, new object[]{ victim.Name }));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_ScreamsAndDisappearsInThickenedAir, new object[]{ victim.Name }));
                         if (((Player)creature).Morality <= -10 && creature.LayerID != GlobalVars.Layer_Vanaheim) {
                             creature.TransferTo(GlobalVars.Layer_Vanaheim, 0, 0, -1, -1, StaticData.MapArea, true, false);
                             string msg = BaseLocale.GetStr(RS.rs_SphereMiredYouInItselfAndDisappears);
-                            GlobalVars.nwrWin.ShowText(creature, msg, new LogFeatures(LogFeatures.lfDialog));
+                            GlobalVars.nwrHost.ShowText(creature, msg, new LogFeatures(LogFeatures.lfDialog));
                         }
                     }
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_TooMightyAndDoesntSubjectedToIt));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_TooMightyAndDoesntSubjectedToIt));
                 }
             }
         }
@@ -2226,14 +2226,14 @@ namespace NWR.Effects
                     } else {
                         ef.Duration += Effect.GetDuration(EffectID.eid_Intoxicate, ItemState.is_Normal, false);
                         if (ef.Duration > 160) {
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouHaveOverworkedYourLiver));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouHaveOverworkedYourLiver));
                             creature.Death(BaseLocale.GetStr(RS.rs_KilledByAlcoholAbuse), null);
                         } else {
                             if (ef.Duration > 120) {
-                                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouGag));
+                                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouGag));
                             } else {
                                 if (ef.Duration > 80) {
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelMoreIntoxicated));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelMoreIntoxicated));
                                 }
                             }
                         }
@@ -2255,7 +2255,7 @@ namespace NWR.Effects
 
                 case InvokeMode.im_UseEnd:
                     creature.DoneEffect(EffectID.eid_Invisibility, source);
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouVisibleAgain));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouVisibleAgain));
                     break;
 
                 case InvokeMode.im_ItSelf:
@@ -2317,7 +2317,7 @@ namespace NWR.Effects
             AuxUtils.ExStub("skill of writing.");
             AuxUtils.ExStub("Your knowledge of writing increases.");
             if (StaticData.dbTeachable[i].CommentRS != RS.rs_Reserved) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(StaticData.dbTeachable[i].CommentRS));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(StaticData.dbTeachable[i].CommentRS));
             }
         }
 
@@ -2362,7 +2362,7 @@ namespace NWR.Effects
                     }
                 }
 
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_LavaIsRained));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_LavaIsRained));
             }
         }
 
@@ -2373,7 +2373,7 @@ namespace NWR.Effects
 
             NWField fld = creature.CurrentField;
 
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_GroundHereTurnsToLava));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_GroundHereTurnsToLava));
             fld.GetTile(creature.PosX, creature.PosY).Background = (ushort)PlaceID.pid_Lava;
             fld.Normalize();
 
@@ -2482,11 +2482,11 @@ namespace NWR.Effects
             // check-ok
             if (state == ItemState.is_Cursed) {
                 creature.Luck -= RandomHelper.GetBoundedRnd(1, 4);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_SkinBurns));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_SkinBurns));
                 creature.ApplyDamage(RandomHelper.GetBoundedRnd(1, 4), DamageKind.Physical, null, BaseLocale.GetStr(RS.rs_Consumed));
             } else {
                 creature.Luck++;
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_HolyWater));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_HolyWater));
             }
         }
 
@@ -2533,18 +2533,18 @@ namespace NWR.Effects
                 RaceID race = cr.Entry.Race;
                 if ((race == RaceID.crDefault || race == RaceID.crHuman) && (cr.Entry.Flags.Contains(CreatureFlags.esMind) && cr.HasAffect(EffectID.eid_MindControl))) {
                     cr.AddEffect(EffectID.eid_Obedience, ItemState.is_Normal, EffectAction.ea_Persistent, false, "");
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_MindControlDone));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_MindControlDone));
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_NothingHappens));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_NothingHappens));
                 }
             } else {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_NothingHappens));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_NothingHappens));
             }
         }
 
         public static void e_MistTrap(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
         {
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_StrangeMistSeepsOutOfGround));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_StrangeMistSeepsOutOfGround));
             switch (RandomHelper.GetRandom(8)) {
                 case 0:
                     {
@@ -2567,13 +2567,13 @@ namespace NWR.Effects
                 case 3:
                     {
                         creature.Constitution -= RandomHelper.GetBoundedRnd(1, 3);
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourHealthIsAffected));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourHealthIsAffected));
                         break;
                     }
                 case 4:
                     {
                         e_Insanity(EffectID.eid_Insanity, creature, null, ItemState.is_Normal, InvokeMode.im_ItSelf, null);
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourMindIsAffected));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourMindIsAffected));
                         break;
                     }
                 case 5:
@@ -2585,13 +2585,13 @@ namespace NWR.Effects
                 case 6:
                     {
                         creature.Strength -= RandomHelper.GetBoundedRnd(1, 3);
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourStrengthIsAffected));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourStrengthIsAffected));
                         break;
                     }
                 case 7:
                     {
                         creature.Dexterity = (ushort)(creature.Dexterity - RandomHelper.GetBoundedRnd(1, 3));
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourDexterityIsAffected));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourDexterityIsAffected));
                         break;
                     }
                 case 8:
@@ -2698,7 +2698,7 @@ namespace NWR.Effects
                     {
                         AuxUtils.ExStub("?? > A rolling boulder misses/hit you.");
                         AuxUtils.ExStub("?? > The hill giant hits.");
-                        GlobalVars.nwrWin.ShowText(enemy, BaseLocale.GetStr(RS.rs_YouAreBeingCrushed));
+                        GlobalVars.nwrHost.ShowText(enemy, BaseLocale.GetStr(RS.rs_YouAreBeingCrushed));
                         SimpleAttack(enemy, effectID, DamageKind.Physical, "");
                         break;
                     }
@@ -2860,7 +2860,7 @@ namespace NWR.Effects
                     {
                         AuxUtils.ExStub("todo: ???");
                         AuxUtils.ExStub("??? e_Confusion(eid_Confusion, enemy, nil, is_Normal, im_ItSelf, ");
-                        GlobalVars.nwrWin.ShowText(enemy, BaseLocale.GetStr(RS.rs_GazeMakesYouFeelDisoriented));
+                        GlobalVars.nwrHost.ShowText(enemy, BaseLocale.GetStr(RS.rs_GazeMakesYouFeelDisoriented));
                         break;
                     }
             }
@@ -2872,7 +2872,7 @@ namespace NWR.Effects
 
             DungeonRoom dunRoom = creature.FindDungeonRoom();
             if (dunRoom != null) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_MonsterTrapEntering));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_MonsterTrapEntering));
                 List<int> validCreatures = fld.ValidCreatures;
                 int cnt = (validCreatures != null) ? validCreatures.Count : 0;
                 int id = fld.ValidCreatures[RandomHelper.GetRandom(cnt)];
@@ -2903,7 +2903,7 @@ namespace NWR.Effects
             // check-ok
             if (invokeMode == InvokeMode.im_Use) {
                 creature.SetAbility(AbilityID.Ab_MusicalAcuity, creature.GetAbility(AbilityID.Ab_MusicalAcuity) + 1);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetAMusicalAcuty));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetAMusicalAcuty));
             }
         }
 
@@ -2915,11 +2915,11 @@ namespace NWR.Effects
                     if (num != 1) {
                         if (num == 2) {
                             creature.SetSkill(SkillID.Sk_Writing, creature.GetSkill(SkillID.Sk_Writing) + 1);
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouLearnWrite));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouLearnWrite));
                         }
                     } else {
                         creature.SetSkill(SkillID.Sk_Fennling, creature.GetSkill(SkillID.Sk_Fennling) + 1);
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouLearnFennl));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouLearnFennl));
                     }
                 } else {
                     creature.AddEffect(EffectID.eid_LegsMissing, ItemState.is_Normal, EffectAction.ea_Persistent, false, BaseLocale.GetStr(RS.rs_LegsGone));
@@ -2941,9 +2941,9 @@ namespace NWR.Effects
             if (source is Item) {
                 bool music = creature.GetAbility(AbilityID.Ab_MusicalAcuity) > 0;
                 if (!music) {
-                    GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_OcarinaTune));
+                    GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_OcarinaTune));
                 } else {
-                    GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_OcarinaBeautifulTune));
+                    GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_OcarinaBeautifulTune));
                 }
 
                 if (((Item)source).CLSID == GlobalVars.iid_GlassOcarina) {
@@ -2979,7 +2979,7 @@ namespace NWR.Effects
                         f = creature.CurrentField;
 
                         if (old_fld.LandID == GlobalVars.Land_Muspelheim && f.LandID != old_fld.LandID) {
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouReturnToYourPlaneOfExistence));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouReturnToYourPlaneOfExistence));
                         } else {
                             AuxUtils.ExStub("todo: You remain in this realm.");
                         }
@@ -3006,7 +3006,7 @@ namespace NWR.Effects
 
                 case InvokeMode.im_FinAction:
                     if (creature.IsPlayer) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCanMoveAgain));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCanMoveAgain));
                         GlobalVars.nwrGame.TurnState = TurnState.Done;
                     }
                     break;
@@ -3022,10 +3022,10 @@ namespace NWR.Effects
                             Effect e = creature.Effects.FindEffectByID(EffectID.eid_Phase);
                             if (e.Source == null) {
                                 if (e.Duration == 1) {
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSolidAgain));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSolidAgain));
                                 } else {
                                     if (e.Duration < 5) {
-                                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_FazingActionFinishes));
+                                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_FazingActionFinishes));
                                     }
                                 }
                             }
@@ -3073,7 +3073,7 @@ namespace NWR.Effects
                 if (invokeMode == InvokeMode.im_ItSelf) {
                     Effect e = creature.Effects.FindEffectByID(EffectID.eid_Poisoned);
                     if (e.Source == null && e.Duration == 1) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_VenomReachesYourHeart));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_VenomReachesYourHeart));
                         creature.Death(BaseLocale.GetStr(RS.rs_KilledByDeadlyPotion), null);
                     }
                 }
@@ -3117,9 +3117,9 @@ namespace NWR.Effects
             } else {
                 creature.SetSkill(SkillID.Sk_Precognition, creature.GetSkill(SkillID.Sk_Precognition) + 1);
                 if (creature.GetSkill(SkillID.Sk_Precognition) == 1) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetAPrecognitionSkill));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetAPrecognitionSkill));
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_PowerPrecognitionGrows));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_PowerPrecognitionGrows));
                 }
             }
         }
@@ -3170,10 +3170,10 @@ namespace NWR.Effects
                 if ((race == RaceID.crDefault || race == RaceID.crHuman) && cr.HasAffect(EffectID.eid_PsiBlast)) {
                     cr.Death(BaseLocale.GetStr(RS.rs_YouProbeAForeignMind), null);
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelNoResponse));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelNoResponse));
                 }
             } else {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelNoResponse));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelNoResponse));
             }
         }
 
@@ -3288,9 +3288,9 @@ namespace NWR.Effects
 
             creature.MPMax += cnt;
             if (cnt > 0) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourMagicAbilityIncreases));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourMagicAbilityIncreases));
             } else {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourMagicAbilityDecreases));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourMagicAbilityDecreases));
             }
         }
 
@@ -3308,7 +3308,7 @@ namespace NWR.Effects
                     } else {
                         creature.TransferTo(GlobalVars.Layer_Midgard, 2, 2, -1, -1, StaticData.MapArea, true, true);
                     }
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourWorldSpins));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourWorldSpins));
                 }
             }
         }
@@ -3324,7 +3324,7 @@ namespace NWR.Effects
             Item aExtItem = (Item)ext.GetParam(EffectParams.ep_Item);
 
             if (creature.Confused) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_WandsDrained));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_WandsDrained));
 
                 int num = creature.Items.Count;
                 for (int i = 0; i < num; i++) {
@@ -3346,15 +3346,15 @@ namespace NWR.Effects
                     }
                 }
 
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_WandPulsates, new object[]{ aExtItem.GetDeclinableName(Number.nSingle, Case.cNominative, creature.Blindness) }));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_WandPulsates, new object[]{ aExtItem.GetDeclinableName(Number.nSingle, Case.cNominative, creature.Blindness) }));
             }
         }
 
         public static void e_Reflect(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
         {
             AuxUtils.ExStub("todo: ???");
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouNowReflect));
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_SpellAlreadyProtects));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouNowReflect));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_SpellAlreadyProtects));
         }
 
         public static void e_Regeneration(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
@@ -3377,23 +3377,23 @@ namespace NWR.Effects
             AuxUtils.ExStub("todo: if all ok then Nothng seems to happen");
 
             if (creature.Effects.FindEffectByID(EffectID.eid_Withered) != null) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouExhaustedNoRejuvenation));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouExhaustedNoRejuvenation));
             } else {
                 switch (state) {
                     case ItemState.is_Blessed:
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourLiverTingles));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourLiverTingles));
                         creature.SetAbility(AbilityID.Resist_Poison, 100);
                         CureEffect(creature, EffectID.eid_Poisoned, BaseLocale.GetStr(RS.rs_VenomIsNeutralized));
                         break;
 
                     case ItemState.is_Cursed:
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourLiverAches));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourLiverAches));
                         creature.SetAbility(AbilityID.Resist_Poison, 0);
                         break;
                 }
 
                 if (state != ItemState.is_Cursed && creature.HPCur != creature.HPMax_Renamed) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourLostStrengthIsRestored));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourLostStrengthIsRestored));
                     // todo: original - strength
                     creature.HPCur = creature.HPMax_Renamed;
                 }
@@ -3404,6 +3404,7 @@ namespace NWR.Effects
         {
             switch (invokeMode) {
                 case InvokeMode.im_Use:
+                case InvokeMode.im_ItSelf:
                     {
                         if (creature.HasAffect(EffectID.eid_Relocation)) {
                             NWField fld = creature.CurrentField;
@@ -3411,17 +3412,17 @@ namespace NWR.Effects
                                 break;
                             }
                             if (source is BaseTile && (int)((BaseTile)source).Foreground == PlaceID.pid_TeleportTrap) {
-                                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSetOffTeleportationTrap));
+                                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSetOffTeleportationTrap));
                             }
 
                             ExtPoint pt = ExtPoint.Empty;
-                            bool res = (ext == null);
-                            if (!res) {
-                                pt = (ExtPoint)ext.GetParam(EffectParams.ep_Place);
-                                res = (pt.IsEmpty);
+                            if (ext != null) {
+                                object placeParam = ext.GetParam(EffectParams.ep_Place);
+                                if (placeParam != null) {
+                                    pt = (ExtPoint)placeParam;
+                                }
                             }
-
-                            if (res) {
+                            if (pt.IsEmpty) {
                                 pt = creature.SearchRndLocation(fld, fld.AreaRect);
                             }
 
@@ -3434,7 +3435,7 @@ namespace NWR.Effects
                             creature.CheckTile(true);
 
                             if (creature.IsPlayer) {
-                                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveTeleported));
+                                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveTeleported));
                             }
                         }
                         break;
@@ -3454,7 +3455,7 @@ namespace NWR.Effects
         {
             if (creature.IsPlayer) {
                 if (creature.IsPlayer && creature.CLSID == GlobalVars.cid_Werewolf) {
-                    GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_WerebloodDissipates));
+                    GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_WerebloodDissipates));
                     AuxUtils.ExStub("todo:  ");
                 }
 
@@ -3468,7 +3469,7 @@ namespace NWR.Effects
                 AuxUtils.ExStub("todo: rs_HumansAreExtinct");
                 AuxUtils.ExStub("todo: rs_TurnedIntoMass");
 
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.Format(RS.rs_RestoreForm, new object[]{ creature.Name }));
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.Format(RS.rs_RestoreForm, new object[]{ creature.Name }));
             }
         }
 
@@ -3476,16 +3477,16 @@ namespace NWR.Effects
         {
             // check-ok
             if (creature.MPCur == creature.MPMax) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_NothingHappens));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_NothingHappens));
             } else {
                 creature.MPCur = creature.MPMax;
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouAreRestoredYourMana));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouAreRestoredYourMana));
             }
         }
 
         public static void e_RunicDivination(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
         {
-            GlobalVars.nwrWin.ShowDivination();
+            GlobalVars.nwrHost.ShowDivination();
         }
 
         public static void e_Prayer(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
@@ -3495,7 +3496,7 @@ namespace NWR.Effects
 
             CreatureEntry deity = (CreatureEntry)GlobalVars.nwrDB.GetEntry(deityID);
             if (deity != null) {
-                GlobalVars.nwrWin.ShowTextRes(creature, RS.rs_PraysTo, new object[]{ creature, deity });
+                GlobalVars.nwrHost.ShowTextRes(creature, RS.rs_PraysTo, new object[]{ creature, deity });
 
                 ((Player)creature).Faith.Worship(deityID, Faith.WK_PRAYER, null);
             }
@@ -3509,7 +3510,7 @@ namespace NWR.Effects
             CreatureEntry deity = (CreatureEntry)GlobalVars.nwrDB.GetEntry(deityID);
             if (deity != null) {
                 Item item = (Item)ext.GetParam(EffectParams.ep_Item);
-                GlobalVars.nwrWin.ShowTextRes(creature, RS.rs_ItemSacrificed, new object[]{ item, deity });
+                GlobalVars.nwrHost.ShowTextRes(creature, RS.rs_ItemSacrificed, new object[]{ item, deity });
 
                 ((Player)creature).Faith.Worship(deityID, Faith.WK_SACRIFICE, item);
             }
@@ -3533,11 +3534,11 @@ namespace NWR.Effects
             creature.ArmorClass += cnt;
 
             if (creature.IsPlayer) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSkinFeelsPinching));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSkinFeelsPinching));
                 if (cnt > 0) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouBecameStronger));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouBecameStronger));
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouBecameLessArmored));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouBecameLessArmored));
                 }
             }
         }
@@ -3547,10 +3548,10 @@ namespace NWR.Effects
             if (creature.IsPlayer) {
                 NWField fld = creature.CurrentField;
                 if (fld.LandID == GlobalVars.Land_Jotenheim) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_SpellFails));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_SpellFails));
                 }
                 ((Player)creature).SetRecallPos();
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveMakeAPointOfReturn));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveMakeAPointOfReturn));
             }
         }
 
@@ -3610,7 +3611,7 @@ namespace NWR.Effects
                 NWTile tile = (NWTile)creature.CurrentField.GetTile(nx, ny);
                 if (tile.BackBase != PlaceID.pid_Water) {
                     AuxUtils.ExStub("todo: check message");
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_NeedLaunchOntoWater));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_NeedLaunchOntoWater));
                 } else {
                     LoadShip((Player)creature);
                     creature.AddEffect(EffectID.eid_Sail, ItemState.is_Normal, EffectAction.ea_Persistent, false, "");
@@ -3643,7 +3644,7 @@ namespace NWR.Effects
 
                 case InvokeMode.im_FinAction:
                     if (creature.IsPlayer) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCanMoveAgain));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCanMoveAgain));
                         GlobalVars.nwrGame.TurnState = TurnState.Done;
                     }
                     break;
@@ -3678,12 +3679,12 @@ namespace NWR.Effects
 
                     int speed = creature.Speed;
                     if (speed < 50) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouStayFaster));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouStayFaster));
                     } else {
                         if (speed < 70) {
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_DangerouslyFast));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_DangerouslyFast));
                         } else {
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_HeartBursts));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_HeartBursts));
                             creature.Death(BaseLocale.GetStr(RS.rs_KilledByAcceleration), null);
                         }
                     }
@@ -3712,15 +3713,15 @@ namespace NWR.Effects
                 if (state != ItemState.is_Blessed) {
                     if (state == ItemState.is_Cursed) {
                         creature.Strength--;
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAWeakness));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAWeakness));
                     }
                 } else {
                     creature.Strength += RandomHelper.GetBoundedRnd(1, 4);
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelMuchStronger));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelMuchStronger));
                 }
             } else {
                 creature.Strength++;
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAPower));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelsAPower));
             }
         }
 
@@ -3759,12 +3760,12 @@ namespace NWR.Effects
                         }
                     }
 
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_AlcoRecallCausedACollapse));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_AlcoRecallCausedACollapse));
                 } else {
                     int x = RandomHelper.GetBoundedRnd(creature.PosX - 5, creature.PosX + 5);
                     int y = RandomHelper.GetBoundedRnd(creature.PosY - 5, creature.PosY + 5);
                     field.AddCreature(x, y, GlobalVars.nwrDB.FindEntryBySign("GreyTerror").GUID);
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourHairStandsOnEnd));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourHairStandsOnEnd));
                 }
             } else {
                 string temp = "";
@@ -3789,7 +3790,7 @@ namespace NWR.Effects
                 int x = RandomHelper.GetBoundedRnd(creature.PosX - 5, creature.PosX + 5);
                 int y = RandomHelper.GetBoundedRnd(creature.PosY - 5, creature.PosY + 5);
                 field.AddCreature(x, y, GlobalVars.nwrDB.FindEntryBySign(temp).GUID);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetAReinforcement));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetAReinforcement));
             }
         }
 
@@ -3799,7 +3800,7 @@ namespace NWR.Effects
                 var cs = creature.CurrentField.Creatures;
 
                 if (cs.Count == 1) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_NoCreatureExists));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_NoCreatureExists));
                 } else {
                     NWCreature weak = null;
                     NWCreature strong = null;
@@ -3831,7 +3832,7 @@ namespace NWR.Effects
                     }
                     if (creature.Equals(strong)) {
                         strong = null;
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouAreMostPowerful));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouAreMostPowerful));
                     }
 
                     if (creature.Confused && weak != null) {
@@ -3850,7 +3851,7 @@ namespace NWR.Effects
                         creature.CheckTile(false);
                         creature.SetPos(tPos.X, tPos.Y);
                         creature.CheckTile(true);
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSwitchBodies));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouSwitchBodies));
                     }
                 }
             }
@@ -3864,11 +3865,11 @@ namespace NWR.Effects
                 if (invokeMode == InvokeMode.im_ItSelf) {
                     creature.TransferTo(GlobalVars.Layer_Crossroads, 0, 0, -1, -1, StaticData.MapArea, true, true);
                     fld.Research(false, (BaseTile.TS_SEEN | BaseTile.TS_VISITED));
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCameOnCrossroads));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCameOnCrossroads));
                 }
             } else {
                 creature.SetSkill(SkillID.Sk_DimensionTravel, creature.GetSkill(SkillID.Sk_DimensionTravel) + 1);
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouGetDimTravelAbility));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouGetDimTravelAbility));
             }
         }
 
@@ -3882,7 +3883,7 @@ namespace NWR.Effects
                     break;
 
                 case InvokeMode.im_FinAction:
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCanMoveAgain));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCanMoveAgain));
                     GlobalVars.nwrGame.TurnState = TurnState.Done;
                     break;
             }
@@ -3895,12 +3896,12 @@ namespace NWR.Effects
                 RaceID race = cr.Entry.Race;
                 if ((race == RaceID.crDefault || race == RaceID.crHuman) && (!cr.Entry.Flags.Contains(CreatureFlags.esPlant))) {
                     cr.AddEffect(EffectID.eid_Obedience, ItemState.is_Normal, EffectAction.ea_Persistent, false, "");
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCharmTheMonster));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCharmTheMonster));
                 } else {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_NothingHappens));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_NothingHappens));
                 }
             } else {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_NothingHappens));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_NothingHappens));
             }
         }
 
@@ -3938,8 +3939,8 @@ namespace NWR.Effects
 
                 case InvokeMode.im_FinAction:
                     if (creature.IsPlayer) {
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouStepIntoFlowOfTime));
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCanMoveAgain));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouStepIntoFlowOfTime));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCanMoveAgain));
                         GlobalVars.nwrGame.TurnState = TurnState.Done;
                     }
                     break;
@@ -3954,7 +3955,7 @@ namespace NWR.Effects
                 case InvokeMode.im_Use:
                     if (creature.IsPlayer && fld.LandID != GlobalVars.Land_Bazaar && fld.LandID != GlobalVars.Land_MimerWell) {
                         if (fld.LandID == GlobalVars.Land_MimerRealm || fld.LandID == GlobalVars.Land_Niflheim || fld.LandID == GlobalVars.Land_Jotenheim || fld.LandID == GlobalVars.Land_Nidavellir || fld.LandID == GlobalVars.Land_Armory || fld.LandID == GlobalVars.Land_Vigrid || fld.LandID == GlobalVars.Land_Valhalla || fld.LandID == GlobalVars.Land_GodsFortress || fld.LandID == GlobalVars.Land_Ocean || fld.LandID == GlobalVars.Land_Bifrost || fld.LandID == GlobalVars.Land_GiollRiver) {
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouOpenedMagicGate));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouOpenedMagicGate));
 
                             int id = RandomHelper.GetRandom(5);
                             switch (id) {
@@ -4018,7 +4019,7 @@ namespace NWR.Effects
 
                                         Effect effect = new Effect(creature.Space, creature, EffectID.eid_TimeStop, null, EffectAction.ea_Persistent, cnt, 0);
                                         creature.Effects.Add(effect);
-                                        GlobalVars.nwrWin.ShowText(creature, msg);
+                                        GlobalVars.nwrHost.ShowText(creature, msg);
                                     }
                                     break;
 
@@ -4046,7 +4047,7 @@ namespace NWR.Effects
                     break;
 
                 case InvokeMode.im_FinAction:
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouStepIntoFlowOfTime));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouStepIntoFlowOfTime));
                     break;
             }
         }
@@ -4074,13 +4075,13 @@ namespace NWR.Effects
 
             if (!creature.Entry.Flags.Contains(CreatureFlags.esUseItems)) {
                 creature.DropAll();
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourArmorFallsOff));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourArmorFallsOff));
             }
 
             AuxUtils.ExStub("todo:  messages");
             AuxUtils.ExStub("todo: Your amulet falls off.");
             AuxUtils.ExStub("todo: Your armor strains and bursts.");
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_YouShallNowBeKnownAsXX, new object[] {
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_YouShallNowBeKnownAsXX, new object[] {
                 creature.Name,
                 creature.Race
             }));
@@ -4107,8 +4108,8 @@ namespace NWR.Effects
                 } else {
                     creature.TransferTo(GlobalVars.Layer_Svartalfheim3, 2, 2, -1, -1, StaticData.MapArea, true, true);
                     fld.Research(false, (BaseTile.TS_SEEN | BaseTile.TS_VISITED));
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourWorldSpins));
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_SignReads));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourWorldSpins));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_SignReads));
                 }
             }
         }
@@ -4136,7 +4137,7 @@ namespace NWR.Effects
                     }
                 }
 
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouKnowAboutAllTrapsAndPortals));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouKnowAboutAllTrapsAndPortals));
             }
         }
 
@@ -4155,7 +4156,7 @@ namespace NWR.Effects
                         }
                     }
                 }
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelSenseOfEase));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelSenseOfEase));
             } else {
                 int px = creature.PosX;
                 int py = creature.PosY;
@@ -4168,7 +4169,7 @@ namespace NWR.Effects
                         }
                     }
                 }
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCreateTraps));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouCreateTraps));
             }
         }
 
@@ -4218,7 +4219,7 @@ namespace NWR.Effects
                         if (!fld.IsBarrier(x, y) && (px != x || py != y)) {
                             Item item = fld.AddItem(x, y, GlobalVars.iid_Coin);
                             item.Count = (ushort)RandomHelper.GetBoundedRnd(20, 115);
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_GoldAppears));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_GoldAppears));
                             string temp;
                             if (fld.EntryID == GlobalVars.Field_Bazaar) {
                                 temp = "BlueWisp";
@@ -4240,7 +4241,7 @@ namespace NWR.Effects
 
                         if (!fld.IsBarrier(x, y) && (px != x || py != y)) {
                             UniverseBuilder.Gen_Creature(fld, -1, x, y, true);
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_GatesOpen));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_GatesOpen));
 
                             break;
                         }
@@ -4270,7 +4271,7 @@ namespace NWR.Effects
                 }
             }
 
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThrowVoice));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThrowVoice));
         }
 
         public static void e_Vertigo(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
@@ -4344,7 +4345,7 @@ namespace NWR.Effects
 
             DungeonRoom dunRoom = creature.FindDungeonRoom();
             if (dunRoom != null) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_CeilingCracks));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_CeilingCracks));
                 int turns = Effect.GetDuration(EffectID.eid_CrushRoof, ItemState.is_Normal, false);
                 EffectExt newExt = new EffectExt();
                 newExt.SetParam(EffectParams.ep_DunRoom, dunRoom);
@@ -4366,7 +4367,7 @@ namespace NWR.Effects
         {
             DungeonRoom dunRoom = creature.FindDungeonRoom();
             if (dunRoom != null) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_FloorBeneathYouSinks));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_FloorBeneathYouSinks));
 
                 EffectExt newExt = new EffectExt();
                 newExt.SetParam(EffectParams.ep_DunRoom, dunRoom);
@@ -4390,29 +4391,29 @@ namespace NWR.Effects
         {
             NWCreature enemy = (NWCreature)ext.GetParam(EffectParams.ep_Creature);
 
-            GlobalVars.nwrWin.ShowText(enemy, BaseLocale.GetStr(RS.rs_WeirdFumeEnvelops));
+            GlobalVars.nwrHost.ShowText(enemy, BaseLocale.GetStr(RS.rs_WeirdFumeEnvelops));
             switch (RandomHelper.GetRandom(8)) {
                 case 0:
                     enemy.CurrentField.Close(true);
-                    GlobalVars.nwrWin.ShowText(enemy, BaseLocale.GetStr(RS.rs_MindIsRearranged));
+                    GlobalVars.nwrHost.ShowText(enemy, BaseLocale.GetStr(RS.rs_MindIsRearranged));
                     break;
 
                 case 1:
                     SimpleAttack(enemy, EffectID.eid_WeirdFume_Acid, DamageKind.Physical, "");
-                    GlobalVars.nwrWin.ShowText(enemy, BaseLocale.GetStr(RS.rs_AcidDropletsFall));
+                    GlobalVars.nwrHost.ShowText(enemy, BaseLocale.GetStr(RS.rs_AcidDropletsFall));
                     break;
 
                 case 2:
                     if (enemy.Body != null) {
                         enemy.Body.AddPart((int)BodypartType.bp_Finger);
-                        GlobalVars.nwrWin.ShowText(enemy, BaseLocale.GetStr(RS.rs_FingerGrow));
+                        GlobalVars.nwrHost.ShowText(enemy, BaseLocale.GetStr(RS.rs_FingerGrow));
                     }
                     break;
 
                 case 3:
                     if (enemy.Body != null) {
                         enemy.Body.AddPart((int)BodypartType.bp_Eye);
-                        GlobalVars.nwrWin.ShowText(enemy, BaseLocale.GetStr(RS.rs_EyeGrow));
+                        GlobalVars.nwrHost.ShowText(enemy, BaseLocale.GetStr(RS.rs_EyeGrow));
                     }
                     break;
 
@@ -4420,7 +4421,7 @@ namespace NWR.Effects
                     {
                         CreatureSex sex = enemy.Sex;
                         if (sex != CreatureSex.csFemale && sex != CreatureSex.csMale) {
-                            GlobalVars.nwrWin.ShowText(enemy, BaseLocale.GetStr(RS.rs_Unchanged));
+                            GlobalVars.nwrHost.ShowText(enemy, BaseLocale.GetStr(RS.rs_Unchanged));
                         } else {
                             CreatureSex sex2 = enemy.Sex;
                             if (sex2 != CreatureSex.csFemale) {
@@ -4430,18 +4431,18 @@ namespace NWR.Effects
                             } else {
                                 enemy.Sex = CreatureSex.csMale;
                             }
-                            GlobalVars.nwrWin.ShowText(enemy, BaseLocale.GetStr(RS.rs_GenderChange));
+                            GlobalVars.nwrHost.ShowText(enemy, BaseLocale.GetStr(RS.rs_GenderChange));
                         }
                         break;
                     }
                 case 5:
                     {
-                        GlobalVars.nwrWin.ShowText(enemy, BaseLocale.GetStr(RS.rs_Unchanged));
+                        GlobalVars.nwrHost.ShowText(enemy, BaseLocale.GetStr(RS.rs_Unchanged));
                         break;
                     }
                 case 6:
                     {
-                        GlobalVars.nwrWin.ShowText(enemy, BaseLocale.GetStr(RS.rs_BrainThrobs));
+                        GlobalVars.nwrHost.ShowText(enemy, BaseLocale.GetStr(RS.rs_BrainThrobs));
                         AuxUtils.ExStub("todo: vertiginous");
                         break;
                     }
@@ -4461,8 +4462,8 @@ namespace NWR.Effects
 
         public static void e_Wishing(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
         {
-            GlobalVars.nwrWin.HideInventory();
-            GlobalVars.nwrWin.ShowInput(BaseLocale.GetStr(RS.rs_WishedItem), WishAcceptProc);
+            GlobalVars.nwrHost.HideInventory();
+            GlobalVars.nwrHost.ShowInput(BaseLocale.GetStr(RS.rs_WishedItem), WishAcceptProc);
         }
 
         public static void e_Withered(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
@@ -4474,7 +4475,7 @@ namespace NWR.Effects
 
         private static void FieldDries(NWField f, NWCreature creature)
         {
-            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_AllLiquidIsDriedHere));
+            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_AllLiquidIsDriedHere));
             if (f.LandID != GlobalVars.Land_Ocean) {
                 bool mud = false;
                 bool water = false;
@@ -4527,16 +4528,16 @@ namespace NWR.Effects
                 f.Normalize();
 
                 if (mud) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_MudDries));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_MudDries));
                 }
                 if (water) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_WaterDries));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_WaterDries));
                 }
                 if (quicksand) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_QuicksandDries));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_QuicksandDries));
                 }
                 if (lava) {
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_LavaDries));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_LavaDries));
                 }
             }
 
@@ -4607,7 +4608,7 @@ namespace NWR.Effects
                                     }
                                 }
                             }
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_TreesSprout));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_TreesSprout));
                             break;
                         }
 
@@ -4650,7 +4651,7 @@ namespace NWR.Effects
                                 }
                             }
 
-                            GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ForestTransforms));
+                            GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ForestTransforms));
                             break;
                         }
 
@@ -4672,7 +4673,7 @@ namespace NWR.Effects
                     case 9:
                         creature.SetAbility(AbilityID.Resist_Teleport, 100);
                         creature.SetSkill(SkillID.Sk_Relocation, 5);
-                        GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetTeleportResistance));
+                        GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetTeleportResistance));
                         break;
 
                     case 10:
@@ -4682,31 +4683,31 @@ namespace NWR.Effects
 
                             switch (ab) {
                                 case AbilityID.Resist_Cold:
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelStrangelyCool));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelStrangelyCool));
                                     break;
                                 case AbilityID.Resist_Heat:
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelStrangelyWarm));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelStrangelyWarm));
                                     break;
                                 case AbilityID.Resist_Acid:
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourSkinFeelsSlick));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourSkinFeelsSlick));
                                     break;
                                 case AbilityID.Resist_Poison:
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourLiverSquirms));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourLiverSquirms));
                                     CureEffect(creature, EffectID.eid_Poisoned, BaseLocale.GetStr(RS.rs_VenomIsNeutralized));
                                     break;
                                 case AbilityID.Resist_Ray:
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YourBodyHasStrangeSheen));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YourBodyHasStrangeSheen));
                                     break;
                                 case AbilityID.Resist_DeathRay:
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouWillLiveForever));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouWillLiveForever));
                                     break;
                                 case AbilityID.Resist_Petrification:
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelOneWithEarth));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouFeelOneWithEarth));
                                     CureStoning(creature, null);
                                     break;
 
                                 default:
-                                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetANewResistance));
+                                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_YouveGetANewResistance));
                                     break;
                             }
                             break;
@@ -4718,7 +4719,7 @@ namespace NWR.Effects
         public static void e_Writing(EffectID effectID, NWCreature creature, object source, ItemState state, InvokeMode invokeMode, EffectExt ext)
         {
             if (creature.Items.FindByCLSID(GlobalVars.iid_Stylus) == null) {
-                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_StylusNecessary));
+                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_StylusNecessary));
             } else {
                 object obj = ext.GetParam(EffectParams.ep_ScrollID);
                 int sid = (int)obj;
@@ -4727,7 +4728,7 @@ namespace NWR.Effects
                 if (scroll.Kind == ItemKind.ik_Scroll) {
                     scroll.CLSID = sid;
                     AuxUtils.ExStub("msg: You rewrite the scroll.");
-                    GlobalVars.nwrWin.ShowText(creature, BaseLocale.Format(RS.rs_ScrollWrited, new object[]{ scroll.Name }));
+                    GlobalVars.nwrHost.ShowText(creature, BaseLocale.Format(RS.rs_ScrollWrited, new object[]{ scroll.Name }));
                 } else {
                     // message?
                 }
@@ -4766,7 +4767,7 @@ namespace NWR.Effects
             string ms = monster.GetDeclinableName(Number.nSingle, Case.cAccusative);
             monster.CheckTile(false);
             field.Creatures.Remove(monster);
-            GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.Format(RS.rs_RayDeanimateMonster, new object[]{ ms }));
+            GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.Format(RS.rs_RayDeanimateMonster, new object[]{ ms }));
         }
 
         private static int FindExtinctCreature(string input)
@@ -4789,15 +4790,15 @@ namespace NWR.Effects
             Player player = GlobalVars.nwrGame.Player;
             if (id > -1) {
                 if (cEntry.Race == player.Entry.Race) {
-                    GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_AsYouWish));
+                    GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_AsYouWish));
                     if (cEntry.Race == RaceID.crHuman) {
-                        GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_HumanRaceDestroyed));
+                        GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_HumanRaceDestroyed));
                     }
                     player.Death(BaseLocale.GetStr(RS.rs_DestroyedHisRace), null);
-                    GlobalVars.nwrWin.DoEvent(EventID.event_Dead, null, null, null);
+                    GlobalVars.nwrHost.DoEvent(EventID.event_Dead, null, null, null);
                 } else {
                     if (cEntry.Extinctable) {
-                        GlobalVars.nwrWin.ProgressInit(GlobalVars.dbLayers.Count);
+                        GlobalVars.nwrHost.ProgressInit(GlobalVars.dbLayers.Count);
 
                         int num = GlobalVars.dbLayers.Count;
                         for (int i = 0; i < num; i++) {
@@ -4820,21 +4821,21 @@ namespace NWR.Effects
                                 }
                             }
 
-                            GlobalVars.nwrWin.ProgressLabel(BaseLocale.GetStr(RS.rs_Henocide) + " (" + Convert.ToString(i + 1) + "/" + Convert.ToString(GlobalVars.dbLayers.Count) + ")");
-                            GlobalVars.nwrWin.ProgressStep();
+                            GlobalVars.nwrHost.ProgressLabel(BaseLocale.GetStr(RS.rs_Henocide) + " (" + Convert.ToString(i + 1) + "/" + Convert.ToString(GlobalVars.dbLayers.Count) + ")");
+                            GlobalVars.nwrHost.ProgressStep();
                         }
 
-                        GlobalVars.nwrWin.ProgressDone();
+                        GlobalVars.nwrHost.ProgressDone();
                         player.Morality = (sbyte)((int)player.Morality - 15);
                         GlobalVars.nwrGame.SetVolatileState(id, VolatileState.Extincted);
-                        GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_RaceDestroyed) + cEntry.GetNounDeclension(Number.nPlural, Case.cAccusative) + ".");
-                        GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_MoraleLowered));
+                        GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_RaceDestroyed) + cEntry.GetNounDeclension(Number.nPlural, Case.cAccusative) + ".");
+                        GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_MoraleLowered));
                     } else {
-                        GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_RaceUndestroyable));
+                        GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_RaceUndestroyable));
                     }
                 }
             } else {
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_NoSuchRace));
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_NoSuchRace));
             }
         }
 
@@ -4926,7 +4927,7 @@ namespace NWR.Effects
                                 lid = GlobalVars.Layer_Svartalfheim2;
                                 fp = fld.Coords;
                             } else {
-                                GlobalVars.nwrWin.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisAreaIsMagicallyBounded));
+                                GlobalVars.nwrHost.ShowText(creature, BaseLocale.GetStr(RS.rs_ThisAreaIsMagicallyBounded));
                                 return;
                             }
                         } else {
@@ -5040,11 +5041,11 @@ namespace NWR.Effects
                 }
                 if (res) {
                     int i = RandomHelper.GetBoundedRnd(910, 912);
-                    GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(i));
-                    GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_WishedItemTaked));
+                    GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(i));
+                    GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_WishedItemTaked));
                 }
             } else {
-                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_NoSuchItem));
+                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_NoSuchItem));
             }
         }
 
@@ -5055,7 +5056,7 @@ namespace NWR.Effects
 
             NWCreature cr = (NWCreature)map.FindCreature(xx, yy);
             if (cr != null && cr.Effects.FindEffectByID(EffectID.eid_Phase) == null) {
-                GlobalVars.nwrWin.ShowText(cr, BaseLocale.GetStr(RS.rs_FallingDebrisHitsYou));
+                GlobalVars.nwrHost.ShowText(cr, BaseLocale.GetStr(RS.rs_FallingDebrisHitsYou));
                 cr.Death(BaseLocale.GetStr(RS.rs_KilledByRoofCrushing), null);
             }
         }
@@ -5109,7 +5110,7 @@ namespace NWR.Effects
             }
             if (cr.HasAffect(effectID)) {
                 AuxUtils.ExStub("todo: aMsg := 'x отразил луч' + aMsg;");
-                GlobalVars.nwrWin.ShowText(victim, hitMsg);
+                GlobalVars.nwrHost.ShowText(victim, hitMsg);
                 cr.ApplyDamage(damage, DamageKind.Radiation, null, deathMsg);
             }
         }

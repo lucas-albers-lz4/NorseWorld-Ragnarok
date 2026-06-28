@@ -134,7 +134,7 @@ namespace NWR.Game.Story
         public void Save(string fileName)
         {
             try {
-                FileStream fs = new FileStream(fileName, FileMode.CreateNew);
+                FileStream fs = new FileStream(fileName, FileMode.Create);
                 using (var dos = new BinaryWriter(fs)) {
                     RSJ_Header.Write(dos);
                     

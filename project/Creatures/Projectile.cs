@@ -61,7 +61,7 @@ namespace NWR.Creatures
             int sy = Creature.PosY;
 
             int dir = Directions.GetDirByCoords(sx, sy, tX, tY);
-            if (GlobalVars.nwrWin.Style == NWMainWindow.RGS_MODERN) {
+            if (GlobalVars.nwrHost.Style == NWMainWindow.RGS_MODERN) {
                 dir = NWCreature.ShootIsoTrans[dir];
             }
 

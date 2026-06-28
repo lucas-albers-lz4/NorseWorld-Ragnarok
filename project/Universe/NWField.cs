@@ -342,14 +342,14 @@ namespace NWR.Universe
                         {
                             if (tile.ForeBase == PlaceID.pid_Tree) {
                                 tile.Foreground = PlaceID.pid_DeadTree;
-                                GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_TreeBursts));
+                                GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_TreeBursts));
                             }
 
                             // ALERT: fixme, where resistances?!!
                             NWCreature cr = (NWCreature)FindCreature(x, y);
                             if (cr != null) {
                                 if (cr.IsPlayer) {
-                                    GlobalVars.nwrWin.ShowText(cr, BaseLocale.GetStr(RS.rs_LavaEncasesYou));
+                                    GlobalVars.nwrHost.ShowText(cr, BaseLocale.GetStr(RS.rs_LavaEncasesYou));
                                     cr.Death(BaseLocale.GetStr(RS.rs_EncasedInVolcanicRock), null);
                                 } else {
                                     cr.Death(BaseLocale.GetStr(RS.rs_XIsConsumedByLava), null);
@@ -397,7 +397,7 @@ namespace NWR.Universe
                 }
 
                 if (lava_bounds.Count > 5) {
-                    GlobalVars.nwrWin.ShowText(GlobalVars.nwrWin, BaseLocale.GetStr(RS.rs_GroundBeginsToShake));
+                    GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.GetStr(RS.rs_GroundBeginsToShake));
                 }
 
                 int xcnt = RandomHelper.GetBoundedRnd(1, Math.Max(1, (int)Math.Round(lava_bounds.Count * 0.25f)));
@@ -569,7 +569,7 @@ namespace NWR.Universe
                 reverb = SoundEngine.Reverb.Quarry;
             }
 
-            GlobalVars.nwrWin.SoundsReverb = reverb;
+            GlobalVars.nwrHost.SoundsReverb = reverb;
         }
 
         public void DoTurn()
