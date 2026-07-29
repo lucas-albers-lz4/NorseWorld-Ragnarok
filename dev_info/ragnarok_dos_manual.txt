@@ -1,0 +1,876 @@
+actionaction-adventureadventurepuzzleracingrpgshootersimulationsportsstrategyvehicle simulation
+
+For thousands of years, the gods have lived in their home, Asgard.  Most of the gods champion the human race, protecting them from greater evils that would destroy their realm, Midgard, and all that lies within it.  Few see the gods or their work, as they are usually disguised as commonplace people and lesser creatures.  Despite their subtlety, the Asgardians are constantly at war with those who would harm Midgard.
+
+Threatening the gods themselves are greater evils that came with them from the dawn of time.  Fenrir and Garm, the two vile wolves, have killed many of the Asgardians, and would have laid waste to everything in their path, swallowing even the sun, moon, and stars had they not been captured and bound by the gods.
+
+Equal to Odin, the first of the gods and father of all living things, is Surtr, the chaotic fire demon.  His lust for evil is patient and brooding, for he has sworn to destroy the tree of life by fire, destroying Asgard, Midgard, and all the realms of the universe, leaving nothing but flames and darkness.  The Norns have prophesied that his success is unavoidable, for he has merely to wait for the power of the Asgardians to wane while he grows stronger in silence.
+
+Lurking in the depths of the seas lies Jormungand, a serpent born of evil during the chaos at the beginning of time. Coiled about the great tree of life,He gnaws slowly at the roots, severing the lifeblood that holds the worlds together.  He hungers to destroy the world and return all to the nothingness from whence it came.
+
+Of all the evils confronting the gods, the most devious and wicked god, Loki, lives with the Asgardians, spreading strife and contention. It was Loki who brought about the death of Balder for the simple pleasure of destroying the most loved of all the gods.  Loki had promised not to harm Balder himself, but later beguiled Balder's beloved half brother into hurling a mistletoe dart at him, the only living thing capable of harming Balder.  Balder's immortal soul was taken by Hela, goddess of the dead.
+
+In a vain effort to recover Balder, the gods attempted to bargain with Hela.  Hela promised to release Balder if every living thing wept for him, knowing full well that one solitary giantess, Thokk, had a heart so cold that she would weep for none.  All life wept for Balder but Thokk, leaving Balder trapped in Niflheim as long as Thokk lives.
+
+The gods have lost much of their might through various arcane evils and misadventures.  According to prophecy these handicaps will be their undoing.  Odin lost Gungnir, his powerful spear in a battle with the frost giants. Without its deadly accuracy and magical powers, he will be helpless to fight Surtr and his fire demons in armed combat, for no other weapon can withstand the heat of Surtr's fiery form.
+
+Freyr, on the other hand, traded his powerful sword, Mimming, for a bride.  In surrendering Mimming, Freyr surrendered his invulnerability as well.
+
+During the chaining of Fenrir, Tyr suffered the loss of his right arm.  While holding Fenrir at bay, the foul wolf grabbed hold of his arm with his jaw, and only by tearing it off was Tyr able to escape death.
+
+Mighty Thor himself has suffered at the hands of darkness.  In conspiracy with the lord of the fire giants, Loki deceived Thor into leaving his hammer, Mjollner, in the halls of Grynr, the most impenetrable labyrinth of caves known to exist.
+
+Loki likewise beguiled Heimdall, Asgard's guardian, into allowing Frekstn Tyl to touch the outer shell of his great horn, Gjall.  Disguised as a mute messenger, Tyl approached Heimdall peacefully, but upon gaining his confidence, Tyl cursed Gjall.  The great horn turned into the writhing serpent, Aspenth.  Aspenth twisted free of Heimdall's grasp, plunging off of the rainbow bridge, Bifrost, into the land of Mimer.  Mimer bound the evil serpent into a deep well from which it could not escape.  Unable to leave his post, Heimdall cannot journey forth to reclaim his horn, and Aspenth destroys all who come near.  Without his horn, Heimdall has not the power to warn the Asgardians of their impending doom.
+
+Although many hold the prophecies of the Norns to be all-knowing, it is whispered that the future is not set in stone.  Although wise, the Norns often overlook the potential of humans in their powerful webs.  Many believe that the prophecies can be foiled through human intervention, but it will take a true hero and exceptional warrior to meddle in the realm of gods and giants.  With the dread day of Ragnarok approaching, many have quested forth to recover the lost artifacts of the gods, or to find the rainbow bridge.  No one has ever returned.
+
+It is 999 A.D., and as a young Viking, you fear there is little time left before the coming of Surtr and his hordes of fire demons.  The nights have been increasingly colder, the days shorter, and the sun and moon have been growing steadily darker, indicating that the power of the gods is faltering.  You have decided to brave the unknown rather than wait to perish in flames.
+
+You have chosen to leave your village to pursue the following quests:
+
+News of Mimming (Freyr's sword), Mjollner (Thor's hammer), or Gungnir,(Odin's spear).
+
+Mimer's well and the skill and magic needed to defeat Aspenth, releasing the curse that forms him into a serpent.
+
+Some manner of weapon or magic that can assist Tyr in battling with but one arm.
+
+Thokk's tears, or news of her death to bring to Hela in exchange for the release of Balder's soul.
+
+Even the Norns cannot predict the final outcome of Ragnarok, but you know in your heart that the successful efforts of a true hero may save the world.
+
+The world is divided into three main planes of existence: Midgard, the land of mortals (including men, giants, and dwarfs), Asgard, land of the gods, and Niflheim, land of the dead.  In addition, five minor planes are known to exist and there may be countless others outside the normal boundaries of space and time.
+
+Midgard is the plane of the world where men live.  It consists of a great forest bounded by virtually impassable mountains.  On the other sides of these mountains lie the perilous river Vid, Mimer's  realm (which is host to hordes of powerful creatures in addition to the spring and well of Mimer), Jotenheim (the land of the fire and frost giants), Nidavellir (the caves of the elusive dwarfs), the river Gioll (the entrance to Niflheim), Slaeter's sea (a land of  great adventure and danger), and the base of the flaming rainbow bridge, Bifrost, which leads to Asgard. Somewhere within the boundaries of the great forest lies an entrance to an vast underground world.  The  size of this complex is unknown but rumors have filtered back of the existence of a large crypt, a temple, and even a strange bazaar.  Few have ever ventured past Midgard's protective mountains or into the world of darkness below the forest.  Nidavellir is said to be home to both the mythical forges of the dwarfs and their gigantic mining operations which are said to reach beyond the depths of the earth.
+
+Asgard exists on a plane above Midgard and is accessible to  mortals only by crossing the rainbow bridge.  Here lie the homes of the gods and the great plain, Vigrid, the prophesied site of Ragnarok, the final battle for the existence of the universe.
+
+Niflheim is a plane of unimaginable cold located beneath Midgard.  The souls of those who have not died gloriously in battle are consigned to spend eternity here where Hela and her legions of demons rule Niflheim with an iron hand.  It is here that Hela cruelly holds the soul of Balder.
+
+Not much is known about AZARE'S PLANE; the greatest alchemist of all time discovered and named it after himself.  It is believed that the source of his great power emanated from this plane.
+
+The CROSSROADS are spoken of only in whispers by those who worship the great gods of the knilbs.  While the knilbs themselves barely understand the powers that they have, it is said that a man who gains the knowledge of traveling via the Crossroads will rule the world.
+
+LIMBO is a plane located parallel to Niflheim where the gods send those who need to learn the lessons of humility.
+
+CHAOS is a strange world that Konr Rig created through sheer will.  It exists as a warning to those who tamper with his power without properly worshipping him.
+
+The WASTELAND is an area that has slipped outside the normal flow of time.  It is an area which is as unstable as Midgard was in the early stages of its existence.
+
+Insert disk 1, type INSTALL and depress the enter key.  Follow the instructions given by the install program until all files have been copied onto the hard drive.
+
+Step 1 - Log onto the drive containing the RAGNAROK directory (ex. C: ).
+
+Step 2 - Log into the RAGNAROK directory (ex. cd\Ragnarok ).
+
+Step 3 - Type in RAGNAROK and depress the enter key.
+
+You are now ready to play Ragnarok.
+
+The first screen contains the view from the base of Bifrost (the Rainbow bridge) which connects Midgard (earth) and Asgard (home of the gods).  Press any key to proceed.
+
+The second screen asks for a basic description of your adventurer.  You are first asked to enter the name of your adventurer.  You may choose a name randomly by striking the F2 key or you may enter your name by using the keyboard.  Names may be up to ten letters long.  Press enter when your character's name is complete.  Select a gender for your adventurer by pressing 'M' for male or 'F' for female.
+
+The third screen asks you to input your character's class.  You may choose a class by typing the first letter of the desired class or by placing the mouse icon inside of the desired class's box and pressing either button on the mouse.  A description of the character classes appears later in the manual.
+
+If you have saved games a special screen will appear before the second screen.  You may then choose to play a previously saved game by typing the number of that game or placing the mouse icon on that number and depressing either mouse button.  You may also erase old saved games by typing 'E' or placing the mouse on the erase game button and then choosing the number of the game to be erased.  Press the cancel button or  to cancel erasure.  Games set to be erased will be marked with an 'x'.  Should  you decide that you do not wish to erase a game marked for erasure, merely repeat the erase procedure upon it.  It will now be removed from the erasure list and no longer marked by an 'x'.  If you wish to play a new game merely type 'n' or  or depress the new game button using the mouse icon.
+
+The odds are against the survival of your character.  Most creatures are hostile and these hordes vastly outnumber you.  Fortunately, humankind is more intelligent than other races, and can develop strategies for survival.  Here are some strategies to aid in your quests:
+
+- Use projectile weapons.  Each hit you inflict on a monster from afar may be a fatal blow, thus saving you the risk of hand-to-hand combat.
+
+- Flee when outnumbered or overwhelmed.  If you manage to elude your pursuers, you can recuperate to reengage in combat when you are stronger.
+
+- Take advantage of friendly creatures.  The shopkeeper is the first of several friendly beings you will meet.  If you are in need of aid, retreat into the shop where you can shut the doors or enlist the aid of the powerful trader.  Friendly and neutral creatures are identifiable by their lack of interest in attacking you.  If you move onto their square, they will move elsewhere rather than engage in combat.
+
+- Map the entire level.  Each square may contain an item which could prolong your life and aid you in your quest.  Also, fight each hostile monster that you are capable of defeating.  Only through successful battles will you be able to become a hero of mighty proportions.
+
+- If one empty square separates you from a hostile creature, wait one turn for it to move next to you.  In this manner, you can strike the first blow.
+
+- Pay close attention to the messages which you receive in the message area.  They will allow you to better understand cause and effect relationships of your actions.
+
+- Do not neglect the use of diagonal movement.  This will allow you to more efficiently map and escape from foes.
+
+- Beware monsters whose speeds are greater than yours.  Fleeing may not be particularly helpful.
+
+- Do not be afraid to use up scrolls, potions, and wands.  Dying with these objects still in your possession is of no use to you.
+
+- Keep a notebook handy.  You may wish to keep track of such things as effects of magical items, advice from sources such as the raven and diaries of other adventurers, and information about each race of monsters such as which attack strategies are successful and which have no effect.
+
+- Do not battle a shopkeeper or attempt to steal from him unless you are assured of victory in your endeavor.
+
+- If you can find no strategy that is successful against a certain race of creatures, you may wish to genocide them using a scroll of extinction.
+
+- Take your time.  No game time will pass unless you press a key.  Relax and think about your moves.
+
+-  Take chances.  Try out new magic items that you have not before encountered.  In order to ultimately be victorious you will have to sacrifice some adventurers first.
+
+- Lastly, if you are still having trouble, play only the more powerful classes (Viking, woodsman) until you have more experience with the game.
+
+The playing screen is broken into five areas. First, is the upper map. This map provides an overview of the entire level you are currently on.
+
+Second is the status area. This area is located on the lower left portion of the screen and contains the following information:
+
+(1)	LEVEL	area currently being explored
+
+Items 3 through 6 have a status bar.  The amount of green showing equals the percent remaining of the maximum of that category.
+
+The third part of the screen is the lower map. This zoom mode shows the area near the player in more detail.
+
+The fourth area is the area of the mouse buttons (see COMMANDS).
+
+The fifth area is the message area.  It is located on the bottom two rows of the screen and will tell you the effects of many of the moves which you initiate as well as actions which occur as the result of outside sources.
+
+Hit Points: Hit points represent the amount of physical damage a character may take before dying. The higher the number of hit points, the more damage a player may sustain.  Hit points increase as a character gains experience levels (see below) and through magical means such as the consumption of certain foods and potions. Lost hit points do regenerate slowly over time.
+
+Strength: Strength is a measure of the muscle strength of the character. Strength influences the amount of weight which may be carried, the amount of damage which may be inflicted, the ability to hit a target, the distance objects may be thrown, the amount of hit points gained as new experience levels are reached, and even the ability to wield or hurl certain magical items.
+
+Magic Points: Magic points are necessary in order to cast spells. These points regenerate over time. (See CONJURER, under CHARACTER CLASSES for descriptions of spells)
+
+Hunger Level: This represents the relative fullness of the character's stomach. Eat whenever hungry to avoid fainting spells and starvation.
+
+Experience Level: Initially, each character starts with no real-world experience.  Actual battle situations are what allow the character to become a better fighter, hardier, and more able to adapt to new situations.  After set numbers of experience points are reached, the character will increase in experience levels.  Increased experience also hones each classes' special skills(see CHARACTER CLASSES for a description of these abilities).
+
+Constitution: Constitution represents a character's general health and hardiness. A high constitution will bring a rise in the character's rate of healing, resistance to toxins in foods, and lung capacity.  Additionally, the higher a character's constitution, the greater the rise in hit points as new experience levels are reached.
+
+Luck: Luck reflects the favor of the gods upon the character.  Luck affects such things as the number of items the character may encounter, the quality of objects found, the infliction of damage by the character, the ability to avoid traps, and the ability to use objects such as wands and orbs.  The scale of luck runs from -100 to 100, with 7 being the starting point for all adventurers.
+
+Armor Class: Armor class represents a combination of a character's ability to dodge and parry attacks.  The lower the armor class, the greater the chance that the character will sustain no damage in an attack.  Armor class may be lowered by increasing the thickness and toughness of skin and by wearing all available pieces of armor.  An armor class of 10 is normal for an unarmored human.
+
+Gold: Gold is the coin of the realm and represents the character's wealth.
+
+Identification: A character with this ability is able to pick up an object and immediately know both what it is and its quality.
+
+Master of Weaponry: Those who possess this mastery are among the most lethal fighters in all the world.
+
+Telepathy: Telepathy is the ability to sense other minds, thus knowing the positions of hostile creatures before they are inadvertently discovered.
+
+Swimming: Those who wish to master Slaeter's Sea and plunge to the depths of Mimer's well must learn how to swim.
+
+Levitation: Levitation allows one to hover just slightly above the terrain, thus avoiding most traps and obstacles.
+
+Musical Acuity: Those who have the ability to play music will find the strange instruments of our lands to contain great power.
+
+Increased visual range: Characters with increased visual range are able to perceive parts of the spectrum not normally visible to the human eye.
+
+Non-visual Perception: This physical manifestation causes a secondary bundle of nerves to grow parallel to the optic nerve. If the optic nerve is damaged somehow, this alternate  link-up will allow for limited "sight."
+
+Throwing skills: Practice with each type of throwing/shooting weapon increases accuracy and power.
+
+Alchemy: Those skilled in alchemy can create nearly any potion known to mankind.
+
+Cartography: Adventurers with the skill of cartography intuitively know the features of terrain surrounding them.
+
+Diagnosis: With only the merest of glances, an adventurer with the skill of diagnosis can take stock of a creature's state of mind, hit points, armor class, speed, ability to hit, and ability to inflict damage.
+
+Embalming: The possessor of this skill can preserve the bodies of the dead.
+
+Fennling: Fennling is the ancient art of transfer of charge between similar wands.
+
+Golem Creation: Bodies of the recently slain may be brought back to life by adventurers who possess this knowledge. However, not all golems can be kept under control by their masters.
+
+Husbandry: This skill learned from the breeder race, allows users to clone most forms of life instantaneously.
+
+Ironworking: The skill of the blacksmith is one of the most valued by mankind. For without the weapons and armor he can create, there would be no glorious adventures of conquest.
+
+Fletching: When a character learns the art of the fletcher, he may carve arrows and bolts from the wood of trees.
+
+Origami: This decorative art of paper folding increases the value of otherwise worthless paper.
+
+Precognition: Characters with the skill of precognition can channel the untapped power of the mind toward  discovery of the unknown. They need merely to concentrate upon an object and they will "feel" a sense of the quality of that object.
+
+Relocation: The ability to teleport at will has saved many an adventurer's life. This skill may not be over-used; the energy needed to move a body through rifts in the dimensions to a new physical location must be slowly recuperated.
+
+Taming: Those who possess the skill to tame lesser creatures are often seen surrounded by a worshipping entourage.
+
+Slave usage: The skill to use slaves is available to those who control other's minds and those who control mindless golems.
+
+Ventriloquism: This minor skill can sometimes confuse creatures as to the whereabouts of the user.
+
+Writing: Writing is one of the most powerful tools known to mankind. An adventurer who can write and knows the specific runes can create any magical scroll he wishes.
+
+Animation: This power allows the user to breathe life into inanimate objects.
+
+Dimension Travel: Adventurers who possess the power to travel to the mysterious Crossroads can  travel nearly anywhere in but an instant.
+
+Fire Vision: Those who possess this power can send out fiery beams of destruction with a mere gaze.
+
+Heat Radiation: Adventurers who have attained this power may send out a blaze of heat in a sphere surrounding their bodies.
+
+Innate Powers: Innate powers are available to adventurers who have shed their human form and become another type of creature.
+
+Mind Control: Those who possess this power can force their will upon the minds of lesser creatures and control their movements.
+
+Psionics: Psionic ability is the power to engage in mental warfare.  An adventurer having this power can blast the minds of other sentient creatures.
+
+Spellcasting: The ability to cast spells (see Conjurer under CHARACTER CLASSES for descriptions of spells available).
+
+Terraforming: Terraforming is the ability to instantly transform one feature of terrain into any other. Some powerful creatures can reflect or avoid this power when it is used as a mode of attack.
+
+Cold: Provides the adventurer with resistance to any form of cold.
+
+Heat: Provides the adventurer with protection from all heat and flame except that which can boil the blood and damage the heart.
+
+Acid: Makes the adventurer impervious to all forms of acidic attack.
+
+Poison: Enures the adventurer against all but the most powerful of toxins.
+
+Death Ray: Places the adventurer in a state similar to that of undead creatures. That is, his/her physical body may be destroyed, but the heart is immune to attack.
+
+Ray: Causes all rays which strike the adventurer to harmlessly pass through his physical body.
+
+Petrification: Changes the physical structure of the skin of the adventurer so that it resembles that of the dreaded cockatrice. This means that attacks which would normally turn the adventurer to stone instead have no effect.
+
+Teleportation: Allows the adventurer to control the location of his/her physical body.
+
+Race: Lists the race of the adventurer.
+
+Sex: Lists the sex of the adventurer.
+
+Eyes: Lists the current number of eyes which the adventurer has.
+
+Fingers: Lists the current number of ring-bearing fingers which the adventurer has (thumbs not included).
+
+Speed: Lists the current speed of the adventurer on the Raud scale. 10 is normal for humans.
+
+Morality: Lists the relative morality of the adventurer.  Great lapses in  morality may be severely punished by the gods.
+
+Additional listings:  The diagnostic screen will also inform the adventurer if he/she/it is blind, deaf, turning to stone (hardening), fading from existence, lycanthropic (afflicted with the disease of one who is a werewolf), confused, hallucinating, contaminated with fatal toxins, feverish from the effects of a fatal disease, afflicted with rotting disease, dyslexic or invulnerable.
+
+Each character starts as an apprentice to a class. To reach mastery of one's chosen class, one must read a scroll of knowledge. Below are descriptions of the six apprentice classes. They include hit points (HP) and strength (STR).
+
+Viking: The apprentice Viking is training to become a master of weaponry. As such, he has the highest HP (high 30s) and STR (18) of the apprentice classes.    As the Viking becomes more experienced in the field of battle, he learns to attack so quickly that occasionally he will get a second attack.
+
+Alchemist: The alchemist is an average physical specimen (HP in mid 20s, STR 14).  As an apprentice, the alchemist sets out with an array of potions.  These potions may not be beneficial, nor may mixing them be so.  Therefore, it is often prudent to wait before experimenting.  While it is possible for anyone to learn the art of alchemy, an apprentice alchemist will learn the profession faster, make fewer mistakes, and can create unique potions once he has reached a level of mastery. The pride of the alchemist is the potion of second life.
+
+Sage: The sage is one of the physically weakest classes (HP low 20s, STR 12).  What he lacks in strength, he makes in intellect; the sage is the most learned of all the classes.  While others are able to learn to write, their knowledge is limited. Not so with the sage; once he learns to write with his stylus, it will be just a matter of time until he can produces scrolls never before seen. The most prized accomplishment of a sage is a scroll of switch bodies.
+
+Woodsman: The woodsman is hardy (HP mid 30s, STR 16).  He is adept with both the long bow and the crossbow.  He is equipped with both as well as the appropriate projectiles.  He easily learns to swim, quickly learns the art of fletching, and can tame lesser creatures when he becomes a master woodsman.
+
+Conjurer: The conjurer is not as strong or as healthy as other classes (HP high 20s, STR 10).  However, he makes up for his failings by learning the art of spell-casting, the skill of fennling, and the ability to teleport.  The spells that are available to the conjurer are as follows (cost listed in magic points):
+
+(1):	Set recall - Casting this spell sets the level to which the player will return upon reading a scroll of recall.  (1 point)
+
+(2):	Illusory self - Creates an illusion of the spell caster that will act as an ally until dispelled.  (6 points)  learned by third level conjurers.
+
+(3):	Reflect - Reflects part of physical attacks directed upon user. (11 magic points) learned at fifth level.
+
+(4):	Entomb - Encloses each area of a level, causing those who have no means of escape to slowly starve.  (13 magic pts) learned at seventh level.
+
+(5):	Draw life - Allows caster to drain life from beings touched bare-handed.  (11 magic pts) learned at tenth level.
+
+Blacksmith: The blacksmith is a robust character (HP low 30s, STR 17) who is following in the family trade.  He is equipped with a silver sword, scale mail and  an ingot of fine metal to forge.  The blacksmith is one of the most respected members of his community due to ability to forge weapons and armor after his apprenticeship ends.  Although other characters may learn to forge weapons and armor, adventurers who choose this profession will be able to master the art of the smith faster and produce finished goods that other classes may not.
+
+Movement may be accomplished in three ways.  The first method is to place the mouse cursor on the lower map in a desired direction away from the player symbol and press either button.
+
+The second method of movement is to place the mouse cursor anywhere on the upper map in a desired direction from the character symbol and press either mouse button.
+
+The third method is to use the number keypad by pressing the appropriate number in the direction you wish to go.
+
+The player may rest one turn by clicking on the character symbol with the mouse cursor or by pressing the "5" or "." (period) keys.
+
+To go up one depth level or down one depth level (on stairs or holes), the player may either click the mouse cursor on the up arrow or down arrow located in the far right row of mouse buttons, or may type "" (greater than) to proceed downward.
+
+To attack hostile creatures, the player needs merely to attempt to move in the direction which the hostile creature is located.  To attack friendly or neutral creatures, the attack friend command must first be used, followed by the desired direction of attack.
+
+When the command prompt asks for a desired direction of aim, the previous movement instructions may be used to choose any of the eight directions surrounding the character with the additional two choices of  up and down.
+
+The following keys may be employed in addition to the buttons available to the mouse:
+
+a: AGAIN. This command repeats the previous action. This command only functions with EAT, THROW, USE SKILL, USE POWER, and ZAP.
+
+A: ATTACK FRIEND. This command (in combination with a desired direction) is used to attack friendly or neutral creatures.  Hostile creatures may be attacked by moving toward their square.
+
+*	c: CALL ITEM. Calls all of one type of item by the inputted name. Only used for wands, rings, scrolls and potions (Ex. - Call all laurel wands "fire").
+
+C: CHECK SELF. This command lists the players current physical state, including skills, innate abilities and powers.
+
+*	f: FILL VIAL. This command allows the player to fill empty vials with available liquid.
+
+F: FAR MOVE/REST. The player will move in the desired direction until blocked or disturbed.  Allows the player to avoid tedious input in long hallways etc.  If rest instead of travel is required, merely input the "." (period)  key when the direction prompt appears.  The setting of autopilot determines the actions which will disturb this function.  If you desire to cease this action at any time, type the  key or use the cancel mouse button.
+
+i: INVENTORY PACK. Shows the items currently located in the player's pack.
+
+***	l: LOOK. Allows the player to look at a pile of items, another creature, or a terrain feature in order to determine what it is.
+
+*	m: MIX POTIONS. The player may combine any two potions.
+
+M: MAP.  Shows the world map, highlighting the areas which the player has visited.
+
+*	n: NAME ITEM. This allows the player to name a specific item (ex. , the player may wish to name the mace that he is wielding to discern it from other maces).
+
+N: AID FELLOW NORSEMAN. This command allows the player to give items to and take items from fellow Norsemen.  In addition the player may wish to equip these allies with weapons and chest armor.
+
+o: LIST CURRENT DEBTS. Shows how far in hock to the local shopkeeper the player is.
+
+O: OPTIONS. Lists all toggle switches at once (see F1-F8 below).
+
+p: PAY. This command both pays off old debts and purchases all unpaid merchandise currently in the player's pack (provided the player has ample funds).
+
+P: USE POWER. The player may gain unusual powers as the game progresses.  Powers which may be gained: Spellcasting, Animation, Fire vision, Mind control, Psi Blast, Terraforming, Dimension travel, Heat Radiation, and many of the innate powers which monsters have.
+
+Q: QUIT/SAVE. Allows the player the choice of quitting current game permanently or saving it for future play.
+
+*	t: THROW/SHOOT. Projectiles may be hurled using this command. In addition, bow weapons may be employed by wielding the desired weapon first and then shooting the appropriate projectile.
+
+*	T: TAKE OFF. Removes armor, rings, and amulets.
+
+u: USE SKILL. Available skills: Alchemy, Cartography, Diagnose others, Embalming, Fennling , Golem creation, Husbandry, Ironworking, Fletching, Origami, Precognition, Teleportation, Taming, Ventriloquism, Writing, and Use Slave.
+
+*	U: USE ITEM. This key may be used to play instruments and employ magical items such as bags and orbs.
+
+*	w: WIELD WEAPON. Player may wield new weapon at no time cost.
+
+*	W: WEAR. Player may wear armor, rings, and an amulet.
+
+*	x: Examine/describe. Gives player descriptions of the possessions of the gods.
+
+**	Comma: PICK UP. Allows player to pick up items currently located at the player's feet.
+
+ALT-D: DIG. Digs in desired direction if a pick axe is wielded.  Digging takes several turns of concentration.  This concentration can be disturbed in a manner similar to that of FAR MOVE.
+
+ALT-Q: TOGGLE MOUSE BOX. Allows player to turn on/off the grey boxes which appear on the upper map.
+
+Question mark- HELP. Quick reference sheet.
+
+F1: HELP. Quick reference sheet.
+
+F2: TOGGLE PICKUP. Turns on/off auto pickup function.  On position causes player to automatically attempt to pick up everything.  Off position causes player to pick up nothing appropriate commands are used.  Default=On.
+
+F3: TOGGLE MORE. Turns on off auto more function. On position notifies player of all messages; more button may be cleared with (spacebar) or (enter).  Off position notifies player only of messages which fit in message area. Default=On.
+
+F4: PLAYBACK. This feature lists up to the last ten messages received by the player.
+
+F5: TOGGLE AUTOPILOT. This sets the warning level for extended moves such as DIG and FAR MOVE.  Low setting avoids most disturbances, high avoids almost no disturbances. Default=High.
+
+F7: TOGGLE EAT. On position allows player to eat off of the ground. Default=On.
+
+F8: TOGGLE LOOK. On position automatically lists all items moved onto; Off position returns "There are many objects here". Default=On.
+
+F9: SHOW MEMORY. Shows memory free on current level for creation of new items and monsters.
+
+ESC: CANCEL COMMAND. Most commands may be cancelled without time penalty incurred.
+
+\ : DISCOVERIES. Lists all wands, potions, scrolls, and rings whose functions have been discovered or described.
+
+: DOWN. Employed to descend stairs, dive underwater, pass through holes in the floor and trigger traps.
+
+*	The starred commands involve using an item.  The item may be selected using the mouse or by choosing the corresponding letter of the item using the keyboard. The item may also be chosen from the screen by moving the cursor up, down, left, and right with the arrow keys and pressing spacebar when the cursor reaches the desired item. If you desire to view all items in the pack for a command rather than only those listed press "*". To drop gold use the "$" key. To wield nothing use the "-" key. To drop or sell part of a multiple quantity item, type in the desired number to be dropped before selecting the item. When done viewing a screen press enter or select OK with the mouse.
+
+**	These commands involve picking a list of items. The list may be selected as the previous paragraph with the following additions- ALT-A selects all items, ALT-U selects unpaid items, ) selects all weapons, ( selects all tools, = selects all rings, ? selects all scrolls, / selects all wands, % selects all food, [ selects all armor, ! selects all potions, " selects all amulets. These additions are also available to the mouse by selecting the appropriate symbol box.
+
+***	These commands involve choosing a space on the screen. This may be done by moving the mouse to the desired square on EITHER map and pressing a button, or by using the movement keys to direct the cursor to the desired square and selecting that square by typing period or 5.
+
+Herein follows an incomplete list of some of the items found in the Northern Lands.  These lists were made by Borak of Old and are said to be true and reliable.
+
+FOOD (Not Withstanding Edible Animals)
+
+Food ration	Explorer's mainstay.  Bland but filling.
+
+Urn			Foodstuffs prepared by Shamans.
+
+Clay lump		Said to stop the body from hardening.
+
+Gnarled root	Prized for their medicinal value.
+
+Bleached root	Native Greenland plant.  May increase
+
+Mushrooms		Many species of mushrooms exist in the
+
+Northern lands.  From of old these magical
+
+plants have been used by the Shamans.  Some
+
+are edible.  Some are dangerous.
+
+Spongy mass	Believed to affect non-visual perception.
+
+Green lump	The thrall's main food source. High in nutrition, low in taste.
+
+These rare and magical gems are worn upon the forehead and may endow the wearer with special skills.
+
+Infravision	Also called "eagle sight", this amulet extends the visual range of the wearer.
+
+Quickening	Enables the wearer to walk forward through the field of time.
+
+Eye of Sertrud	Undetermined powers when worn. An underground depository honoring the god of thunder is rumored to exist, with a great reward awaiting the bearer of the Eyes.
+
+Holding	A worthless gem created by a bitter wizard.
+
+Ethereality 	Bestows the wearer with the ability to walk through any substance.
+
+Might	A mortal version of the belt of Thor, this amulet increases the wearer's strength to unheard of proportions.
+
+Eternal Life	Cause its owner never to perish.
+
+ARMOR (Including armor class value for each item).
+
+Leather armor(1)         Helmet    (1)
+
+Chain Mail   (5)         Extremities
+
+Banded mail  (6)         Gauntlets (2)
+
+Plate mail   (7)         Bracers   (1)
+
+Grey cloak (Worn with or without other armor) (1)
+
+Rare, strong and weightless (10)
+
+Made from fire dragon scales. Reflects heat.  (3)
+
+Created from a Sentinel hide, this cloak offers no
+
+physical protection, but will reflect magic.  (0)
+
+Highly polished iron shield capable of reflecting gaze
+
+attacks.  expensive, but worth it.  (5)
+
+Carved from the skull of the Zardon.  Protects against
+
+Note: Other legendary items of armor are rumored to exist,
+
+but their whereabouts has never been confirmed.
+
+Wrought in secret from gnarled boughs of ancient trees,
+
+these magical devices draw their strength from the earth
+
+itself.  Their lives are limited and are eventually drawn
+
+back to the earth from whence they came.  Each wand has a
+
+specific power.  Most wands are directional.
+
+Fire	Produces a ray of searing heat.
+
+Ice	Issues a deadly beam of freezing cold.
+
+Armoring	Toughens the skin of anyone struck by its beam (including the user).  Limited power.
+
+Displacement	A being struck by this ray is teleported elsewhere.
+
+Healing	Beings struck by this soothing beam experience rejuvenation.
+
+Deanimation	Drains and destroys undead beings.
+
+Sleep	Induces a temporary trance on an opponent.
+
+Cancellation	Neutralizes magical abilities of affected beings.
+
+Polymorph	A being struck by this beam is transformed into another creature.
+
+Restoration	Restores the user back to his/her original form.
+
+Stoning	Immediately petrifies anything in its path.
+
+Light	Illuminates any area in which it is used.
+
+Wishing	Said to be the most powerful wand in existence.  Allows the user to wish for desired items.  Not for the greedy.
+
+There are many potions rumored to exist in the Northern
+
+lands.  Most of Borak's records on potions have been lost
+
+or destroyed.  Produced by alchemists, these vials contain
+
+fluids which have a specific effect.  A potion may be drunk
+
+or mixed with another potion to produce even rarer
+
+solutions.  Mixing is dangerous, but can yield great reward.
+
+Potions can be blessed and are safest when identified.  Here
+
+follows the few remaining records on potions:
+
+Rejuvenation	Restores strength lost to the effects of poison.  Also strengthens the liver.
+
+Holy water	Bestows the favor of the gods on the drinker.
+
+Translucence	Causes the drinker to temporarily become invisible.  Improves stealth and armor class.
+
+Phasing	Allows one to move through solid objects.
+
+Depredation	Permits the drinker to temporarily visualize all items on a given level.  Useful in finding treasure or magical items.
+
+Lycanthropy	Drunk by the followers of Fenrir during a full moon.
+
+Ancient devices of great magic.  One ring may be worn per
+
+finger.  Effects of some rings may be additive.  One must
+
+check self whenever a new ring is worn.  Some are cursed
+
+and can only be removed by destruction or a scroll of dispel
+
+hex.  Some rings confer protection from the elements.  Some
+
+give the wearer extra senses.  The history of the rings is
+
+a secret closely guarded by the Shamans.  Borak's scanty
+
+records on rings are as follows:
+
+Agility	Improves wearer's agility and armor class.
+
+Locus Mastery	Allows the wearer to chose a relocation site when teleported.
+
+Protection	Detects hidden traps and dangers.
+
+Regeneration	Accelerates healing.
+
+Third sight	Permits visualization of invisible monsters.
+
+Soul trapping	Created by Hela, this unique ring has passed through many generations to you.  Legend holds that this ring can possess the soul of Thokk if removed immediately after killing the giantess in combat.
+
+The ancient Norse scrolls contain specific spells woven
+
+together in rune writing.  In reading a scroll, the power
+
+of the spell is released and the scroll is vaporized.
+
+Blessing	This coveted scroll improves the power of many items in your world.
+
+Destruction	Disposes of unwanted or cursed items.
+
+Dispel hex	Removes curses from found items.
+
+Traveling	Immediately teleports the reader elsewhere.
+
+Extinction	This powerful scroll gives the user the ability to destroy an entire race.  Not to be used lightly.
+
+Knowledge	Coveted scroll that bestows powerful abilities on the reader.
+
+Cartography	Allows one to visualize an entire level.
+
+Transport	A unique scroll that sends the reader to a land of plenty near Valhalla.
+
+Enchantment	This rare scroll greatly enhances the power of some items and transforms other commonplace instruments.
+
+Recharging	Restores power to wands and a few rare magical items.
+
+Recall	Sends the reader back to a chosen safe haven.
+
+Wonder	Amazing scroll.  Unpredictable.  Often beneficial.  Sometimes dangerous.
+
+Alliance	Charms those around the reader.
+
+Summoning	Summons powerful, mystic creatures to your defense.
+
+Ocarina	Hand held musical instrument.  Rumored to have unusual powers when enchanted.
+
+Imprisoning	Powerful, magical weapon used to trap one's enemies in limbo.  Rumor has it that on occasion, the orb's owner has also been known to vanish, never to be seen again.
+
+Wooden flute	Charming instrument-particularly when enchanted.
+
+Grappling hook	Essential tools to pull and dig an explorer out of trouble.
+
+Red bag	A highly prized, magical sack with seemingly unlimited holding capacity.
+
+Skidbladnir	Freyr's magical ship.  Folds up to fit in a pocket.  Large enough to carry a crew.
+
+horn	This powerful horn, when blown underground or in a room can cause the roof to collapse.
+
+Green stone	Linked in legend to Scyld.
+
+Diamond needle	Said to increase one's psychic powers.
+
+Stylus	The common writing instrument of a sage.
+
+Cube	Mystical shape said to transport one over space and time.  Can be enchanted.
+
+Black gem	Renowned for their energy conducting properties, these potent stones are said to draw the strength from an enemy and deposit it to the holder of the stone.
+
+Lazlul's rope	Created by a powerful wizard, this magical rope can be used to climb up sheer objects.
+
+Three known categories of weapons exist:  those which are
+
+wielded, those which are hurled or fired and legendary
+
+The following weapons are listed in order of desirability and ability to inflict damage.
+
+Some are even more lethal when wielded by a weaponmaster.
+
+Runesword	Most revered weapon in the Northern lands.  Forged only by master blacksmiths.  Rare and deadly.
+
+Katana	Razor-sharp and highly prized.  Preferred by weaponmasters.  More available than runeswords.
+
+War hammer	Designed to smash.  Heavy weapon wielded by strong fighters.
+
+Battle axe	Double-edged and honed to slice--even through metal.
+
+Ivory staff	Formidable weapon--especially against the undead.
+
+Barbed whip	Brutal, many-tailed lash designed to quickly quell dissent.
+
+Trident	Lethal, three-pronged thrusting weapon.
+
+Phase blade	Strange, many-edged weapon from the ethereal planes.  Very deadly when phasing.
+
+Silver sword	Finely honed silver alloy.  Werewolve's bane.
+
+Mace	Heavy club prized for its ability to smash armor.
+
+Sai	Short, pronged weapon used to maim victims.  Valued by weaponmasters.
+
+Repeated use of the following weapons brings greater skill
+
+and increased ability to hit and damage.
+
+Longbow/arrow	Long range weapon favored by woodsmen.
+
+Crossbow/bolt	Greater strength makes it superior to the longbow.  Long range weapon.
+
+Shurikin	Lightweight throwing stars imported from the East.  Produces high damage.  Preferred by weaponmasters.
+
+Boomerang	Magical weapon which returns when thrown.
+
+Spear	Heavy and finely crafted.  Produces high damage.
+
+Net	Used to ensnare enemies.  Short range weapon.
+
+Flask	Ceramic flask of liquid fire.  Explosive and deadly.
+
+Knife	Last resort defense.  Not very effective.
+
+Knowledge of these sacred weapons exists only in Norse lore.
+
+Some say if they exist at all they can only be wielded by
+
+Herein follows an incomplete list of some of the races of
+
+man and beast in the Northern lands.  These lists were
+
+chronicled by Borak of old as told to him by the great hero
+
+Throm-Inui.  Many races are mortal enemies of man.  A few
+
+noble races remain as allies of mankind.  Be wary and live.
+
+Anssk	Floating, unaggressive creature whose main defense is hypnosis.
+
+Bear	Large, aggressive and dangerous.
+
+Dreg	Slow, nasty creature.  Spews acid when struck.
+
+Gnome	Small, nocturnal humanoids who hate mankind.
+
+Adept tool-users.  Travel in groups.
+
+Kabold	Malevolent race of underground dwellers.  Adept with knives.
+
+Wild boar	Vicious and quick.  Beware their tusks.
+
+Bandit	Swarthy groups of human plunderers who often have items of interest.
+
+Berserker	Crazed Warriors who have eaten mind-altering mushrooms.  Will readily attack anything.
+
+Bloodslug	Giant leeches addicted to warm blood.
+
+Chameleon	A deceptive and deadly carnivore.
+
+Corpse	Rotting, undead body.  Disease ridden.
+
+Dwarf	Hardy workers who have befriended mankind.
+
+Elgar	Mysterious race of bird-men who look kindly upon men of the North.
+
+Ghost	Lingering spirits of past adventurers.  Terrifying to behold.
+
+Homunculus	This small animal's bite can cause unconsciousness.  Aggressive and nasty.
+
+Hrygar	Very fast, flying creature.  Attacks without provocation.
+
+Knilb	Small dog-like creature which can teleport.
+
+Lacunar	Mermen of legend, these beings have adapted to land and have become friends of man.
+
+Nymph	Thief and seducer of man.  Can teleport.
+
+Ranger	Neutral, self-appointed dispenser of justice.
+
+Raven	Magical bird sent by Odin to help travelers.
+
+Secitt	Small creatures which rapidly multiply when near their next meal.
+
+Shadow dog	Stealthy carnivore, adept at hiding.
+
+Spirit	Undead soul whose touch can freeze the blood.
+
+Stalker	Invisible hunter and foe of mankind.
+
+Thokk	A giantess.  The only creature which did not weep at the death of Balder.  It is said that Hela will exchange Thokk's soul for Balder's.
+
+Weird fume	A strange, vaporous creature capable of physically changing an adventurer. Dangerous.
+
+Womera	Cannibalistic ancestor of mankind.  Skilled group hunters.  Adept with spears.
+
+Archer	Skilled Eastern bow-hunters.  Hostile to man.
+
+Blur	Fastest creature in Midgard.  Shape unknown.
+
+Breeder	Secretive race created to repopulate Midgard.
+
+Cockatrice	Dreaded creature.  Can petrify with its gaze.
+
+Fire dragon	Powerful, flame-breathing reptile.  Deadly.
+
+Gibberer	Vile, multi-mouthed mass.  Voracious.
+
+Glard	Large, venomous flying creature.  Lives in nests.
+
+Ivy creeper	Carnivorous, rapidly growing plant.  Has poisonous spores and powerful tendrils.
+
+Magician	Skilled spell-caster.  If disturbed, can summon powerful beings to his defense.
+
+Migdnart	Devil-spawned beings from Niflheim.  Beware.
+
+Morph	Ancient, magical being which can become any creature.  Potentially very deadly.
+
+Ogre	Cave-dwelling giant.  Slow, but very strong.
+
+Pale moss	Also called "memory moss".  This dense, harmful organism can affect memory.
+
+Pelgrat	An ethereal creature which feeds on the power of wands.  Breathes dangerous rays.
+
+Phausq	Brooding, eyeless creature which attacks in darkness.  Shuns light.
+
+Rock giant	A particularly evil race of giants which seeks to destroy man and reclaim Midgard.
+
+Ruxicon	This strange and aggressive creature destroys and erodes all it touches.
+
+Shadow	Invisible, undead, life-draining creature.
+
+Vampire	Undead beings who prey on adventurers.
+
+Werewolf	Once dismissed as folklore, these fell creatures have entered the land.  Their bite can be fatal and can induce lycanthropy.  They are deceptively fast.
+
+Wier	Strange creature which can induce an urgent sense of greed on the adventurer.
+
+Wraith	Undead, life-draining being.  Lowers life levels of humans.
+
+Wyvern	Small, fire-breathing, winged reptile.
+
+Yapok	Solitary, aggressive creatures.  Capable of summoning other Yapoks.
+
+Archmage	Powerful mage with deadly and destructive spells.  Can create horrible new races.
+
+Hill giant	Incredibly strong.  Can crush with its grasp.
+
+Ice dragon	This fur-bearing reptile can freeze with its breath.  Known to hoard treasure.
+
+Minion	Evil inhabitants of Niflheim which have crept into Midgard.  Known to swarm their prey.
+
+Phantom asp	Imported from Arabia, this beautiful snake's bite is almost always fatal.
+
+Preden	Small, flying creature whose bite spreads a feverish disease.  Fatal if not treated.
+
+Ramapith	Formidable foe whose touch can boil the blood.
+
+Red ooze	Voracious, slow moving mass.  This creature can consume anything and is always hungry.
+
+Sentinel	A terrible, floating five-eyed creature.  Beware its gaze.  Hard to kill.
+
+Shade	An undead being which feeds on magical energy.
+
+Slinn	An abomination of a creature escaped from Niflheim.  Spews an unholy liquid on its victims when attacked.
+
+Swordsman	Invaders from the East.  Deadly masters of combat.  Fast and adept with any weapon.
+
+Vanisher	Elusive creature whose mere touch may cause one to slowly fade away.
+
+Warrior	Barbarians from the South.  Armed with deadly flasks of bottled fire.  Aggressive.
+
+Basilisk	Largest of the land-bound reptiles.  Its gaze can petrify and its breath is poisonous.  Few survive an encounter with this beast.
+
+Fire giant	This flaming horror of Muspelheim radiates a blazing sphere of death.  Adventurers who stray to close are usually cremated.
+
+Fyleisch	This undead creature has depopulated many a hamlet.  Its body is surrounded by a lethal mist which can tear the soul from the living.
+
+Knell bird	A strange bird that can kill without contact.
+
+Sandiff	Aggressive beast which sprays a corrosive acid on a potential meal.  Beware.
+
+Wight	Powerful, undead creature which feeds off the energy of the living.  Its touch ages and weakens opponents.
+
+Zardon	A spindly creature with vast mental powers.  Very capable of killing from a distance.
+
+Midgard: Mimer's Realm, Jotenheim, Nidavellir, Slater's Sea, Bifrost  and
+
+Air ghola	Undead creature which incubates in its victims bodies.
+
+Aspenth	Guardian of Mimer's well.  Delights in drowning trespassers with his vicious bite and crushing tentacles.
+
+Borgon vile	Deadly creature which lives in a whirlwind of swirling stone.
+
+Eitri	Reclusive master dwarvesmith who can construct anything.  His creations include Mjollner and artificial hair for Thor's wife.
+
+Gorm	Biped with a strong exoskeleton and acidic blood.  The gorm seeks a living host for its offspring.
+
+Gymir	Powerful king of the mountain giants.  In ancient times he gave his daughter's  hand to Freyr in exchange for the legendary sword, Mimming.
+
+Harbard	Guardian of Gioll.  Powerless on the mortal side of the river Gioll, he incites the living into crossing into his domain to die.
+
+Iridorn	An intelligent being, the Iridorn is an avid collector...of heads.
+
+Lorkesth	The only creature that can survive the waters of the river Gioll.
+
+Quivit	The largest of all the Northern sharks.  Crafty and quick.
+
+Uorik	Powerful being created by the dwarves to protect their realm.  Said to currently stand guard over the inner sanctum of the dwarves.
+
+Anxarcule	This awesome demon  is probably the strongest of all known creatures.  It kills its victims by rending them apart.
+
+Breleor	A shambling plant-creature which feeds on living flesh.  A dazzling combination of shapes and colors hypnotizes its prey.
+
+Draugr	The most powerful of the undead.  Able to spring back from any attack.  The best strategy with a draugr is retreat.
+
+Emanon	Lesser demon.  Master of the draugr and the red ooze.
+
+Hela	Ruler of Niflheim.  Has power over the dead and all that lies within her realm.
+
+Hel dragon	This most lethal of all carnivores has keen long distance smell which enables it to instantly teleport next to its prey.  Very deadly.
+
+Gulveig	Tentacled demon lord of the ramapiths whose touch turns to stone.
+
+Konr Rig	Lord of the insane, surrounded by those who worship chaos.
+
+Nidhogg	Demon-king of the dragons.  Able to control other's minds and absorb spells.  Master spellcaster.
+
+Nidslacr	Related to dragons, the nidslacr prefers a quicksand environment.  The female preserves the bodies of its victims to lay her eggs.  This creature's touch affects memory and dexterity.
+
+Plog	Minor demon worshipped by minions and migdnarts.  Draws energy from wands and magical items.
+
+Vanseril	Powerful psionic demon capable of draining the strength of others.
+
+NORSE GODS (Aid them and be rewarded)
+
+Thor	God of the sky and strongest of the gods.  Protector of mankind.  Preferred weapon is Mjollner, his magic hammer.
+
+Heimdall	Protects Asgard from invasion by the evil forces with his renowned eyesight.  Resides on Bifrost and will signal the coming of Ragnarok by blowing his horn, Gjall.
+
+Balder	The purest and most loved of the gods, Balder was slain by Loki's treachery.  His soul now suffers the unbearable cold of Niflheim.  His absence probably ensures the failure of the gods at Ragnarok.
+
+Odin	Leader of the gods, Odin is missing an eye which he sacrificed to gain knowledge of the world during the short time that he did not exist.  Occasionally sends his ravins to Midgard to share his vast knowledge with mankind.  Preferred weapon is Gungnir his spear.
+
+Tyr	Tyr's appearance identifies him from afar.  He is missing an arm which was sacrificed so that Fenrir could be safely chained up.
+
+Freyr	The most powerful of the Aesir, Freyr was once invincible.  He has given up his powerful sword Mimming to marry a giantess.
+
+THE EVIL GODS (Attract their wrath and be destroyed):
+
+Fenrir	Offspring of Loki, this giant wolf seeks to devour the sun and moon and to finally destroy Odin himself.  Imprisoned deep inside the earth, Fenrir was bound by the magical chains of the dwarvesmiths and the courage of Tyr.
+
+Jormungand	Named the "world-serpent", this gigantic beast encircles the entire world.  Prophesy says that Thor and Jormungand will destroy each other at Ragnarok.
+
+Sutr	The most powerful inhabitant of Muspelheim, this fiery titan seeks to consume the entire universe with his sword.
+
+Garm	This wolf-being guards the entrance to Niflheim.  Prophesy says he will aid his kinsman, Fenrir in destroying Tyr.
+
+Loki	Once a welcome member of Asgard, this evil god is now an outcast.  Bound to earth and tortured by the gods, his great sufferings are the cause of earthquakes.  It is said he will someday unfetter himself and lead the ice giants across the water to destroy Asgard.
+
+Scale Mail   (3)  MjollnirMjollnirm.  Prophesy says he will aid his kinsman, Fenrir in destroying Tyr.
+
+Loki	Once a welcome member of Asgard, this evil god is now an outcast.  Bound to earth and tortured by the gods, his great sufferings are the cause of earthquakes.  It is said he will someday unfetter himself and lead the ice giants across the water to destroy Asgard.
+
