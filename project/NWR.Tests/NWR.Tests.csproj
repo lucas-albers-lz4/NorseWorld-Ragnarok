@@ -46,6 +46,8 @@
     <Compile Include="Serialization\GhostsListStreamTests.cs" />
     <Compile Include="Combat\CombatAttackInfoTests.cs" />
     <Compile Include="Effects\ProwlingEffectsTests.cs" />
+    <Compile Include="Quests\QuestCoreTests.cs" />
+    <Compile Include="Quests\QuestHandinTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NWR.csproj">

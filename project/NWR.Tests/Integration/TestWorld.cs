@@ -4,6 +4,7 @@ using NWR.Effects;
 using NWR.Game;
 using NWR.Game.Types;
 using NWR.Items;
+using NWR.Universe;
 
 namespace NWR.Tests.Integration
 {
@@ -54,6 +55,71 @@ namespace NWR.Tests.Integration
                 }
             }
             return total;
+        }
+
+        /// <summary>
+        /// Loaded fixtures do not restore fQuests; call after LoadGame for quest tests.
+        /// </summary>
+        public static void EnsureMainQuests(NWGameSpace game)
+        {
+            game.GenMainQuests();
+        }
+
+        public static NWCreature PlaceCreatureNearPlayer(NWGameSpace game, int creatureId)
+        {
+            Player player = game.Player;
+            NWField fld = player.CurrentField;
+            int px = -1;
+            int py = -1;
+            for (int dx = -1; dx <= 1 && px < 0; dx++) {
+                for (int dy = -1; dy <= 1; dy++) {
+                    if (dx == 0 && dy == 0) {
+                        continue;
+                    }
+                    int nx = player.PosX + dx;
+                    int ny = player.PosY + dy;
+                    if (player.CanMove(fld, nx, ny) && fld.FindCreature(nx, ny) == null) {
+                        px = nx;
+                        py = ny;
+                        break;
+                    }
+                }
+            }
+            if (px < 0) {
+                throw new InvalidOperationException("no adjacent tile for creature " + creatureId);
+            }
+
+            NWCreature cr = game.FindCreature(creatureId);
+            if (cr != null) {
+                cr.TransferTo(player.LayerID, fld.Coords.X, fld.Coords.Y, px, py, StaticData.MapArea, true, false);
+                return cr;
+            }
+
+            cr = game.AddCreatureEx(player.LayerID, fld.Coords.X, fld.Coords.Y, px, py, creatureId);
+            if (cr == null) {
+                throw new InvalidOperationException("AddCreatureEx failed for " + creatureId);
+            }
+            return cr;
+        }
+
+        public static QuestItemState HandInArtefact(NWGameSpace game, string itemSign, int artefactId, int deityId, int maxTurns)
+        {
+            Item item = SpawnItem(game.Player, itemSign, 1, true);
+            if (item == null) {
+                throw new InvalidOperationException("could not spawn " + itemSign);
+            }
+            if (game.CheckQuestItem(artefactId, deityId) != QuestItemState.Founded) {
+                throw new InvalidOperationException(itemSign + ": expected Founded after spawn");
+            }
+
+            PlaceCreatureNearPlayer(game, deityId);
+            for (int i = 0; i < maxTurns; i++) {
+                if (game.CheckQuestItem(artefactId, deityId) == QuestItemState.Completed) {
+                    return QuestItemState.Completed;
+                }
+                RunTurns(game, 1);
+            }
+            return game.CheckQuestItem(artefactId, deityId);
         }
     }
 }
