@@ -1,17 +1,14 @@
-# Serialization correctness audit
+# Game audits (`dev_info/audit`)
 
-Tracks GitHub issue [#6](https://github.com/lucas-albers-lz4/NorseWorld-Ragnarok/issues/6).
+Review notes for Phase 1 audits. Fixes go to Phase 4 issues (#19 serialization done; #20 combat).
 
-## Method
+## Method (serialization)
 
-For each `SaveToStream` / `LoadFromStream` (or `Save`/`Load`) pair:
+For each `SaveToStream` / `LoadFromStream` pair: compare field order/types; note version branches; flag conditional I/O. See [serialization-checklist.md](serialization-checklist.md).
 
-1. Compare field order, types, and counts side-by-side.
-2. Note version branching against current `NWGameSpace.RGF_Version` (1.21).
-3. Flag conditional writes that load always reads (or vice versa).
-4. Mark **OK**, **ASYMMETRY**, or **N/A** in [serialization-checklist.md](serialization-checklist.md).
+## Method (combat)
 
-Fixes belong under issue #19 — this directory is review notes only.
+Trace attack → hit → damage → death; verify AC/damage vs DOS manual notes; document overflow/null risks. See [combat-checklist.md](combat-checklist.md).
 
 ## Save formats
 
@@ -23,12 +20,12 @@ Fixes belong under issue #19 — this directory is review notes only.
 | Ghosts list (separate) | RGL | 1.0 | Ghost creatures |
 | Scores list (separate) | RSL | 1.0 | High scores |
 
-## Baseline (this audit)
+## Baseline harness
 
-Ran `./dev_info/run-tests.sh` on branch `audit/serialization-correctness` (2026-07-30):
+`./dev_info/run-tests.sh` — record date/result in the audit that ran it.
 
-- Tier B: FileHeader, JournalStream, ItemStream — all passed
-- Tier C: bootstrap, save-load-roundtrip, save-overwrite, save-erase, player-metadata, container-roundtrip, effect-persist, wait-turns, item-use-potion, teleport-trap — all passed
+- Serialization audit (`audit/serialization-correctness`, 2026-07-30): all Tier B + C passed.
+- Combat audit (`audit/combat-resolution`, 2026-07-30): all Tier B + C passed (incl. `player-load-trailing-fail`).
 
 Fixtures were **not** regenerated.
 
@@ -42,7 +39,11 @@ Fixtures were **not** regenerated.
 | [04-brain-goals.md](04-brain-goals.md) | NWBrainEntity, goals |
 | [05-terrain.md](05-terrain.md) | Layer, Field, Tile, Building, Village, Gate |
 | [06-secondary.md](06-secondary.md) | Journal, Memory, Debt, Ghosts, Scores, etc. |
-| [serialization-checklist.md](serialization-checklist.md) | Status table |
+| [serialization-checklist.md](serialization-checklist.md) | Serialization status table |
+| [07-combat-call-graph.md](07-combat-call-graph.md) | Attack entry points and sequence |
+| [08-combat-ac-damage.md](08-combat-ac-damage.md) | AC scale, hit/damage formulas, weapons |
+| [09-combat-death-speed.md](09-combat-death-speed.md) | Death, XP, Speed, stats |
+| [combat-checklist.md](combat-checklist.md) | Combat status table |
 
 ## Re-run harness
 
