@@ -1061,6 +1061,9 @@ namespace NWR.Game
                 GlobalVars.nwrHost.ProgressDone();
                 fFileIndex = index;
 
+                // Quest registry is not serialized; rebuild and sync stages from inventories.
+                GenMainQuests();
+
                 GlobalVars.nwrHost.PlaySound("game_load.ogg", SoundEngine.sk_Sound, -1, -1);
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.loadGame(): " + ex.Message);
@@ -2571,6 +2574,24 @@ namespace NWR.Game
             AddQuest(new MainQuest(this, GlobalVars.iid_DwarvenArm, GlobalVars.cid_Tyr));
             AddQuest(new MainQuest(this, GlobalVars.iid_Mimming, GlobalVars.cid_Freyr));
             AddQuest(new MainQuest(this, GlobalVars.iid_Gungnir, GlobalVars.cid_Odin));
+
+            SyncMainQuestStagesFromInventory();
+        }
+
+        private void SyncMainQuestStagesFromInventory()
+        {
+            int num = fQuests.Count;
+            for (int i = 0; i < num; i++) {
+                MainQuest mq = fQuests[i] as MainQuest;
+                if (mq == null) {
+                    continue;
+                }
+                QuestItemState qis = CheckQuestItem(mq.ArtefactID, mq.DeityID);
+                mq.Stage = qis;
+                if (qis == QuestItemState.Completed && !mq.IsComplete) {
+                    mq.CheckComplete();
+                }
+            }
         }
 
         #region IHost

@@ -25,20 +25,19 @@ namespace NWR.Tests.Quests
             return Directory.GetCurrentDirectory();
         }
 
-        private static NWGameSpace LoadSlot8WithQuests()
+        private static NWGameSpace LoadSlot8()
         {
             string repoRoot = FindRepoRoot();
             NWGameSpace game = HarnessBootstrap.Init(repoRoot);
             SaveLoadScenarios.CopyFixtureToSlot(repoRoot, "slot8", SaveLoadScenarios.TestSlot);
             game.LoadGame(SaveLoadScenarios.TestSlot);
-            TestWorld.EnsureMainQuests(game);
             return game;
         }
 
         [Test]
         public void GenMainQuests_RegistersSixArtefactQuests()
         {
-            NWGameSpace game = LoadSlot8WithQuests();
+            NWGameSpace game = LoadSlot8();
             Assert.AreEqual(6, game.QuestsCount);
 
             var q0 = (MainQuest)game.GetQuest(0);
@@ -53,7 +52,7 @@ namespace NWR.Tests.Quests
         [Test]
         public void CheckQuestItem_NoneFoundedCompleted()
         {
-            NWGameSpace game = LoadSlot8WithQuests();
+            NWGameSpace game = LoadSlot8();
             int iid = GlobalVars.iid_Mjollnir;
             int deity = GlobalVars.cid_Thor;
 
@@ -72,7 +71,7 @@ namespace NWR.Tests.Quests
         [Test]
         public void MainQuest_PickupSetsFounded_GiveupSetsComplete()
         {
-            NWGameSpace game = LoadSlot8WithQuests();
+            NWGameSpace game = LoadSlot8();
             var quest = (MainQuest)game.GetQuest(2);
             Item hammer = TestWorld.SpawnItem(game.Player, "Mjollnir", 1, true);
             Assert.IsNotNull(hammer);
@@ -90,7 +89,7 @@ namespace NWR.Tests.Quests
         [Test]
         public void ItemQuest_CompletesOnMatchingPickup()
         {
-            NWGameSpace game = LoadSlot8WithQuests();
+            NWGameSpace game = LoadSlot8();
             var quest = new ItemQuest(game, GlobalVars.iid_Gjall);
             Item wrong = TestWorld.SpawnItem(game.Player, "Mjollnir", 1, true);
             Item right = TestWorld.SpawnItem(game.Player, "Gjall", 1, true);
@@ -103,7 +102,7 @@ namespace NWR.Tests.Quests
         [Test]
         public void EnemyQuest_CompletesAfterRequiredKills()
         {
-            NWGameSpace game = LoadSlot8WithQuests();
+            NWGameSpace game = LoadSlot8();
             var quest = new EnemyQuest(game, GlobalVars.cid_Thokk, 2);
             var dummy = new NWCreature(game, null);
             dummy.InitEx(GlobalVars.cid_Thokk, true, false);
@@ -116,22 +115,47 @@ namespace NWR.Tests.Quests
         }
 
         [Test]
-        public void SaveLoad_InventoryStagesSurvive_AfterGenMainQuests()
+        public void SaveLoad_FoundedStage_WithoutManualGenMainQuests()
         {
-            // fQuests is not serialized; stages are reconstructed from inventories via
-            // CheckQuestItem after GenMainQuests rebuilds the registry post-load.
             string repoRoot = FindRepoRoot();
             NWGameSpace game = HarnessBootstrap.Init(repoRoot);
             SaveLoadScenarios.CopyFixtureToSlot(repoRoot, "slot8", SaveLoadScenarios.TestSlot);
             game.LoadGame(SaveLoadScenarios.TestSlot);
-            TestWorld.EnsureMainQuests(game);
+            Assert.AreEqual(6, game.QuestsCount);
+
             TestWorld.SpawnItem(game.Player, "Gungnir", 1, true);
             Assert.AreEqual(QuestItemState.Founded, game.CheckQuestItem(GlobalVars.iid_Gungnir, GlobalVars.cid_Odin));
 
             game.SaveGame(SaveLoadScenarios.TestSlot);
             game.LoadGame(SaveLoadScenarios.TestSlot);
-            TestWorld.EnsureMainQuests(game);
+            Assert.AreEqual(6, game.QuestsCount);
             Assert.AreEqual(QuestItemState.Founded, game.CheckQuestItem(GlobalVars.iid_Gungnir, GlobalVars.cid_Odin));
+            var quest = (MainQuest)game.GetQuest(5);
+            Assert.AreEqual(QuestItemState.Founded, quest.Stage);
+            Assert.IsFalse(quest.IsComplete);
+        }
+
+        [Test]
+        public void SaveLoad_CompletedStage_RestoresIsComplete()
+        {
+            string repoRoot = FindRepoRoot();
+            NWGameSpace game = HarnessBootstrap.Init(repoRoot);
+            SaveLoadScenarios.CopyFixtureToSlot(repoRoot, "slot8", SaveLoadScenarios.TestSlot);
+            game.LoadGame(SaveLoadScenarios.TestSlot);
+
+            Assert.AreEqual(QuestItemState.Completed,
+                TestWorld.HandInArtefact(game, "Mjollnir", GlobalVars.iid_Mjollnir, GlobalVars.cid_Thor, 40));
+            var before = (MainQuest)game.GetQuest(2);
+            Assert.IsTrue(before.IsComplete);
+
+            game.SaveGame(SaveLoadScenarios.TestSlot);
+            game.LoadGame(SaveLoadScenarios.TestSlot);
+            Assert.AreEqual(6, game.QuestsCount);
+            Assert.AreEqual(QuestItemState.Completed,
+                game.CheckQuestItem(GlobalVars.iid_Mjollnir, GlobalVars.cid_Thor));
+            var after = (MainQuest)game.GetQuest(2);
+            Assert.AreEqual(QuestItemState.Completed, after.Stage);
+            Assert.IsTrue(after.IsComplete);
         }
     }
 }

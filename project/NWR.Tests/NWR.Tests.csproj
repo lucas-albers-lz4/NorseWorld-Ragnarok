@@ -48,6 +48,7 @@
     <Compile Include="Effects\ProwlingEffectsTests.cs" />
     <Compile Include="Quests\QuestCoreTests.cs" />
     <Compile Include="Quests\QuestHandinTests.cs" />
+    <Compile Include="Quests\QuestValidationTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NWR.csproj">
