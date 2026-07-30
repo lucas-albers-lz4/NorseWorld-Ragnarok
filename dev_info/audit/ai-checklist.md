@@ -22,9 +22,7 @@ Baseline: `./dev_info/run-tests.sh` all passed on `audit/creature-ai` (2026-07-3
 
 | Issue | Title |
 |-------|-------|
-| (umbrella) | Creature AI / specials bug fixes |
-| (child) | Cockatrice gaze petrify never fires |
-| (child) | Werewolf bite does not apply lycanthropy |
-| (child) | AI goals NRE on null house / Enemy / Leader / Debtor |
-
-*(Numbers filled after `gh issue create`.)*
+| [#45](https://github.com/lucas-albers-lz4/NorseWorld-Ragnarok/issues/45) | Umbrella: Creature AI / specials bug fixes |
+| [#46](https://github.com/lucas-albers-lz4/NorseWorld-Ragnarok/issues/46) | Cockatrice petrify gaze never fires |
+| [#47](https://github.com/lucas-albers-lz4/NorseWorld-Ragnarok/issues/47) | Werewolf bite does not apply lycanthropy |
+| [#48](https://github.com/lucas-albers-lz4/NorseWorld-Ragnarok/issues/48) | AI goals NRE on null house / Enemy / Leader / Debtor |
