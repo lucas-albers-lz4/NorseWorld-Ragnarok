@@ -12,12 +12,11 @@ Gameplay / stability
 
 Sound (later tiers)
 -------------------
-- Re-enable land ambient loops (PlayAmbient currently no-ops; disabled so
-  Tier C placeholder loops do not mask SFX during testing).
 - Obtain or build real soundpak (original v0.10 pack unavailable on SF).
 - Tier B: DOS/Valhalla PC-speaker captures as master clips (optional flavor).
 - generate-sfx-pack.sh --copy mode for Windows Mono (symlinks are Linux-first).
 - Per-spell / per-creature unique assets instead of Tier C category reuse.
+- Ambient loops re-enabled (PlayAmbient); Tier C placeholders may be loud vs SFX — tune volumes in options if needed.
 
 Platform / release
 ------------------
