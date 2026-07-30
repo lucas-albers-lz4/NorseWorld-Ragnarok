@@ -14,6 +14,7 @@ namespace NWR.Harness
             { "save-overwrite", SaveLoadScenarios.SaveOverwrite },
             { "save-erase", SaveLoadScenarios.SaveErase },
             { "player-metadata", SaveLoadScenarios.PlayerMetadata },
+            { "player-load-trailing-fail", SaveLoadScenarios.PlayerLoadTrailingFail },
             { "container-roundtrip", GameplayScenarios.ContainerRoundtrip },
             { "effect-persist", GameplayScenarios.EffectPersist },
             { "wait-turns", GameplayScenarios.WaitTurns },

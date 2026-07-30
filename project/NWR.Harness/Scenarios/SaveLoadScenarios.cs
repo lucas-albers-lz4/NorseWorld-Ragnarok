@@ -89,5 +89,29 @@ namespace NWR.Harness.Scenarios
             }
             LogAssert.RequireLogMarkers(HarnessBootstrap.LogPath, "playerLoad(): ok");
         }
+
+        public static void PlayerLoadTrailingFail(string repoRoot)
+        {
+            HarnessBootstrap.Init(repoRoot);
+            CopyFixtureToSlot(repoRoot, "slot8", TestSlot);
+
+            string rgp = Path.Combine(repoRoot, "save", "rgame_" + TestSlot + ".rgp");
+            using (var fs = new FileStream(rgp, FileMode.Append, FileAccess.Write)) {
+                byte[] junk = new byte[] { 0xDE, 0xAD, 0xBE, 0xEF };
+                fs.Write(junk, 0, junk.Length);
+            }
+
+            var preview = new Player(GlobalVars.nwrGame, null);
+            bool threw = false;
+            try {
+                NWGameSpace.LoadPlayer(TestSlot, preview);
+            } catch (IOException) {
+                threw = true;
+            }
+            if (!threw) {
+                throw new InvalidOperationException("LoadPlayer: expected IOException on trailing bytes");
+            }
+            LogAssert.RequireLogMarkers(HarnessBootstrap.LogPath, "playerLoad(): fail");
+        }
     }
 }
