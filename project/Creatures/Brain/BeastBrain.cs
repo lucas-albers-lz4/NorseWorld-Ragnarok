@@ -176,10 +176,19 @@ namespace NWR.Creatures.Brain
             NWCreature self = (NWCreature)fSelf;
             EscortGoal goal = (EscortGoal)FindGoalByKind(GoalKind.gk_Escort);
             if (goal != null) {
+                NWCreature leader = goal.Leader as NWCreature;
+                if (leader == null) {
+                    ReleaseGoal(goal);
+                    return;
+                }
                 if (goal.NotParty) {
-                    goal.Position = self.GetNearestPlace(goal.Leader.Location, 3, true);
+                    goal.Position = self.GetNearestPlace(leader.Location, 3, true);
                 } else {
-                    LeaderBrain leaderBrain = (LeaderBrain)goal.Leader.Brain;
+                    LeaderBrain leaderBrain = leader.Brain as LeaderBrain;
+                    if (leaderBrain == null) {
+                        ReleaseGoal(goal);
+                        return;
+                    }
                     goal.Position = leaderBrain.GetMemberPosition(self);
                 }
             }

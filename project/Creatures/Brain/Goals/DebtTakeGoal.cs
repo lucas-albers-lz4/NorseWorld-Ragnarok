@@ -40,6 +40,11 @@ namespace NWR.Creatures.Brain.Goals
             NWCreature self = (NWCreature)Self;
 
             try {
+                if (Debtor == null) {
+                    IsComplete = true;
+                    return;
+                }
+
                 int dist = MathHelper.Distance(self.Location, Debtor.Location);
                 if (dist == 1) {
                     GlobalVars.nwrHost.ShowText(self, BaseLocale.GetStr(RS.rs_GiveMeTheMoney));
