@@ -1747,6 +1747,20 @@ namespace NWR.Creatures
             }
         }
 
+        /// <summary>
+        /// Hit chance is a percent for AuxUtils.Chance; never invert misses via Abs.
+        /// </summary>
+        public static int ClampHitChance(int pHit)
+        {
+            if (pHit < 0) {
+                return 0;
+            }
+            if (pHit > 100) {
+                return 100;
+            }
+            return pHit;
+        }
+
         protected virtual AttackInfo CalcAttackInfo(AttackKind attackKind, NWCreature enemy, Item weapon, Item projectile)
         {
             AttackInfo result = new AttackInfo();
@@ -1757,7 +1771,8 @@ namespace NWR.Creatures
                 int damage;
 
                 if (projectile == null) {
-                    pHit = ToHit;
+                    // Remake scale: higher ArmorClass = better defense (same coefficient as projectile).
+                    pHit = ToHit - 2 * enemy.ArmorClass;
                     damage = DamageBase;
                 } else {
                     pHit = (int)(Math.Round((Strength / 7.0 - 2 * enemy.ArmorClass + Luck / 10.0 + 30.0 + (double)projectile.Bonus)));
@@ -1807,7 +1822,7 @@ namespace NWR.Creatures
                     pHit -= 40;
                 }
 
-                pHit = Math.Abs(pHit);
+                pHit = ClampHitChance(pHit);
                 if (GlobalVars.Debug_Divinity && IsPlayer) {
                     pHit = 100;
                 }
@@ -1862,7 +1877,8 @@ namespace NWR.Creatures
 
                     Space.DoEvent(EventID.event_Miss, this, null, null);
 
-                    if (AuxUtils.Chance(attackInfo.ToHit - attackInfo.Parry)) {
+                    // Train Parry only when the defender's parry check succeeds (not attacker ToHit).
+                    if (AuxUtils.Chance(enemy.GetAbility(AbilityID.Ab_Parry))) {
                         enemy.CheckActionAbility(CreatureAction.caAttackParry, null);
                     }
                     return false;
@@ -2666,7 +2682,7 @@ namespace NWR.Creatures
                 } else if (entrySign.Equals("MudFlow")) {
                     PostDeath_SetTile(PlaceID.pid_Mud);
                 } else if (entrySign.Equals("Nidhogg")) {
-                    if (LastAttacker.Equals(Space.Player)) {
+                    if (LastAttacker != null && LastAttacker.Equals(Space.Player)) {
                         Space.ShowText(this, BaseLocale.Format(RS.rs_XSlavers, new object[]{ base.Name }));
                     }
                 } else if (entrySign.Equals("SandForm")) {
