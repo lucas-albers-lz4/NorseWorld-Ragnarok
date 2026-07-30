@@ -1,6 +1,6 @@
 # Game audits (`dev_info/audit`)
 
-Review notes for Phase 1 audits. Fixes go to Phase 4 issues (#19 serialization done; #20 combat).
+Review notes for Phase 1 audits. Fixes go to Phase 4 issues (#19 serialization done; #20 combat done; #37 effects).
 
 ## Method (serialization)
 
@@ -9,6 +9,10 @@ For each `SaveToStream` / `LoadFromStream` pair: compare field order/types; note
 ## Method (combat)
 
 Trace attack → hit → damage → death; verify AC/damage vs DOS manual notes; document overflow/null risks. See [combat-checklist.md](combat-checklist.md).
+
+## Method (effects)
+
+Trace create → tick → expire; review rays; document Prowling/quit-time list mutation. See [effects-checklist.md](effects-checklist.md).
 
 ## Save formats
 
@@ -26,6 +30,7 @@ Trace attack → hit → damage → death; verify AC/damage vs DOS manual notes;
 
 - Serialization audit (`audit/serialization-correctness`, 2026-07-30): all Tier B + C passed.
 - Combat audit (`audit/combat-resolution`, 2026-07-30): all Tier B + C passed (incl. `player-load-trailing-fail`).
+- Effects audit (`audit/effects-system`, 2026-07-30): all Tier B + C passed (incl. combat tests).
 
 Fixtures were **not** regenerated.
 
@@ -44,6 +49,10 @@ Fixtures were **not** regenerated.
 | [08-combat-ac-damage.md](08-combat-ac-damage.md) | AC scale, hit/damage formulas, weapons |
 | [09-combat-death-speed.md](09-combat-death-speed.md) | Death, XP, Speed, stats |
 | [combat-checklist.md](combat-checklist.md) | Combat status table |
+| [10-effects-lifecycle.md](10-effects-lifecycle.md) | Effect create/tick/expire/stack |
+| [11-effects-rays.md](11-effects-rays.md) | Ray subclasses + FyleischCloud |
+| [12-effects-prowling-quit.md](12-effects-prowling-quit.md) | ProwlingEnd / quit-time failures |
+| [effects-checklist.md](effects-checklist.md) | Effects status table |
 
 ## Re-run harness
 
