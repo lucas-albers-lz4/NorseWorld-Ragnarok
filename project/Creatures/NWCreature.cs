@@ -104,6 +104,7 @@ namespace NWR.Creatures
         public bool Illusion;
         public bool Prowling;
         public byte[] ProwlImage;
+        private bool fProwlingEndPending;
 
 
         public NWField CurrentField
@@ -2728,6 +2729,10 @@ namespace NWR.Creatures
             try {
                 IncTurn();
                 fEffects.Execute();
+                if (fProwlingEndPending) {
+                    fProwlingEndPending = false;
+                    ProwlingEnd();
+                }
                 Recovery();
 
                 if (fEntry.Flags.Contains(CreatureFlags.esUseItems)) {
@@ -3708,9 +3713,16 @@ namespace NWR.Creatures
             }
         }
 
+        public void RequestProwlingEnd()
+        {
+            fProwlingEndPending = true;
+        }
+
         public void ProwlingEnd()
         {
             try {
+                fProwlingEndPending = false;
+
                 if (IsPlayer) {
                     if (fProwlSource == EffectID.eid_Lycanthropy) {
                         Space.ShowText(this, BaseLocale.GetStr(RS.rs_RestoreForm));
@@ -3722,6 +3734,11 @@ namespace NWR.Creatures
                 }
                 Prowling = false;
                 fProwlSource = EffectID.eid_None;
+
+                if (ProwlImage == null) {
+                    Logger.Write("NWCreature.ProwlingEnd(): ProwlImage is null");
+                    return;
+                }
 
                 int lid = LayerID;
                 int fx = fField.X;

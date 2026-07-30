@@ -84,6 +84,10 @@ namespace NWR.Effects.Rays
             EffID = effectID;
 
             Field = Creature.CurrentField;
+            if (Field == null) {
+                Logger.Write("EffectRay.Exec(): CurrentField is null");
+                return;
+            }
 
             int eid = (int)effectID;
             EffectRec effRec = EffectsData.dbEffects[eid];
