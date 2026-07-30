@@ -2499,7 +2499,7 @@ namespace NWR.Effects
                     break;
 
                 case InvokeMode.im_FinAction:
-                    creature.ProwlingEnd();
+                    creature.RequestProwlingEnd();
                     break;
             }
         }

@@ -91,10 +91,9 @@ namespace NWR.Effects
                             eff.Magnitude = (int)Math.Round((float)eff.Magnitude * ((float)eff.Duration / (float)oldDuration));
 
                             if (eff.Source == null && eff.Duration == 0) {
-                                // e_Prowling has change effects list, 
-                                // so we need check current effect
-                                // its hack and bad code!
-                                if (this[i] == eff) {
+                                // FinAction (e.g. Prowling) must not mutate this list mid-loop;
+                                // ProwlingEnd is deferred until after Execute returns.
+                                if (i < Count && this[i] == eff) {
                                     Delete(i);
                                 }
                             }
