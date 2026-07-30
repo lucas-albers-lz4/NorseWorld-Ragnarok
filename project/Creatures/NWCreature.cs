@@ -1452,6 +1452,11 @@ namespace NWR.Creatures
                     cr.Items.Extract(it);
                     fItems.Add(it, false);
 
+                    int qn = Space.QuestsCount;
+                    for (int qi = 0; qi < qn; qi++) {
+                        Space.GetQuest(qi).GiveupItem(it, this);
+                    }
+
                     if (CLSID == GlobalVars.cid_Hela) {
                         Space.AddCreatureEx(GlobalVars.Layer_Asgard, 1, 0, RandomHelper.GetBoundedRnd(29, 68), RandomHelper.GetBoundedRnd(3, StaticData.FieldHeight - 4), GlobalVars.cid_Balder);
                     } else {

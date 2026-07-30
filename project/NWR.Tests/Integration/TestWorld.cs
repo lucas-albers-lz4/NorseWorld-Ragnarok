@@ -58,7 +58,7 @@ namespace NWR.Tests.Integration
         }
 
         /// <summary>
-        /// Loaded fixtures do not restore fQuests; call after LoadGame for quest tests.
+        /// Rebuild main quests and sync stages from inventories (also done by LoadGame).
         /// </summary>
         public static void EnsureMainQuests(NWGameSpace game)
         {
@@ -71,22 +71,28 @@ namespace NWR.Tests.Integration
             NWField fld = player.CurrentField;
             int px = -1;
             int py = -1;
-            for (int dx = -1; dx <= 1 && px < 0; dx++) {
-                for (int dy = -1; dy <= 1; dy++) {
-                    if (dx == 0 && dy == 0) {
-                        continue;
-                    }
-                    int nx = player.PosX + dx;
-                    int ny = player.PosY + dy;
-                    if (player.CanMove(fld, nx, ny) && fld.FindCreature(nx, ny) == null) {
-                        px = nx;
-                        py = ny;
-                        break;
+            // TakeItemDef accepts distance <= 3
+            for (int dist = 1; dist <= 3 && px < 0; dist++) {
+                for (int dx = -dist; dx <= dist && px < 0; dx++) {
+                    for (int dy = -dist; dy <= dist; dy++) {
+                        if (dx == 0 && dy == 0) {
+                            continue;
+                        }
+                        if (Math.Abs(dx) != dist && Math.Abs(dy) != dist) {
+                            continue;
+                        }
+                        int nx = player.PosX + dx;
+                        int ny = player.PosY + dy;
+                        if (player.CanMove(fld, nx, ny) && fld.FindCreature(nx, ny) == null) {
+                            px = nx;
+                            py = ny;
+                            break;
+                        }
                     }
                 }
             }
             if (px < 0) {
-                throw new InvalidOperationException("no adjacent tile for creature " + creatureId);
+                throw new InvalidOperationException("no nearby tile for creature " + creatureId);
             }
 
             NWCreature cr = game.FindCreature(creatureId);
