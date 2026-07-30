@@ -49,6 +49,7 @@
     <Compile Include="Quests\QuestCoreTests.cs" />
     <Compile Include="Quests\QuestHandinTests.cs" />
     <Compile Include="Quests\QuestValidationTests.cs" />
+    <Compile Include="Creatures\CreatureSpecialsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NWR.csproj">

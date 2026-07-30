@@ -41,6 +41,10 @@ namespace NWR.Creatures.Brain.Goals
 
             try {
                 Building house = self.FindHouse();
+                if (house == null || Ware == null) {
+                    IsComplete = true;
+                    return;
+                }
                 if (house.Area.Contains(self.PosX, self.PosY)) {
                     self.DropItem(Ware);
                     IsComplete = true;

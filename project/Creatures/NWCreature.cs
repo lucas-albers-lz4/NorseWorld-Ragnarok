@@ -1909,6 +1909,9 @@ namespace NWR.Creatures
 
                     enemy.ApplyDamage(attackInfo.Damage, DamageKind.Physical, this, msg);
 
+                    ApplyMeleeHitSpecials(enemy);
+                    enemy.DefenseSpecialEffect(this);
+
                     if (enemy.State == CreatureState.Dead) {
                         int xp = GetAttackExp(enemy);
                         Experience = Experience + xp;
@@ -1952,7 +1955,10 @@ namespace NWR.Creatures
                     AuxUtils.ExStub("Pierced by a' (on death)");
                     AuxUtils.ExStub("It feels strange.' (if tendril not kill)");
                 } else if (sign.Equals("Cockatrice")) {
-                    AuxUtils.ExStub("The %s is turned to stone.");
+                    if (enemy != null && enemy.HasAffect(EffectID.eid_Stoning)) {
+                        enemy.AddEffect(EffectID.eid_Stoning, ItemState.is_Normal, EffectAction.ea_Persistent, true,
+                            BaseLocale.GetStr(RS.rs_YouTurnToStone));
+                    }
                 } else if (sign.Equals("Dreg")) {
                     AuxUtils.ExStub("???");
                 } else if (sign.Equals("Edgewort")) {
@@ -2185,6 +2191,20 @@ namespace NWR.Creatures
             }
         }
 
+        /// <summary>
+        /// On-hit melee specials (after a successful ToHit). Gaze-style effects stay in AttackSpecialEffect.
+        /// </summary>
+        public void ApplyMeleeHitSpecials(NWCreature enemy)
+        {
+            if (enemy == null || fEntry == null) {
+                return;
+            }
+            if (fEntry.Sign.Equals("Werewolf") && enemy.HasAffect(EffectID.eid_Lycanthropy)) {
+                enemy.AddEffect(EffectID.eid_Lycanthropy, ItemState.is_Normal, EffectAction.ea_RandomTurn, true,
+                    BaseLocale.GetStr(RS.rs_YouveGetALicanthropy));
+            }
+        }
+
         public void DefenseSpecialEffect(NWCreature enemy)
         {
             string entrySign = fEntry.Sign;
@@ -2197,13 +2217,10 @@ namespace NWR.Creatures
             } else if (entrySign.Equals("Breleor")) {
                 AuxUtils.ExStub("//UseEffect(eid_Breleor_Tendril, nil, im_ItSelf, );");
             } else if (entrySign.Equals("Cockatrice")) {
-                AuxUtils.ExStub("You hit the ");
-                AuxUtils.ExStub(" with your ");
-                AuxUtils.ExStub(".");
-                AuxUtils.ExStub("rs_YouTurnToStone");
-                AuxUtils.ExStub("Touched a");
-                AuxUtils.ExStub(" ");
-                AuxUtils.ExStub("%");
+                if (enemy != null && enemy.HasAffect(EffectID.eid_Stoning)) {
+                    enemy.AddEffect(EffectID.eid_Stoning, ItemState.is_Normal, EffectAction.ea_Persistent, true,
+                        BaseLocale.GetStr(RS.rs_YouTurnToStone));
+                }
             } else if (entrySign.Equals("Dreg")) {
                 AuxUtils.ExStub("    nwrWin.ShowText(aEnemy, Format(rsList(rs_XSplashesYou], [Self.Name]));");
                 AuxUtils.ExStub("Sizzled by a");
@@ -2868,7 +2885,11 @@ namespace NWR.Creatures
         public Building FindHouse()
         {
             if (fHouse == null) {
-                var features = CurrentField.Features;
+                NWField fld = CurrentField;
+                if (fld == null) {
+                    return null;
+                }
+                var features = fld.Features;
                 int num = features.Count;
                 for (int i = 0; i < num; i++) {
                     GameEntity b = features[i];
