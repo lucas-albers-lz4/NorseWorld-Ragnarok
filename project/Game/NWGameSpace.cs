@@ -961,10 +961,12 @@ namespace NWR.Game
                         Logger.Write("playerLoad(): ok");
                     } else {
                         Logger.Write("playerLoad(): fail");
+                        throw new IOException("playerLoad(): trailing data in save file");
                     }
                 }
             } catch (IOException ex) {
                 Logger.Write("NWGameSpace.loadPlayer.io(): " + ex.Message);
+                throw;
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.loadPlayer(): " + ex.Message);
                 throw ex;
@@ -1116,7 +1118,7 @@ namespace NWR.Game
                 GlobalVars.nwrHost.PlaySound("game_save.ogg", SoundEngine.sk_Sound, -1, -1);
             } catch (IOException ex) {
                 Logger.Write("NWGameSpace.saveGame.IO(): " + ex.Message);
-                //throw ex;
+                throw;
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.saveGame(): " + ex.Message);
                 throw ex;
