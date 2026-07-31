@@ -71,6 +71,7 @@ Scenarios
   dsl-json-fixtures     Run all JSON under dev_info/fixtures/scenarios/
   single-op-smoke       Catalog-driven UseItem / AddEffect smoke (#14)
   ab-diff               Java vs C# differential (#18; needs fetch-java-dist.sh)
+  edge-cases            Roguelike edge/invariant smoke (#17)
 
 Java vs C# A/B
 --------------
