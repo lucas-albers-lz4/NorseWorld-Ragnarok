@@ -23,6 +23,7 @@ namespace NWR.Tests
             { "wait-turns", GameplayScenarios.WaitTurns },
             { "item-use-potion", GameplayScenarios.ItemUsePotion },
             { "teleport-trap", GameplayScenarios.TeleportTrap },
+            { "item-catalog", CatalogScenarios.ItemCatalog },
             { "build-fixture", FixtureBuilder.BuildSlot8Fixture },
             { "build-container-fixture", FixtureBuilder.BuildContainerFixture },
             { "build-effects-fixture", FixtureBuilder.BuildEffectsFixture },
@@ -50,6 +51,7 @@ namespace NWR.Tests
                 names.Remove("build-fixture");
                 names.Remove("build-container-fixture");
                 names.Remove("build-effects-fixture");
+                names.Remove("item-catalog");
             }
 
             if (names.Count == 0) {
