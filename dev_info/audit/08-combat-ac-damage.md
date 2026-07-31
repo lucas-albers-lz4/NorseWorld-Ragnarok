@@ -64,5 +64,5 @@ Artifacts (Mjollnir, Gungnir, Scythe, …) outrank Runesword as expected.
 | BUG | Medium | `Math.Abs(pHit)` can turn negative ToHit (Phase / high AC) into a positive hit chance |
 | BUG | Low | Miss path trains Parry via `Chance(ToHit - Parry)` (near-always when ToHit ≫ Parry) |
 | DEFER | — | DOS AC-10 scale vs remake AC-0 higher-is-better naming |
-| DEFER | — | FIXME: enemy armor skill unused on damage |
+| FIXED | — | Enemy armor skill reduces damage by skill/10 in CalcAttackInfo (#60); trains on non-lethal hits |
 | OK | — | Runesword damage &gt; WarHammer; Speed 10 for human classes |
