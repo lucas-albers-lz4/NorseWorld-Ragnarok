@@ -649,7 +649,10 @@ namespace NWR.Creatures
                 NWField field = CurrentField;
                 for (int i = 0; i < field.Creatures.Count; i++) {
                     NWCreature creat = field.Creatures[i];
-                    if (!Equals(creat) && IsEnemy(creat)) {
+                    if (creat == null || Equals(creat) || creat.State == CreatureState.Dead) {
+                        continue;
+                    }
+                    if (IsEnemy(creat)) {
                         return false;
                     }
                 }

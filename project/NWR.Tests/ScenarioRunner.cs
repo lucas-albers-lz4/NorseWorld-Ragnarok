@@ -32,6 +32,7 @@ namespace NWR.Tests
             { "ab-diff", DifferentialScenarios.AbDiff },
             { "edge-cases", EdgeCaseScenarios.EdgeCaseSmoke },
             { "sequence-fuzz", FuzzScenarios.SequenceFuzz },
+            { "oldman-demonbane", DialogScenarios.OldmanDemonBane },
             { "build-fixture", FixtureBuilder.BuildSlot8Fixture },
             { "build-container-fixture", FixtureBuilder.BuildContainerFixture },
             { "build-effects-fixture", FixtureBuilder.BuildEffectsFixture },

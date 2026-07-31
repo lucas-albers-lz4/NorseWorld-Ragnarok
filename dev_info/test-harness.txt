@@ -73,6 +73,7 @@ Scenarios
   ab-diff               Java vs C# differential (#18; needs fetch-java-dist.sh)
   edge-cases            Roguelike edge/invariant smoke (#17)
   sequence-fuzz         Seeded random op sequences (#15; NWR_FUZZ_N/SEED)
+  oldman-demonbane      Jint Oldman DemonBane dialog scripts (#59)
 
 Java vs C# A/B
 --------------

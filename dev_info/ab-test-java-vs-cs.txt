@@ -87,7 +87,7 @@ Results table (automated + pending manual confirmation)
 | Quest accepted               |  -   | -  | Manual |
 | Field cleared                |  -   | -  | Manual |
 | Reward dialog shown          |  -   | -  | Manual |
-| DemonBane in inventory       |  -   | -  | Manual; C# transferItem wired |
+| DemonBane in inventory       |  -   | Y  | Automated: oldman-demonbane scenario (#59) |
 
 Scripting verification (automated, 2026-06-27)
 ----------------------------------------------

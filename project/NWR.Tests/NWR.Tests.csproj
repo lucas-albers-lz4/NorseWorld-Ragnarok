@@ -25,6 +25,9 @@
     <Reference Include="nunit.framework">
       <HintPath>nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Jint">
+      <HintPath>..\libs\Jint.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -60,11 +63,14 @@
     <Compile Include="Integration\Scenarios\DifferentialScenarios.cs" />
     <Compile Include="Integration\Scenarios\EdgeCaseScenarios.cs" />
     <Compile Include="Integration\Scenarios\FuzzScenarios.cs" />
+    <Compile Include="Integration\Scenarios\DialogScenarios.cs" />
+    <Compile Include="Integration\DialogScript.cs" />
     <Compile Include="Integration\Dsl\TestsScenarioEnv.cs" />
     <Compile Include="Dsl\ScenarioDslTests.cs" />
     <Compile Include="Differential\DifferentialTests.cs" />
     <Compile Include="EdgeCases\EdgeCaseTests.cs" />
     <Compile Include="Fuzz\SequenceFuzzTests.cs" />
+    <Compile Include="Dialog\OldmanDemonBaneTests.cs" />
     <Compile Include="..\ScenarioDsl\IScenarioEnv.cs">
       <Link>ScenarioDsl\IScenarioEnv.cs</Link>
     </Compile>
