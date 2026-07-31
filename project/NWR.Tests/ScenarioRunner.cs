@@ -31,6 +31,7 @@ namespace NWR.Tests
             { "single-op-smoke", SingleOpScenarios.SingleOpSmoke },
             { "ab-diff", DifferentialScenarios.AbDiff },
             { "edge-cases", EdgeCaseScenarios.EdgeCaseSmoke },
+            { "sequence-fuzz", FuzzScenarios.SequenceFuzz },
             { "build-fixture", FixtureBuilder.BuildSlot8Fixture },
             { "build-container-fixture", FixtureBuilder.BuildContainerFixture },
             { "build-effects-fixture", FixtureBuilder.BuildEffectsFixture },
