@@ -1,0 +1,8 @@
+{
+  "name": "effect-apply-prowling",
+  "steps": [
+    { "op": "loadFixture", "arg": "slot8" },
+    { "op": "applyEffect", "arg": "Prowling" },
+    { "op": "check", "arg": "effectPresent", "checkArg": "Prowling" }
+  ]
+}

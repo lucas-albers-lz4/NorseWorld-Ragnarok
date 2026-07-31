@@ -1,6 +1,8 @@
 using System;
 using NWR.Game;
+using NWR.Harness.Dsl;
 using NWR.Items;
+using NWR.ScenarioDsl;
 
 namespace NWR.Harness.Scenarios
 {
@@ -45,38 +47,25 @@ namespace NWR.Harness.Scenarios
 
         public static void WaitTurns(string repoRoot)
         {
-            NWGameSpace game = HarnessBootstrap.Init(repoRoot);
-            SaveLoadScenarios.CopyFixtureToSlot(repoRoot, "slot8", SaveLoadScenarios.TestSlot);
-            game.LoadGame(SaveLoadScenarios.TestSlot);
-
-            int turnBefore = game.Player.Turn;
-            TestWorld.RunTurns(game, 5);
-            if (game.Player.Turn <= turnBefore) {
-                throw new InvalidOperationException("wait-turns: player turn did not advance");
-            }
+            Scenario.Create("wait-turns")
+                .LoadFixture("slot8")
+                .Capture("turn")
+                .WaitTurns(5)
+                .Check("turnAdvanced")
+                .Run(HarnessScenarioEnv.Instance, repoRoot);
         }
 
         public static void ItemUsePotion(string repoRoot)
         {
-            NWGameSpace game = HarnessBootstrap.Init(repoRoot);
-            SaveLoadScenarios.CopyFixtureToSlot(repoRoot, "slot8", SaveLoadScenarios.TestSlot);
-            game.LoadGame(SaveLoadScenarios.TestSlot);
-
-            int hpBefore = game.Player.HPCur;
-            if (game.Player.HPCur >= game.Player.HPMax_Renamed) {
-                game.Player.HPCur = Math.Max(1, game.Player.HPMax_Renamed / 2);
-                hpBefore = game.Player.HPCur;
-            }
-
-            Item potion = TestWorld.SpawnItem(game.Player, "Potion_Curing", 1, true);
-            if (potion == null) {
-                throw new InvalidOperationException("item-use-potion: could not spawn Potion_Curing");
-            }
-            game.Player.UseItem(potion, null);
-
-            if (game.Player.HPCur <= hpBefore) {
-                throw new InvalidOperationException("item-use-potion: HP did not increase");
-            }
+            Scenario.Create("item-use-potion")
+                .Param("item", "Potion_Curing")
+                .LoadFixture("slot8")
+                .HalfHp()
+                .Capture("hp")
+                .SpawnItem("${item}")
+                .UseItem()
+                .Check("hpIncreased")
+                .Run(HarnessScenarioEnv.Instance, repoRoot);
         }
     }
 }

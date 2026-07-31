@@ -65,8 +65,34 @@ Scenarios
   player-metadata       LoadPlayer preview path (S4 partial)
   container-roundtrip   Container fixture save/load
   effect-persist        Effects fixture save/load
-  wait-turns            caWait + ProcessGameStep loop
-  item-use-potion       Spawn Potion_Curing, UseItem, HP increases
+  wait-turns            DSL: caWait + ProcessGameStep loop
+  item-use-potion       DSL: Spawn Potion_Curing, UseItem, HP increases
+  effect-apply-prowling DSL: ApplyEffect Prowling + check present
+  dsl-json-fixtures     Run all JSON under dev_info/fixtures/scenarios/
+  single-op-smoke       Catalog-driven UseItem / AddEffect smoke (#14)
+
+Scenario DSL (#13)
+------------------
+Fluent + JSON step language shared by NWR.Tests and NWR.Harness
+(project/ScenarioDsl/). Example:
+
+  Scenario.Create("item-use-potion")
+      .Param("item", "Potion_Curing")
+      .LoadFixture("slot8")
+      .HalfHp()
+      .Capture("hp")
+      .SpawnItem("${item}")
+      .UseItem()
+      .Check("hpIncreased")
+      .Run(env, repoRoot);
+
+Steps: loadFixture, spawnItem, spawnCreature, useItem, applyEffect, waitTurns,
+saveGame, loadGame, saveLoadRoundtrip, capture, check, requireLog, halfHp, param.
+
+Named checks (JSON-safe): turnAdvanced, hpIncreased, effectsUnchanged,
+effectPresent, effectAbsent. C# also allows .Check(ctx => ...).
+
+JSON authoring: dev_info/fixtures/scenarios/*.json (see README there).
 
 Log checks (harness.log at repo root during scenarios):
 
@@ -75,10 +101,12 @@ Log checks (harness.log at repo root during scenarios):
 
 Adding a scenario
 -----------------
-  1. Add static method to NWR.Tests/Integration/Scenarios/*.cs
-  2. Register in NWR.Tests/ScenarioRunner.cs
-  3. Use HarnessBootstrap.Init(repoRoot), TestWorld helpers, LogAssert
-  4. Optional: mirror in NWR.Harness for standalone exe
+  Fluent/DSL: Scenario.Create(...).Run(...) from DslScenarios or GameplayScenarios
+  Or add a *.json under dev_info/fixtures/scenarios/ (picked up by dsl-json-fixtures)
+  Procedural: Add static method to NWR.Tests/Integration/Scenarios/*.cs
+  Register in NWR.Tests/ScenarioRunner.cs (and NWR.Harness/Program.cs if needed)
+  Use HarnessBootstrap.Init(repoRoot), TestWorld helpers, LogAssert
+  Optional: mirror in NWR.Harness for standalone exe
 
 Debug_DevMode
 -------------

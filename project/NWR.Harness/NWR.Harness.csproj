@@ -32,6 +32,25 @@
     <Compile Include="Scenarios\SaveLoadScenarios.cs" />
     <Compile Include="Scenarios\GameplayScenarios.cs" />
     <Compile Include="Scenarios\FixtureBuilder.cs" />
+    <Compile Include="Dsl\HarnessScenarioEnv.cs" />
+    <Compile Include="..\ScenarioDsl\IScenarioEnv.cs">
+      <Link>ScenarioDsl\IScenarioEnv.cs</Link>
+    </Compile>
+    <Compile Include="..\ScenarioDsl\ScenarioStep.cs">
+      <Link>ScenarioDsl\ScenarioStep.cs</Link>
+    </Compile>
+    <Compile Include="..\ScenarioDsl\ScenarioContext.cs">
+      <Link>ScenarioDsl\ScenarioContext.cs</Link>
+    </Compile>
+    <Compile Include="..\ScenarioDsl\Scenario.cs">
+      <Link>ScenarioDsl\Scenario.cs</Link>
+    </Compile>
+    <Compile Include="..\ScenarioDsl\ScenarioExecutor.cs">
+      <Link>ScenarioDsl\ScenarioExecutor.cs</Link>
+    </Compile>
+    <Compile Include="..\ScenarioDsl\ScenarioJson.cs">
+      <Link>ScenarioDsl\ScenarioJson.cs</Link>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NWR.csproj">

@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using NWR.Game;
+using NWR.Harness.Dsl;
 using NWR.Harness.Scenarios;
 
 namespace NWR.Harness
@@ -19,6 +21,7 @@ namespace NWR.Harness
             { "effect-persist", GameplayScenarios.EffectPersist },
             { "wait-turns", GameplayScenarios.WaitTurns },
             { "item-use-potion", GameplayScenarios.ItemUsePotion },
+            { "dsl-json-fixtures", RunJsonFixtures },
             { "bootstrap-check", BootstrapCheck },
             { "build-fixture", FixtureBuilder.BuildSlot8Fixture },
             { "build-container-fixture", FixtureBuilder.BuildContainerFixture },
@@ -87,6 +90,21 @@ namespace NWR.Harness
         {
             NWGameSpace game = HarnessBootstrap.Init(repoRoot);
             Console.WriteLine("layers=" + game.LayersCount);
+        }
+
+        private static void RunJsonFixtures(string repoRoot)
+        {
+            string dir = Path.Combine(repoRoot, "dev_info", "fixtures", "scenarios");
+            if (!Directory.Exists(dir)) {
+                throw new InvalidOperationException("missing scenarios dir: " + dir);
+            }
+            string[] files = Directory.GetFiles(dir, "*.json");
+            Array.Sort(files, StringComparer.OrdinalIgnoreCase);
+            for (int i = 0; i < files.Length; i++) {
+                var def = NWR.ScenarioDsl.Scenario.FromFile(files[i]);
+                def.Run(HarnessScenarioEnv.Instance, repoRoot);
+                Console.WriteLine("  OK  dsl-json:" + Path.GetFileNameWithoutExtension(files[i]));
+            }
         }
 
         private static void PrintUsage()
