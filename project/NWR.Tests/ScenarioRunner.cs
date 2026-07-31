@@ -30,6 +30,7 @@ namespace NWR.Tests
             { "effect-catalog", CatalogScenarios.EffectCatalog },
             { "single-op-smoke", SingleOpScenarios.SingleOpSmoke },
             { "ab-diff", DifferentialScenarios.AbDiff },
+            { "edge-cases", EdgeCaseScenarios.EdgeCaseSmoke },
             { "build-fixture", FixtureBuilder.BuildSlot8Fixture },
             { "build-container-fixture", FixtureBuilder.BuildContainerFixture },
             { "build-effects-fixture", FixtureBuilder.BuildEffectsFixture },
