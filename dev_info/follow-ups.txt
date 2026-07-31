@@ -21,8 +21,10 @@ Sound (later tiers)
 Platform / release
 ------------------
 - Merge feature/linux-sound to master after rebase review.
-- Continue Java vs C# A/B from dev_info/ab-test-java-vs-cs.txt.
-- README: note Music vs Sounds volume sliders in options.
+- Continue Java vs C# A/B from dev_info/ab-test-java-vs-cs.txt (automated ab-diff landed; manual Oldman quest still optional).
+- README: note Music vs Sounds volume sliders in options (done).
+- Oldman / DemonBane dialog harness — see GitHub #59.
+- Combat armor-skill FIXME — see GitHub #60.
 
 Misc
 ----
