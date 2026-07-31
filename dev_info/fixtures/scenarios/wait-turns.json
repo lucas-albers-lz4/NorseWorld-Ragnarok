@@ -1,0 +1,9 @@
+{
+  "name": "wait-turns",
+  "steps": [
+    { "op": "loadFixture", "arg": "slot8" },
+    { "op": "capture", "arg": "turn" },
+    { "op": "waitTurns", "n": 5 },
+    { "op": "check", "arg": "turnAdvanced" }
+  ]
+}

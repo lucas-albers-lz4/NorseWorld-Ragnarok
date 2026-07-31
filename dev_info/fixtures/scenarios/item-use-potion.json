@@ -1,0 +1,12 @@
+{
+  "name": "item-use-potion",
+  "steps": [
+    { "op": "param", "arg": "item", "value": "Potion_Curing" },
+    { "op": "loadFixture", "arg": "slot8" },
+    { "op": "halfHp" },
+    { "op": "capture", "arg": "hp" },
+    { "op": "spawnItem", "arg": "${item}" },
+    { "op": "useItem" },
+    { "op": "check", "arg": "hpIncreased" }
+  ]
+}

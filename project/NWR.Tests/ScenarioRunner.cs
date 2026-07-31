@@ -22,6 +22,8 @@ namespace NWR.Tests
             { "effect-persist", GameplayScenarios.EffectPersist },
             { "wait-turns", GameplayScenarios.WaitTurns },
             { "item-use-potion", GameplayScenarios.ItemUsePotion },
+            { "effect-apply-prowling", DslScenarios.EffectApplyProwling },
+            { "dsl-json-fixtures", DslScenarios.RunJsonFixtures },
             { "teleport-trap", GameplayScenarios.TeleportTrap },
             { "item-catalog", CatalogScenarios.ItemCatalog },
             { "creature-catalog", CatalogScenarios.CreatureCatalog },
