@@ -57,8 +57,10 @@
     <Compile Include="Integration\Scenarios\CatalogScenarios.cs" />
     <Compile Include="Integration\Scenarios\SingleOpScenarios.cs" />
     <Compile Include="Integration\Scenarios\DslScenarios.cs" />
+    <Compile Include="Integration\Scenarios\DifferentialScenarios.cs" />
     <Compile Include="Integration\Dsl\TestsScenarioEnv.cs" />
     <Compile Include="Dsl\ScenarioDslTests.cs" />
+    <Compile Include="Differential\DifferentialTests.cs" />
     <Compile Include="..\ScenarioDsl\IScenarioEnv.cs">
       <Link>ScenarioDsl\IScenarioEnv.cs</Link>
     </Compile>

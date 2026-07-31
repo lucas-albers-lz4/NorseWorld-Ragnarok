@@ -29,6 +29,7 @@ namespace NWR.Tests
             { "creature-catalog", CatalogScenarios.CreatureCatalog },
             { "effect-catalog", CatalogScenarios.EffectCatalog },
             { "single-op-smoke", SingleOpScenarios.SingleOpSmoke },
+            { "ab-diff", DifferentialScenarios.AbDiff },
             { "build-fixture", FixtureBuilder.BuildSlot8Fixture },
             { "build-container-fixture", FixtureBuilder.BuildContainerFixture },
             { "build-effects-fixture", FixtureBuilder.BuildEffectsFixture },
@@ -59,6 +60,11 @@ namespace NWR.Tests
                 names.Remove("item-catalog");
                 names.Remove("creature-catalog");
                 names.Remove("effect-catalog");
+                string javaJar = Path.Combine(repoRoot, "nwr-dist-v0.11.0-win", "Ragnarok.jar");
+                if (!File.Exists(javaJar)) {
+                    names.Remove("ab-diff");
+                    Console.WriteLine("skip ab-diff (no Java dist; ./dev_info/fetch-java-dist.sh)");
+                }
                 // single-op-smoke included in --all (catalog-driven regression)
             }
 

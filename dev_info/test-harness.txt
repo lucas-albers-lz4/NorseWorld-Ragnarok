@@ -70,6 +70,14 @@ Scenarios
   effect-apply-prowling DSL: ApplyEffect Prowling + check present
   dsl-json-fixtures     Run all JSON under dev_info/fixtures/scenarios/
   single-op-smoke       Catalog-driven UseItem / AddEffect smoke (#14)
+  ab-diff               Java vs C# differential (#18; needs fetch-java-dist.sh)
+
+Java vs C# A/B
+--------------
+  ./dev_info/fetch-java-dist.sh   # official v0.11 zip → nwr-dist-v0.11.0-win/
+  mono NWR.Tests.exe ab-diff
+  Protocol + results: dev_info/ab-test-java-vs-cs.txt
+  Report: dev_info/fixtures/ab/differential-report.json
 
 Scenario DSL (#13)
 ------------------
