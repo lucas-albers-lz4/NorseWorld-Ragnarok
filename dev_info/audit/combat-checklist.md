@@ -22,7 +22,7 @@ Status: **OK** · **BUG** · **DEFER** · **N/A**
 | Speed Raud-10 | Viking/Woodsman Speed=10 | OK | Matches manual |
 | Integer overflow | damage/HP path | DEFER | No checked ops; ranges practical |
 | DOS AC-10 naming | manual vs DB AC=0 | DEFER | Remake higher-is-better defense rating |
-| Armor skill on damage | FIXME in AttackTo | DEFER | Unimplemented |
+| Armor skill on damage | CalcAttackInfo skill/10 | FIXED | #60 |
 | AttackSpecialEffect stubs | AttackSpecialEffect | DEFER | Mostly ExStub; for #8/#9 as needed |
 
 ## Filed bugs (feed #20)

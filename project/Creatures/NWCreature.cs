@@ -1842,6 +1842,18 @@ namespace NWR.Creatures
                 if (damage < 0) {
                     damage = 0;
                 }
+
+                // Remake: worn armor skill reduces physical damage (skill/10), same divisor as Parry on ToHit.
+                // Java v0.11 left this as an unimplemented FIXME; abilities still train on non-lethal hits.
+                AbilityID armorAbil = enemy.ArmorAbility;
+                if (armorAbil != AbilityID.Ab_None) {
+                    int reduce = (int)(Math.Round(enemy.GetAbility(armorAbil) / 10.0f));
+                    damage -= reduce;
+                    if (damage < 0) {
+                        damage = 0;
+                    }
+                }
+
                 if (enemy.fEffects.FindEffectByID(EffectID.eid_Fragile) != null) {
                     damage <<= 1;
                 }
@@ -1893,7 +1905,6 @@ namespace NWR.Creatures
                     return false;
                 } else {
                     Space.DoEvent(EventID.event_Hit, this, enemy, null);
-                    // FIXME: влияние навыка доспеха врага на урон
                     int hp = (int)(enemy.HPCur - (Math.Round((double)attackInfo.Damage)));
 
                     string msg = "";

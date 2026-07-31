@@ -56,5 +56,5 @@ sequenceDiagram
 ## Notes
 
 - Melee uses `PrimaryWeapon` when `weapon == null`.
-- Code comment at hit path: `FIXME: влияние навыка доспеха врага на урон` — armor skill does not yet modify damage.
+- Enemy **armor skill** (from worn torso armor kind) reduces physical damage by `skill/10` in `CalcAttackInfo` (#60). Java v0.11 never applied this (same FIXME left unimplemented); remake mirrors Parry's `/10` divisor. Skill still trains +1 on non-lethal hits.
 - `AttackSpecialEffect` is largely stubs (`AuxUtils.ExStub`) for named bosses; Enchantress charm text is live.
