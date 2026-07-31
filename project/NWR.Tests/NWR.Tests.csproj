@@ -51,6 +51,7 @@
     <Compile Include="Quests\QuestValidationTests.cs" />
     <Compile Include="Creatures\CreatureSpecialsTests.cs" />
     <Compile Include="Catalogs\ItemCatalogTests.cs" />
+    <Compile Include="Catalogs\CreatureEffectCatalogTests.cs" />
     <Compile Include="Integration\JsonBuilder.cs" />
     <Compile Include="Integration\Scenarios\CatalogScenarios.cs" />
   </ItemGroup>

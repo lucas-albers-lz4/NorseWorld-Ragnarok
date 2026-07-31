@@ -24,6 +24,8 @@ namespace NWR.Tests
             { "item-use-potion", GameplayScenarios.ItemUsePotion },
             { "teleport-trap", GameplayScenarios.TeleportTrap },
             { "item-catalog", CatalogScenarios.ItemCatalog },
+            { "creature-catalog", CatalogScenarios.CreatureCatalog },
+            { "effect-catalog", CatalogScenarios.EffectCatalog },
             { "build-fixture", FixtureBuilder.BuildSlot8Fixture },
             { "build-container-fixture", FixtureBuilder.BuildContainerFixture },
             { "build-effects-fixture", FixtureBuilder.BuildEffectsFixture },
@@ -52,6 +54,8 @@ namespace NWR.Tests
                 names.Remove("build-container-fixture");
                 names.Remove("build-effects-fixture");
                 names.Remove("item-catalog");
+                names.Remove("creature-catalog");
+                names.Remove("effect-catalog");
             }
 
             if (names.Count == 0) {
