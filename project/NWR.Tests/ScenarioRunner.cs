@@ -26,6 +26,7 @@ namespace NWR.Tests
             { "item-catalog", CatalogScenarios.ItemCatalog },
             { "creature-catalog", CatalogScenarios.CreatureCatalog },
             { "effect-catalog", CatalogScenarios.EffectCatalog },
+            { "single-op-smoke", SingleOpScenarios.SingleOpSmoke },
             { "build-fixture", FixtureBuilder.BuildSlot8Fixture },
             { "build-container-fixture", FixtureBuilder.BuildContainerFixture },
             { "build-effects-fixture", FixtureBuilder.BuildEffectsFixture },
@@ -56,6 +57,7 @@ namespace NWR.Tests
                 names.Remove("item-catalog");
                 names.Remove("creature-catalog");
                 names.Remove("effect-catalog");
+                // single-op-smoke included in --all (catalog-driven regression)
             }
 
             if (names.Count == 0) {

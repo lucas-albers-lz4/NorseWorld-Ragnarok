@@ -52,8 +52,10 @@
     <Compile Include="Creatures\CreatureSpecialsTests.cs" />
     <Compile Include="Catalogs\ItemCatalogTests.cs" />
     <Compile Include="Catalogs\CreatureEffectCatalogTests.cs" />
+    <Compile Include="SingleOp\SingleOpSmokeTests.cs" />
     <Compile Include="Integration\JsonBuilder.cs" />
     <Compile Include="Integration\Scenarios\CatalogScenarios.cs" />
+    <Compile Include="Integration\Scenarios\SingleOpScenarios.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NWR.csproj">
