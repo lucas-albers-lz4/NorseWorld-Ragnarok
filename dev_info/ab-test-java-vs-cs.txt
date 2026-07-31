@@ -120,3 +120,61 @@ Version choice:
 General UX: requires manual play session (Phases 1–4 above).
 
 Rebuild C#: NWR_FORCE_BUILD=1 ./play-cs.sh
+
+============================================================================
+Automated differential testing (#18) — 2026-07-30
+============================================================================
+
+Scope
+-----
+Java v0.11 has no headless harness (GUI jar only). Automation therefore:
+
+  1. Static parity: language DB / dialog XML byte-identical vs Java dist
+  2. Save-format parity: Java RGF_Version + RGP/RGT signs via DumpJavaConstants
+  3. C# ops (same as issue minimums): player metadata, item spawn, save/load
+     snapshots recorded in the report (Java interactive A/B still manual above)
+
+Setup
+-----
+  ./dev_info/fetch-java-dist.sh          # downloads official zip → nwr-dist-v0.11.0-win/
+  ./dev_info/ab-java-constants.sh        # prints Java Release/Revision/signs
+  mono NWR.Tests.exe ab-diff             # full differential scenario
+  # also run automatically from ./dev_info/run-tests.sh when dist is present
+
+Report: dev_info/fixtures/ab/differential-report.json
+
+Automated results (2026-07-30)
+------------------------------
+| Check                         | Result | Notes |
+|-------------------------------|--------|-------|
+| lang:en_db.xml                | PASS   | sha256 identical (186386 bytes, 613 Entry) |
+| lang:ru_db.xml                | PASS   | identical |
+| lang:ru_dlg_oldman.xml        | PASS   | identical (DemonBane scripts) |
+| lang:langs.xml                | PASS   | identical |
+| lang:en_texts.xml             | KNOWN  | C# `{0}` vs Java `%s` format placeholders |
+| lang:ru_texts.xml             | KNOWN  | same `{0}` vs `%s` port |
+| rgf-version                   | PASS   | Java+C# 1.21 |
+| save-signs                    | PASS   | RGP / RGT |
+| cs:player-metadata            | PASS   | Load fixture slot8 → name/hp/items/pos |
+| cs:item-spawn                 | PASS   | Potion_Curing GenItem |
+| cs:save-load-roundtrip        | PASS   | snapshot match after Save+Load |
+| cs:load-log-markers           | PASS   | playerLoad/terrainsLoad ok |
+
+Known discrepancies / limits
+----------------------------
+- en_texts.xml / ru_texts.xml: C# tree replaced Java-style `%s` with .NET `{0}`
+  format placeholders in several RS strings (trade/teach/raven/tools). DBs and
+  dialog XML remain byte-identical. ab-diff records this as KNOWN_DIFF (non-fatal).
+- Java getSaveFile() embeds a Windows-style path separator in the string
+  (…\\save/rgame_N.rgp). C# uses Path.Combine (Linux-safe). Saves themselves
+  use the same RGP/RGT/RGJ layout and RGF 1.21 — cousins, not bit-identical worlds.
+- Worldgen / RNG differ (Java threading vs C#); same seed ≠ same map.
+- Full Oldman/DemonBane quest still needs manual play in both (table above).
+- Do not commit nwr-dist-v0.11.0-win/ (gitignored); fetch script is the source.
+
+Cross-load note
+---------------
+C# fixtures under dev_info/fixtures/save/ are C#-produced RGF 1.21. Loading them
+in Java is expected to work for player/terrain headers (same signs/version) but
+is not automated (no Java headless load). Manual: copy rgame_8.* into the Java
+dist save/ folder and Load slot 8 in-game.
