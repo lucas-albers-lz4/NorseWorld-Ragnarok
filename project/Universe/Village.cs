@@ -121,7 +121,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("Village.buildBattlement(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 

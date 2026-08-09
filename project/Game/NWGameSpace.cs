@@ -366,7 +366,7 @@ namespace NWR.Game
                 PreparePrefixes();
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.initData(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -969,7 +969,7 @@ namespace NWR.Game
                 throw;
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.loadPlayer(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1067,7 +1067,7 @@ namespace NWR.Game
                 GlobalVars.nwrHost.PlaySound("game_load.ogg", SoundEngine.sk_Sound, -1, -1);
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.loadGame(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1124,7 +1124,7 @@ namespace NWR.Game
                 throw;
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.saveGame(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1190,7 +1190,7 @@ namespace NWR.Game
                 }
             } catch (Exception ex) {
                 Logger.Write("NWGameSpace.getEventMessage(): " + ex.Message);
-                throw ex;
+                throw;
             }
 
             return result;

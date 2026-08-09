@@ -955,7 +955,7 @@ namespace NWR.GUI
                 }
             } catch (Exception ex) {
                 Logger.Write("NWMainWindow.doUserAction(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1340,7 +1340,7 @@ namespace NWR.GUI
                 fGameState = GameState.gsDefault;
             } catch (Exception ex) {
                 Logger.Write("NWMainWindow.AppCreate(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -2276,7 +2276,7 @@ namespace NWR.GUI
                 }
             } catch (Exception ex) {
                 Logger.Write("NWMainWindow.DoEvent(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -2311,7 +2311,7 @@ namespace NWR.GUI
                 }
             } catch (Exception ex) {
                 Logger.Write("NWMainWindow.doPlayerDeathEvent(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 

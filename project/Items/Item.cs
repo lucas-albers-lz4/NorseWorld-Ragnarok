@@ -926,7 +926,7 @@ namespace NWR.Items
                 StreamUtils.WriteFloat(stream, fWeight);
             } catch (Exception ex) {
                 Logger.Write("Item.saveToStream(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
