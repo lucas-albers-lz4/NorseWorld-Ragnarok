@@ -553,7 +553,7 @@ namespace NWR.Game
                 }
             } catch (Exception ex) {
                 Logger.Write("Player.init(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -723,7 +723,7 @@ namespace NWR.Game
                 }
             } catch (Exception ex) {
                 Logger.Write("Player.enterPlace(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -741,7 +741,7 @@ namespace NWR.Game
                 }
             } catch (Exception ex) {
                 Logger.Write("Player.leavePlace(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -788,7 +788,7 @@ namespace NWR.Game
                 ((LeaderBrain)fBrain).Formation = (PartyFormation)(StreamUtils.ReadByte(stream));
             } catch (Exception ex) {
                 Logger.Write("Player.loadFromStream(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -867,7 +867,7 @@ namespace NWR.Game
                 }
             } catch (Exception ex) {
                 Logger.Write("Player.setPos(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1009,7 +1009,7 @@ namespace NWR.Game
                 }
             } catch (Exception ex) {
                 Logger.Write("Player.transferTo(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 

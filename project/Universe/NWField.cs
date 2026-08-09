@@ -230,7 +230,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("NWField.prepareCreatures(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -918,7 +918,7 @@ namespace NWR.Universe
                 Visited = false;
             } catch (Exception ex) {
                 Logger.Write("NWField.clear(" + DebugSign + "): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -945,7 +945,7 @@ namespace NWR.Universe
                 Visited = StreamUtils.ReadBoolean(stream);
             } catch (Exception ex) {
                 Logger.Write("NWField.loadFromStream(): " + ex.Message, ex);
-                throw ex;
+                throw;
             }
         }
 
@@ -966,7 +966,7 @@ namespace NWR.Universe
                 StreamUtils.WriteBoolean(stream, Visited);
             } catch (Exception ex) {
                 Logger.Write("NWField.saveToStream(): " + ex.Message, ex);
-                throw ex;
+                throw;
             }
         }
 

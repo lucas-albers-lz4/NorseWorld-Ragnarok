@@ -345,7 +345,7 @@ namespace NWR.Universe
                 Holder = ((idx == -1) ? null : (CreatureEntity)((NWField)Owner).Creatures[idx]);
             } catch (Exception ex) {
                 Logger.Write("Building.loadFromStream(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -369,7 +369,7 @@ namespace NWR.Universe
                 StreamUtils.WriteInt(stream, idx);
             } catch (Exception ex) {
                 Logger.Write("Building.saveToStream(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 

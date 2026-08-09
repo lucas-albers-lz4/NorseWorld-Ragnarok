@@ -474,7 +474,7 @@ namespace NWR.GUI
                 }
             } catch (Exception ex) {
                 Logger.Write("InventoryWindow.updateEquipmentLists(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 

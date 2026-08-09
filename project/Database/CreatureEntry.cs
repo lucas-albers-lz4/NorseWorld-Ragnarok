@@ -218,7 +218,7 @@ namespace NWR.Database
                 }
             } catch (Exception ex) {
                 Logger.Write("CreatureEntry.loadXML(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 

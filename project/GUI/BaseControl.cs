@@ -482,7 +482,7 @@ namespace NWR.GUI
                 }
             } catch (Exception e) {
                 DragControl = null;
-                throw e;
+                throw;
             }
         }
 

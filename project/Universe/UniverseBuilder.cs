@@ -336,7 +336,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_Dungeon(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -665,7 +665,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_Alfheim(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -791,7 +791,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_Bazaar(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -976,7 +976,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_Crossroads(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -995,7 +995,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.gen_CaveObjects(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1039,7 +1039,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_Forest(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1052,7 +1052,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_GrynrHalls(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1129,7 +1129,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.gen_Items(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1176,7 +1176,7 @@ namespace NWR.Universe
                 field.Normalize();
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_MimerWell(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1214,7 +1214,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.gen_Mountains(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1236,7 +1236,7 @@ namespace NWR.Universe
                 field.Normalize();
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_Muspelheim(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1360,7 +1360,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.gen_Traps(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1405,7 +1405,7 @@ namespace NWR.Universe
                 //
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_GodsFortress(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1445,7 +1445,7 @@ namespace NWR.Universe
                 field.AddCreature(-1, -1, GlobalVars.cid_Odin);
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_Valhalla(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1457,7 +1457,7 @@ namespace NWR.Universe
                 field.AddCreature(-1, -1, GlobalVars.cid_Ketill);
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_VidurTemple(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1489,7 +1489,7 @@ namespace NWR.Universe
                 field.Research(true, BaseTile.TS_VISITED);
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_Village(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1516,7 +1516,7 @@ namespace NWR.Universe
                 field.Normalize();
             } catch (Exception ex) {
                 Logger.Write("UniverseBuilder.build_Wasteland(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 

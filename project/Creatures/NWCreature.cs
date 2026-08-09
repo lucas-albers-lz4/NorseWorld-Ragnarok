@@ -309,7 +309,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.init(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -435,7 +435,7 @@ namespace NWR.Creatures
                     }
                 } catch (Exception ex) {
                     Logger.Write("NWCreature.setInFog(): " + ex.Message);
-                    throw ex;
+                    throw;
                 }
             }
         }
@@ -1517,7 +1517,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.initBody(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1552,7 +1552,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.initBrain(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1623,7 +1623,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.setGlobalPos(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1653,7 +1653,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.enterField(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -1725,7 +1725,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.ApplyDamage(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -2596,7 +2596,7 @@ namespace NWR.Creatures
                 return highestDamage;
             } catch (Exception ex) {
                 Logger.Write("NWCreature.checkEquipment(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -2701,7 +2701,7 @@ namespace NWR.Creatures
                 PostDeath();
             } catch (Exception ex) {
                 Logger.Write("NWCreature.death(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3048,7 +3048,7 @@ namespace NWR.Creatures
                 return result;
             } catch (Exception ex) {
                 Logger.Write("NWCreature.getDeclinableName(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3369,7 +3369,7 @@ namespace NWR.Creatures
                 return ExtPoint.Empty;
             } catch (Exception ex) {
                 Logger.Write("NWCreature.searchLocation(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3610,7 +3610,7 @@ namespace NWR.Creatures
                 AuxUtils.ExStub("todo: on go down in space -  rs_YouDescendThroughSpace");
             } catch (Exception ex) {
                 Logger.Write("NWCreature.enterSpace(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3633,7 +3633,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.enterTrap(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3651,7 +3651,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.enterFog(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3678,7 +3678,7 @@ namespace NWR.Creatures
                 EnterFog(field, tile);
             } catch (Exception ex) {
                 Logger.Write("NWCreature.enterPlace(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3708,7 +3708,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.checkTile(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3749,7 +3749,7 @@ namespace NWR.Creatures
                 Logger.Write("NWCreature.ProwlingBegin.io(): " + ex.Message);
             } catch (Exception ex) {
                 Logger.Write("NWCreature.ProwlingBegin(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3793,7 +3793,7 @@ namespace NWR.Creatures
                 Logger.Write("NWCreature.ProwlingEnd.io(): " + ex.Message);
             } catch (Exception ex) {
                 Logger.Write("NWCreature.ProwlingEnd(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3925,7 +3925,7 @@ namespace NWR.Creatures
             } catch (Exception ex) {
                 Logger.Write("NWCreature.loadFromStream(): " + ex.Message);
                 Logger.Write("NWCreature.avail: " + Convert.ToString((stream.BaseStream.Length - stream.BaseStream.Position)));
-                throw ex;
+                throw;
             }
         }
 
@@ -3983,7 +3983,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.saveToStream(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3994,7 +3994,7 @@ namespace NWR.Creatures
                 base.SetPos(posX, posY);
             } catch (Exception ex) {
                 Logger.Write("NWCreature.setPos(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -4028,7 +4028,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.shootTo(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -4086,7 +4086,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.shootToDir(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -4121,7 +4121,7 @@ namespace NWR.Creatures
                 }
             } catch (Exception ex) {
                 Logger.Write("NWCreature.shootToInternal(): " + ex.Message);
-                throw ex;
+                throw;
             }
 
             return result;
@@ -4216,7 +4216,7 @@ namespace NWR.Creatures
                 CheckTile(true);
             } catch (Exception ex) {
                 Logger.Write("NWCreature.transferTo(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 

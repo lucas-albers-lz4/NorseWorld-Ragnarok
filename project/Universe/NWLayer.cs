@@ -327,7 +327,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("NWLayer.loadFromStream(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -342,7 +342,7 @@ namespace NWR.Universe
                 }
             } catch (Exception ex) {
                 Logger.Write("NWLayer.saveToStream(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 

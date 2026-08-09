@@ -3571,7 +3571,7 @@ namespace NWR.Effects
                 }
             } catch (Exception ex) {
                 Logger.Write("EffectsFactory.loadShip(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
@@ -3598,7 +3598,7 @@ namespace NWR.Effects
                 }
             } catch (Exception ex) {
                 Logger.Write("EffectsFactory.unloadShip(): " + ex.Message);
-                throw ex;
+                throw;
             }
         }
 
