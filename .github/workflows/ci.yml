@@ -19,19 +19,13 @@ jobs:
         uses: actions/checkout@v5
 
       # The solution's ..\.. paths resolve beside the main checkout.
-      - name: Check out BSLib beside the repository
-        uses: actions/checkout@v5
-        with:
-          repository: Serg-Norseman/BSLib
-          path: ../BSLib
-          fetch-depth: 1
+      # NOTE: actions/checkout refuses ../ paths ("not under workspace"),
+      # so the siblings are cloned with plain git instead.
+      - name: Clone BSLib beside the repository
+        run: git clone --depth 1 https://github.com/Serg-Norseman/BSLib.git ../BSLib
 
-      - name: Check out ZRLib beside the repository
-        uses: actions/checkout@v5
-        with:
-          repository: Serg-Norseman/ZRLib
-          path: ../ZRLib
-          fetch-depth: 1
+      - name: Clone ZRLib beside the repository
+        run: git clone --depth 1 https://github.com/Serg-Norseman/ZRLib.git ../ZRLib
 
       - name: Install Mono and xbuild
         run: |
