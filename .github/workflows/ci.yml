@@ -1,0 +1,74 @@
+name: NWR.Tests
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    # Ubuntu 24.04 (ubuntu-latest) dropped mono from its archives; 22.04
+    # ships mono 6.8 via universe. Verified toolchain: Mono 6.12 locally.
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check out NorseWorld-Ragnarok
+        uses: actions/checkout@v5
+
+      # The solution's ..\.. paths resolve beside the main checkout.
+      # NOTE: actions/checkout refuses ../ paths ("not under workspace"),
+      # so the siblings are cloned with plain git instead.
+      - name: Clone BSLib beside the repository
+        run: git clone --depth 1 https://github.com/Serg-Norseman/BSLib.git ../BSLib
+
+      - name: Clone ZRLib beside the repository
+        run: git clone --depth 1 https://github.com/Serg-Norseman/ZRLib.git ../ZRLib
+
+      - name: Install Mono and xbuild
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y mono-complete mono-xbuild
+
+      - name: Build Release solution
+        working-directory: project
+        run: xbuild NWR.sln /p:Configuration=Release
+
+      - name: Run Tier B and Tier C tests
+        run: |
+          set -euo pipefail
+
+          # Stage the runtime exactly like dev_info/run-tests.sh: the suite
+          # resolves languages/ + resources/ relative to the exe's directory,
+          # and those live at the repo root — not in bin/Release.
+          cp -f project/bin/Release/NWR.exe \
+                project/bin/Release/BSLib.dll \
+                project/bin/Release/ZRLib.dll \
+                project/NWR.Tests/bin/Release/NWR.Tests.exe \
+                project/NWR.Tests/bin/Release/Jint.dll \
+                project/NWR.Tests/bin/Release/nunit.framework.dll \
+                ./
+
+          fixture_backup="$(mktemp -d)"
+          cp -a dev_info/fixtures "$fixture_backup/"
+
+          cleanup() {
+            rm -rf dev_info/fixtures
+            mv "$fixture_backup/fixtures" dev_info/fixtures
+            rm -rf "$fixture_backup"
+            find . -maxdepth 1 -type f \( -name '*.log' -o -name '*.exe' -o -name '*.dll' \) -delete
+          }
+          trap cleanup EXIT
+
+          set +e
+          mono NWR.Tests.exe
+          tier_b_status=$?
+          mono NWR.Tests.exe --all
+          tier_c_status=$?
+          set -e
+
+          if [ "$tier_b_status" -ne 0 ] || [ "$tier_c_status" -ne 0 ]; then
+            exit 1
+          fi
