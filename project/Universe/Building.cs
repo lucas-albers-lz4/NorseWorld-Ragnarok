@@ -195,7 +195,7 @@ namespace NWR.Universe
                 if (maxDoors == 1) {
                     dCnt = 1;
                 } else {
-                    dCnt = RandomHelper.GetBoundedRnd((int)maxDoors - 1, (int)((int)maxDoors + 1));
+                    dCnt = RandomHelper.GetBoundedRnd((int)maxDoors - 1, ((int)maxDoors + 1));
                 }
 
                 int dx = 0;
@@ -342,7 +342,7 @@ namespace NWR.Universe
                 }
 
                 int idx = StreamUtils.ReadInt(stream);
-                Holder = ((idx == -1) ? null : (CreatureEntity)((NWField)Owner).Creatures[idx]);
+                Holder = ((idx == -1) ? null : ((NWField)Owner).Creatures[idx]);
             } catch (Exception ex) {
                 Logger.Write("Building.loadFromStream(): " + ex.Message);
                 throw;

@@ -411,7 +411,7 @@ namespace NWR.Items
                 if (result < 1) {
                     result = 1;
                 }
-                result = (int)(result * Count);
+                result = (result * Count);
     
                 return result;
             }
@@ -431,7 +431,7 @@ namespace NWR.Items
                 if (CLSID == GlobalVars.iid_DeadBody) {
                     result = ((NWCreature)fContents[0]).Weight;
                 } else {
-                    result = (((float)fWeight * Count));
+                    result = ((fWeight * Count));
                 }
                 return result;
             }
@@ -843,7 +843,7 @@ namespace NWR.Items
                     result = (int)Math.Round((result * 1.2));
                 } else {
                     if (buyer.IsTrader) {
-                        result = (int)((int)((uint)result >> 1));
+                        result = (int)((uint)result >> 1);
                     }
                 }
             }

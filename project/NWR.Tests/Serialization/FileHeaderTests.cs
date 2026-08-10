@@ -11,7 +11,7 @@ namespace NWR.Tests.Serialization
         [Test]
         public void WriteReadRoundTrip()
         {
-            var header = new FileHeader(NWGameSpace.RGP_Sign, NWGameSpace.RGF_Version.Clone() as FileVersion);
+            var header = new FileHeader(NWGameSpace.RGP_Sign, NWGameSpace.RGF_Version.Clone());
             using (var ms = new MemoryStream())
             using (var writer = new BinaryWriter(ms)) {
                 header.Write(writer);

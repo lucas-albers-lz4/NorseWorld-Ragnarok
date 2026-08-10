@@ -70,7 +70,7 @@ namespace NWR.Creatures.Brain
 
         private int fDir;
         private ExtList<NWCreature> fList;
-        private PMPos[] fOffsets;
+        private readonly PMPos[] fOffsets;
 
         public PartyFormation Formation;
 

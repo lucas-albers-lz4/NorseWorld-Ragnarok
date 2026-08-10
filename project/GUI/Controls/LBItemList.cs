@@ -89,7 +89,7 @@ namespace NWR.GUI.Controls
             do {
                 I = L;
                 int J = R;
-                int P = (int)((int)((uint)(L + R) >> 1));
+                int P = (int)((uint)(L + R) >> 1);
                 do {
                     while (CompareText(I, P) < 0) {
                         I++;

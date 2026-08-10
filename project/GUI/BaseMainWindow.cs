@@ -30,9 +30,9 @@ namespace NWR.GUI
     {
         private sealed class KeyCapInfo
         {
-            public string Sign;
-            public Keys Key;
-            public ShiftStates Shift;
+            public readonly string Sign;
+            public readonly Keys Key;
+            public readonly ShiftStates Shift;
 
             public KeyCapInfo(string sign, Keys key, ShiftStates shift)
             {

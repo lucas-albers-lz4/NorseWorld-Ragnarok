@@ -334,7 +334,7 @@ namespace NWR.GUI
                 }
 
                 NWTile nwTile = (NWTile)fld.GetTile(X, Y);
-                ExtPoint scrPt = new ExtPoint();
+                ExtPoint scrPt;
 
                 if ((tile.HasState(BaseTile.TS_VISITED))) {
                     int bg = (int)tile.Background;
@@ -476,7 +476,7 @@ namespace NWR.GUI
                 Resources = new ImageList(base.Screen);
                 Symbols = new ImageList(base.Screen);
 
-                int cnt = (int)PlaceID.pid_Last + ((int)ItemKind.ik_Last + 1) + GlobalVars.dbItems.Count +
+                int cnt = PlaceID.pid_Last + ((int)ItemKind.ik_Last + 1) + GlobalVars.dbItems.Count +
                           GlobalVars.dbCreatures.Count + (int)EffectID.eid_Last + (int)SkillID.Sk_Last + ((int)ItfElement.id_Last + 1) +
                           ((int)SymbolID.sid_Last + 1) + GlobalVars.dbLayers.Count + StaticData.dbRunes.Length;
 

@@ -51,22 +51,22 @@ namespace NWR.Creatures
         private static readonly Reaction[, ] Relations;
         public static readonly int[] ShootIsoTrans;
 
-        private AttributeList fAbilities;
+        private readonly AttributeList fAbilities;
         private AbstractBody fBody;
         private int fDamageBase;
-        private EffectsList fEffects;
+        private readonly EffectsList fEffects;
         private CreatureEntry fEntry;
         private int fExperience;
         private ExtPoint fField;
         private Building fHouse;
         private bool fInFog;
         private bool fIsMercenary;
-        private ItemsList fItems;
+        private readonly ItemsList fItems;
         //private bool FItemsEnlarged;
         private bool fIsTrader;
         private string fName;
         private EffectID fProwlSource;
-        private AttributeList fSkills;
+        private readonly AttributeList fSkills;
         private int fSpeed;
         private CreatureState fState;
         private byte fSurvey;
@@ -593,8 +593,6 @@ namespace NWR.Creatures
             get {
                 return (((float)(Strength + ArmorClass + Attacks + fSpeed) / 4.0f));
             }
-            set {
-            }
         }
 
         public float MaxItemsWeight
@@ -875,7 +873,7 @@ namespace NWR.Creatures
         {
             Space.DoEvent(EventID.event_Trade, null, null, null);
 
-            int price = (int)item.GetTradePrice(this, seller);
+            int price = item.GetTradePrice(this, seller);
 
             if (IsPlayer && seller.fIsTrader) {
                 ((Player)this).AddDebt(seller.Name, price);
@@ -932,7 +930,7 @@ namespace NWR.Creatures
         {
             bool result = false;
             if (!IsEnemy(aSeller)) {
-                if (Money >= (int)aItem.GetTradePrice(this, aSeller)) {
+                if (Money >= aItem.GetTradePrice(this, aSeller)) {
                     result = true;
                 } else {
                     Space.ShowText(this, BaseLocale.GetStr(RS.rs_NoMoney));
@@ -952,7 +950,7 @@ namespace NWR.Creatures
                     mWeight = 0f;
                 } else {
                     ItemEntry coinEntry = (ItemEntry)GlobalVars.nwrDB.FindEntryBySign("Coin");
-                    mWeight = ((aItem.Price * (float)coinEntry.Weight));
+                    mWeight = ((aItem.Price * coinEntry.Weight));
                 }
                 result = ((TotalWeight + aItem.Weight - mWeight) <= MaxItemsWeight);
                 if (!result) {
@@ -2539,7 +2537,7 @@ namespace NWR.Creatures
                             continue;
                         }
 
-                        float Val = (((float)dist - (float)GetWeaponRange(item)));
+                        float Val = ((dist - (float)GetWeaponRange(item)));
                         if (Val < 1f) {
                             Val = 1f;
                         } else {
@@ -2692,7 +2690,7 @@ namespace NWR.Creatures
 
                 DropAll();
                 if (fIsTrader) {
-                    Building house = (Building)FindHouse();
+                    Building house = FindHouse();
                     if (house != null) {
                         house.Holder = null;
                     }
@@ -2922,7 +2920,7 @@ namespace NWR.Creatures
         {
             Item result = null;
             int idx = -1;
-            int dt = (int)(Survey + 1);
+            int dt = (Survey + 1);
 
             NWField fld = CurrentField;
 
@@ -3809,7 +3807,6 @@ namespace NWR.Creatures
             int lc1 = a1.GetLC();
 
             Alignment a2 = aCreature.Alignment;
-            int lc2 = a2.GetLC();
 
             if (lc1 == AlignmentEx.am_Mask_Lawful || lc1 == AlignmentEx.am_Mask_LCNeutral) {
                 int ge = a1.GetGE();
@@ -4375,13 +4372,13 @@ namespace NWR.Creatures
                 if (Math.Abs(s_daf) < float.Epsilon) {
                     s_af = 1f;
                 } else {
-                    s_af = ((enemy.HPCur / (float)s_daf));
+                    s_af = ((enemy.HPCur / s_daf));
                 }
                 float t_af;
                 if (Math.Abs(t_daf) < float.Epsilon) {
                     t_af = 1f;
                 } else {
-                    t_af = ((HPCur / (float)t_daf));
+                    t_af = ((HPCur / t_daf));
                 }
                 float kf = ((1.0f / ((float)kinsfolks * 0.6f + 1.0f)));
                 result = ((s_af / (s_af + t_af) / kf));

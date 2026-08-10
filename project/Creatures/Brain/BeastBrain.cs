@@ -562,7 +562,7 @@ namespace NWR.Creatures.Brain
                 case EmitterKind.ek_GuardAlarm:
                 case EmitterKind.ek_Call:
                     {
-                        result = (emitter.SourceID != fSelf.UID && MathHelper.Distance(fSelf.Location, ePos) < (int)((NWCreature)iSelf).Hear);
+                        result = (emitter.SourceID != fSelf.UID && MathHelper.Distance(fSelf.Location, ePos) < (int)iSelf.Hear);
                         break;
                     }
                 default:

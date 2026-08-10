@@ -270,7 +270,6 @@ namespace NWR.GUI.Controls
                                 offset += sw;
 
                                 curLink.X2 = offset;
-                                curLink = null;
                             }
                         }
                     }

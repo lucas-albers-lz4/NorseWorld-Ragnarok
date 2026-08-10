@@ -62,14 +62,14 @@ namespace NWR.Game
         public static readonly char[] RGT_Sign = new char[]{ 'R', 'G', 'T' };
 
         private NWDatabase fDB;
-        private ExtList<object> fEventsQueue;
+        private readonly ExtList<object> fEventsQueue;
         private int fFileIndex;
         private List<NWLayer> fLayers;
-        private NamesLib fNameLib;
-        private Player fPlayer;
-        private NWDateTime fTime;
+        private readonly NamesLib fNameLib;
+        private readonly Player fPlayer;
+        private readonly NWDateTime fTime;
         private TurnState fTurnState;
-        private Journal fJournal;
+        private readonly Journal fJournal;
         private List<Quest> fQuests;
 
         public ExtPoint MimerWellPos;
