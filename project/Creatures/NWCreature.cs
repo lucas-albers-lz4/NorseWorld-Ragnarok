@@ -511,7 +511,7 @@ namespace NWR.Creatures
                 if (MPMax == 0) {
                     mpr = 0;
                 } else {
-                    mpr = (int)(Math.Round((MPCur / MPMax) * 100.0f));
+                    mpr = (int)(Math.Round(((float)MPCur / (float)MPMax) * 100.0f));
                 }
     
                 props.Add(Name);
@@ -1784,7 +1784,7 @@ namespace NWR.Creatures
                     pHit = ToHit - 2 * enemy.ArmorClass;
                     damage = DamageBase;
                 } else {
-                    pHit = (int)(Math.Round((Strength / 7.0 - 2 * enemy.ArmorClass + Luck / 10.0 + 30.0 + (double)projectile.Bonus)));
+                    pHit = (int)(Math.Round((Strength / 7.0 - 2.0 * enemy.ArmorClass + Luck / 10.0 + 30.0 + (double)projectile.Bonus)));
 
                     if (projectile.Entry.Sign.CompareTo("FlintKnife") == 0) {
                         pHit += 5;
@@ -4352,7 +4352,7 @@ namespace NWR.Creatures
         public int GetAttackExp(NWCreature enemy)
         {
             float div = (Level + enemy.Level);
-            float dLevel = (div == 0.0f) ? 0 : (enemy.Level / div);
+            float dLevel = (Math.Abs(div) < float.Epsilon) ? 0 : (enemy.Level / div);
 
             if (dLevel == 0f) {
                 dLevel = 1f;
@@ -4372,13 +4372,13 @@ namespace NWR.Creatures
                 float s_daf = (((DBMin + DBMax) / 2.0f * Attacks));
                 float t_daf = (((enemy.DBMin + enemy.DBMax) / 2.0f * enemy.Attacks));
                 float s_af;
-                if (s_daf == 0f) {
+                if (Math.Abs(s_daf) < float.Epsilon) {
                     s_af = 1f;
                 } else {
                     s_af = ((enemy.HPCur / (float)s_daf));
                 }
                 float t_af;
-                if (t_daf == 0f) {
+                if (Math.Abs(t_daf) < float.Epsilon) {
                     t_af = 1f;
                 } else {
                     t_af = ((HPCur / (float)t_daf));

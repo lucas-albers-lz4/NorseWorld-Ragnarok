@@ -350,7 +350,7 @@ namespace NWR.GUI
                     fFrameCount += 1;
                     long now = BaseSystem.TickCount;
                     if (now > fFrameStartTime + 1000) {
-                        FPS = ((1000 * fFrameCount / (now - fFrameStartTime)));
+                        FPS = ComputeFps(fFrameCount, now - fFrameStartTime);
                         fFrameStartTime = now;
                         fFrameCount = 0;
                     }
@@ -358,6 +358,14 @@ namespace NWR.GUI
                     Logger.Write("BaseMainWindow.repaint(): " + ex.Message);
                 }
             }
+        }
+
+        /// <summary>Frames-per-second over an elapsed window. Extracted for
+        /// testability — float division preserves the fraction (CodeQL
+        /// cs/loss-of-precision).</summary>
+        public static float ComputeFps(int frames, long elapsedMs)
+        {
+            return (1000f * frames / elapsedMs);
         }
 
         public abstract void ProcessGameStep();

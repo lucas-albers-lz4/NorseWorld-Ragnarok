@@ -52,11 +52,11 @@ namespace NWR.GUI.Controls
                     }
                 }
                 int percent;
-    
+
                 if (Max == 0) {
                     percent = 0;
                 } else {
-                    percent = (int)((long)Math.Round((double)(fPos * 100) / (double)Max));
+                    percent = PercentOf(fPos, Max);
                 }
     
                 if (fPercent != percent) {
@@ -65,6 +65,13 @@ namespace NWR.GUI.Controls
                 }
                 fPercent = percent;
             }
+        }
+
+        /// <summary>Compute a 0..100 percentage. Extracted for testability —
+        /// cast-before-multiply avoids int overflow (CodeQL cs/loss-of-precision).</summary>
+        public static int PercentOf(int pos, int max)
+        {
+            return (int)((long)Math.Round((double)pos * 100.0 / (double)max));
         }
 
         public static void DrawGauge(BaseScreen screen, ExtRect R, int cur, int max, int cBorder, int cUnready, int cReady)
