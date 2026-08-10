@@ -5,6 +5,8 @@ using BSLib;
 using NWR.Creatures;
 using NWR.Game;
 using NWR.Game.Types;
+using NWR.GUI;
+using NWR.GUI.Controls;
 using NWR.Items;
 using ZRLib.Core;
 
@@ -199,8 +201,18 @@ namespace NWR.Tests
             int toHitArmored = attacker.ProjectileToHitAgainst(enemy, knife);
             Assert.AreEqual(16, toHitNoArmor - toHitArmored);
 
+            // Discriminating case through the REAL code: ArmorClass large
+            // enough that `2 * AC` overflows int. Pre-change the wrapped
+            // negative term (2*1.5e9 -> -1294967296) makes ToHit overflow
+            // POSITIVE -> ClampHitChance returns 100; post-change the exact
+            // 3e9 term makes it overflow NEGATIVE -> clamp returns 0.
+            // AC=2^30 is the overflow threshold for `2 * AC`; 1.5e9 wraps.
+            enemy.ArmorClass = 1500000000;
+            int toHitBigArmor = attacker.ProjectileToHitAgainst(enemy, knife);
+            Assert.AreEqual(0, toHitBigArmor); // post-change; pre-change was 100
+
             // Golden replica of the pre-change multiply (inputs included) --
-            // the overflow class, unreachable with realistic ArmorClass:
+            // documents the overflow the production clamp above discriminates:
             int bigAC = 1500000000;
             int oldMul = unchecked(2 * bigAC);      // pre-change: int x int
             double newMul = 2.0 * bigAC;            // post-change: cast first
@@ -216,34 +228,32 @@ namespace NWR.Tests
         }
 
         // Site: project/GUI/Controls/ProgressBar.cs:59 -- fPos * 100.
-        // ProgressBar.Pos is not unit-testable (the setter repaints
-        // MainWindow), so verbatim pre-/post-change replicas are pinned.
+        // The production Pos setter repaints MainWindow (not unit-testable),
+        // so the arithmetic lives in ProgressBar.PercentOf (internal static
+        // seam) and THIS test calls the production method.
         [Test]
         public void ProgressBarPercent_Overflow_CastBeforeMultiply()
         {
             // Normal range: identical results (behavior preserved).
-            Assert.AreEqual(50, OldProgressPercent(50, 100));
-            Assert.AreEqual(50, NewProgressPercent(50, 100));
+            Assert.AreEqual(50, ProgressBar.PercentOf(50, 100));
 
             // Discriminating overflow: fPos = 100M > ~21.47M threshold.
-            Assert.AreEqual(7, OldProgressPercent(100000000, 200000000));  // golden: overflowed
-            Assert.AreEqual(50, NewProgressPercent(100000000, 200000000)); // fixed
+            // Production (post-change) is correct; the replica below pins
+            // the pre-change overflowed golden (7).
+            Assert.AreEqual(50, ProgressBar.PercentOf(100000000, 200000000)); // fixed
+            Assert.AreEqual(7, OldProgressPercent(100000000, 200000000));     // golden: overflowed
 
             // Overflow threshold: fPos*100 <= int.MaxValue up to 21474836.
-            Assert.AreEqual(1, OldProgressPercent(21474836, int.MaxValue));
-            Assert.AreEqual(1, NewProgressPercent(21474836, int.MaxValue));
+            Assert.AreEqual(1, ProgressBar.PercentOf(21474836, int.MaxValue));
             Assert.AreEqual(-1, OldProgressPercent(21474837, int.MaxValue)); // golden: overflowed
-            Assert.AreEqual(1, NewProgressPercent(21474837, int.MaxValue));
+            Assert.AreEqual(1, ProgressBar.PercentOf(21474837, int.MaxValue));
         }
 
+        // Verbatim pre-change replica, kept ONLY as a documenting golden of
+        // the overflowed value the production seam now avoids.
         private static int OldProgressPercent(int fPos, int max)
         {
             return (int)((long)Math.Round((double)unchecked(fPos * 100) / (double)max));
-        }
-
-        private static int NewProgressPercent(int fPos, int max)
-        {
-            return (int)((long)Math.Round((double)fPos * 100.0 / (double)max));
         }
 
         // Site: project/Game/SoundEngine.cs:393 -- dx * dx + dy * dy.
@@ -346,32 +356,29 @@ namespace NWR.Tests
         }
 
         // Site: project/GUI/BaseMainWindow.cs:353 -- 1000 * fFrameCount / elapsed.
-        // BaseMainWindow.Repaint() needs a live screen, so verbatim pre-/
-        // post-change replicas are pinned. FPS is declared as float.
+        // BaseMainWindow.Repaint() needs a live screen, so the arithmetic
+        // lives in BaseMainWindow.ComputeFps (internal static seam) and THIS
+        // test calls the production method. FPS is declared as float.
         [Test]
         public void FpsCounter_KeepsFraction()
         {
             // Whole-second golden (old == new).
-            Assert.AreEqual(60f, OldFps(60, 1000));
-            Assert.AreEqual(60f, NewFps(60, 1000));
+            Assert.AreEqual(60f, BaseMainWindow.ComputeFps(60, 1000));
 
             // Discriminating case: fraction 1.5 lost by integer division -> 1.
-            Assert.AreEqual(1f, OldFps(3, 2000));   // golden: truncated
-            Assert.AreEqual(1.5f, NewFps(3, 2000)); // fixed
+            Assert.AreEqual(1.5f, BaseMainWindow.ComputeFps(3, 2000)); // fixed
+            Assert.AreEqual(1f, OldFps(3, 2000));                      // golden: truncated
 
             // Truncation (not rounding) pinned: 1000000/1001 = 999.000999...
             Assert.AreEqual(999f, OldFps(1000, 1001));
-            Assert.AreEqual(999.00098f, NewFps(1000, 1001), 1e-3f);
+            Assert.AreEqual(999.00098f, BaseMainWindow.ComputeFps(1000, 1001), 1e-3f);
         }
 
+        // Verbatim pre-change replica, kept ONLY as a documenting golden of
+        // the truncated value the production seam now avoids.
         private static float OldFps(int frameCount, long elapsed)
         {
             return 1000 * frameCount / elapsed;
-        }
-
-        private static float NewFps(int frameCount, long elapsed)
-        {
-            return 1000f * frameCount / elapsed;
         }
     }
 }
