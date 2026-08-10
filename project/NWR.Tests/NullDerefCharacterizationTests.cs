@@ -179,9 +179,19 @@ namespace NWR.Tests
             if (!Directory.Exists(resourcesDir)) {
                 Directory.CreateDirectory(resourcesDir);
             }
-            string missingPath = Path.Combine(resourcesDir, "__nwr_null_deref_missing.xml");
-            string presentPath = Path.Combine(resourcesDir, "__nwr_null_deref_present.xml");
+            // Unique per-run filenames: fixed names could collide under
+            // parallel test processes.
+            string token = Guid.NewGuid().ToString("N");
+            string missingPath = Path.Combine(resourcesDir, "__nwr_null_deref_" + token + "_missing.xml");
+            string presentPath = Path.Combine(resourcesDir, "__nwr_null_deref_" + token + "_present.xml");
             try {
+                // Guard: if Ragnarok.rfa exists beside the app, LoadStream
+                // reads the archive instead of the resources/ files, which
+                // would silently change what this test exercises. Fail loud.
+                string rfaPath = Path.Combine(NWResourceManager.GetAppPath(), "Ragnarok.rfa");
+                Assert.IsFalse(File.Exists(rfaPath),
+                    "Ragnorak.rfa present: resource loading is archive-based, test fixtures would not be read");
+
                 File.WriteAllText(missingPath, "<RDB><Version Release=\"4\" Revision=\"47\"></Version></RDB>");
                 File.WriteAllText(presentPath,
                     "<RDB><Version Release=\"4\" Revision=\"47\"></Version>" +
@@ -212,18 +222,40 @@ namespace NWR.Tests
         [Test]
         public void LoadLangDB_MissingEntriesNode_AbortsWithoutThrowing()
         {
-            string fixturePath = Path.Combine(Path.GetTempPath(), "nwr_null_deref_locale_fixture.xml");
+            // Unique per-run filenames (parallel-run safety), like the
+            // LoadXML test.
+            string token = Guid.NewGuid().ToString("N");
+            string missingPath = Path.Combine(Path.GetTempPath(), "nwr_null_deref_locale_" + token + "_missing.xml");
+            string presentPath = Path.Combine(Path.GetTempPath(), "nwr_null_deref_locale_" + token + "_present.xml");
             try {
-                File.WriteAllText(fixturePath, "<RDB></RDB>");
-                Assert.IsTrue(File.Exists(fixturePath), "locale fixture not written");
+                File.WriteAllText(missingPath, "<RDB></RDB>");
+                File.WriteAllText(presentPath, "<RDB><Entries Count=\"0\"></Entries></RDB>");
+                Assert.IsTrue(File.Exists(missingPath), "locale fixture not written");
 
                 var method = typeof(Locale).GetMethod("LoadLangDB", BindingFlags.NonPublic | BindingFlags.Instance);
                 Assert.IsNotNull(method, "Locale.LoadLangDB not found");
 
                 var locale = new Locale();
-                Assert.DoesNotThrow(() => method.Invoke(locale, new object[] { fixturePath }));
+
+                // Control: with an Entries node present, the method runs its
+                // body past the deref (entries.ChildNodes at :161) and returns
+                // normally. This proves the reflection path and the fixture
+                // reach the deref site at all.
+                Assert.DoesNotThrow(() => method.Invoke(locale, new object[] { presentPath }));
+
+                // Characterization: with Entries missing, the deref NREs and is
+                // swallowed by the method's own catch-all (:188-190) — so the
+                // load aborts silently. NOTE (test limitation): because the
+                // method catches ALL exceptions, a black-box DoesNotThrow
+                // cannot distinguish "deref reached + NRE swallowed" from
+                // "early return". The deref reachability is established by the
+                // present-entries control above plus code inspection; the
+                // swallow-all itself is a characterization finding for the
+                // owner (a future guard should not hide in this catch).
+                Assert.DoesNotThrow(() => method.Invoke(locale, new object[] { missingPath }));
             } finally {
-                try { File.Delete(fixturePath); } catch (Exception) { }
+                try { File.Delete(missingPath); } catch (Exception) { }
+                try { File.Delete(presentPath); } catch (Exception) { }
             }
         }
     }
@@ -245,14 +277,15 @@ namespace NWR.Tests
         {
             NWGameSpace game = TestBootstrap.EnsureGame(null);
             Player player = game.Player;
+            RemoveAllCoins(player); // isolate: game.Player is a shared singleton
             player.AddMoney(10001);
             var mercenary = new NWCreature(game, null);
             mercenary.InitEx(GlobalVars.cid_Viking, true, false);
 
             // Money (10001) >= HirePrice (Viking default 10000) so the code
             // reaches SubMoney then collocutor.AddMoney -> NRE on the null
-            // collocutor. Order-independent: coins added here leave exactly one
-            // coin behind, still far below the hire price for the sibling test.
+            // collocutor. Explicit coin reset makes this independent of
+            // other tests mutating the shared Player.
             Assert.Throws<NullReferenceException>(() => player.RecruitMercenary(null, mercenary, true));
         }
 
@@ -261,6 +294,7 @@ namespace NWR.Tests
         {
             NWGameSpace game = TestBootstrap.EnsureGame(null);
             Player player = game.Player;
+            RemoveAllCoins(player); // isolate: game.Player is a shared singleton
             var mercenary = new NWCreature(game, null);
             mercenary.InitEx(GlobalVars.cid_Viking, true, false);
 
@@ -270,6 +304,22 @@ namespace NWR.Tests
             // player cannot afford the hire.
             Assert.DoesNotThrow(() => player.RecruitMercenary(null, mercenary, true));
             Assert.Less(player.Money, 10000);
+        }
+
+        // Money is a computed getter (sum of coin item Counts), so a reset
+        // must delete every coin item from the shared Player's inventory.
+        private static void RemoveAllCoins(Player player)
+        {
+            var coins = new System.Collections.Generic.List<Item>();
+            for (int i = 0; i < player.Items.Count; i++) {
+                Item item = player.Items[i];
+                if (item.CLSID == GlobalVars.iid_Coin) {
+                    coins.Add(item);
+                }
+            }
+            foreach (Item coin in coins) {
+                player.DeleteItem(coin);
+            }
         }
     }
 }
