@@ -115,7 +115,7 @@ namespace NWR.Game
 
         private void LoadLangs()
         {
-            var f = new FileStream(LangFile("langs.xml"), FileMode.Open);
+            using (var f = new FileStream(LangFile("langs.xml"), FileMode.Open))
             try {
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(f);
@@ -144,7 +144,7 @@ namespace NWR.Game
 
         private void LoadLangDB(string fileName)
         {
-            var f = new FileStream(fileName, FileMode.Open);
+            using (var f = new FileStream(fileName, FileMode.Open))
             try {
                 XmlDocument xmlDocument = new XmlDocument();
                 xmlDocument.Load(f);
@@ -193,7 +193,9 @@ namespace NWR.Game
         private void LoadLangTexts(string fileName)
         {
             try {
-                base.LoadLangTexts(new FileStream(fileName, FileMode.Open));
+                using (var f = new FileStream(fileName, FileMode.Open)) {
+                    base.LoadLangTexts(f);
+                }
             } catch (Exception ex) {
                 Logger.Write("Locale.loadLangTexts(): " + ex.Message);
             }
@@ -207,7 +209,9 @@ namespace NWR.Game
 
             try {
                 XmlDocument xmlDocument = new XmlDocument();
-                xmlDocument.Load(new FileStream(fileName, FileMode.Open));
+                using (var f = new FileStream(fileName, FileMode.Open)) {
+                    xmlDocument.Load(f);
+                }
 
                 XmlNode root = xmlDocument.DocumentElement;
                 return root;

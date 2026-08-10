@@ -3726,9 +3726,11 @@ namespace NWR.Creatures
                     Space.ShowText(this, BaseLocale.GetStr(RS.rs_Insanity_Beg));
                 }
 
-                var memStream = new MemoryStream();
-                SaveToStream(new BinaryWriter(memStream), NWGameSpace.RGF_Version);
-                ProwlImage = memStream.ToArray();
+                using (var memStream = new MemoryStream())
+                using (var writer = new BinaryWriter(memStream)) {
+                    SaveToStream(writer, NWGameSpace.RGF_Version);
+                    ProwlImage = memStream.ToArray();
+                }
 
                 fProwlSource = effectID;
                 Prowling = true;
@@ -3785,8 +3787,10 @@ namespace NWR.Creatures
                 int fy = fField.Y;
                 ExtPoint p = Location;
 
-                var memStream = new MemoryStream(ProwlImage);
-                LoadFromStream(new BinaryReader(memStream), NWGameSpace.RGF_Version);
+                using (var memStream = new MemoryStream(ProwlImage))
+                using (var reader = new BinaryReader(memStream)) {
+                    LoadFromStream(reader, NWGameSpace.RGF_Version);
+                }
                 TransferTo(lid, fx, fy, p.X, p.Y, StaticData.MapArea, true, false);
                 ProwlImage = null;
             } catch (IOException ex) {
