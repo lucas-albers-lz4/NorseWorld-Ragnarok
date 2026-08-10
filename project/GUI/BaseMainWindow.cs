@@ -350,7 +350,7 @@ namespace NWR.GUI
                     fFrameCount += 1;
                     long now = BaseSystem.TickCount;
                     if (now > fFrameStartTime + 1000) {
-                        FPS = ((1000 * fFrameCount / (now - fFrameStartTime)));
+                        FPS = ((1000f * fFrameCount / (now - fFrameStartTime)));
                         fFrameStartTime = now;
                         fFrameCount = 0;
                     }

@@ -56,7 +56,7 @@ namespace NWR.GUI.Controls
                 if (Max == 0) {
                     percent = 0;
                 } else {
-                    percent = (int)((long)Math.Round((double)(fPos * 100) / (double)Max));
+                    percent = (int)((long)Math.Round((double)fPos * 100.0 / (double)Max));
                 }
     
                 if (fPercent != percent) {

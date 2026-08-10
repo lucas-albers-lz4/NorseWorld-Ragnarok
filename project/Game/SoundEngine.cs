@@ -390,7 +390,7 @@ namespace NWR.Game
 
             int dx = player.X - sound.X;
             int dy = player.Y - sound.Y;
-            double dist = Math.Sqrt(dx * dx + dy * dy);
+            double dist = Math.Sqrt((double)dx * dx + (double)dy * dy);
             double scale = Math.Max(0.0, 1.0 - dist / MaxDistance);
             return (int)(volume * scale);
         }
