@@ -38,21 +38,23 @@ namespace NWR.Tests.Serialization
             Assert.IsTrue(flask.Container);
             Assert.AreEqual(1, flask.Contents.Count);
 
-            var ms = new MemoryStream();
-            var writer = new BinaryWriter(ms);
-            flask.SaveToStream(writer, NWGameSpace.RGF_Version);
-            writer.Flush();
+            using (var ms = new MemoryStream())
+            using (var writer = new BinaryWriter(ms)) {
+                flask.SaveToStream(writer, NWGameSpace.RGF_Version);
+                writer.Flush();
 
-            ms.Position = 0;
-            var reader = new BinaryReader(ms);
-            var loaded = new Item(game, null);
-            loaded.LoadFromStream(reader, NWGameSpace.RGF_Version);
+                ms.Position = 0;
+                using (var reader = new BinaryReader(ms)) {
+                    var loaded = new Item(game, null);
+                    loaded.LoadFromStream(reader, NWGameSpace.RGF_Version);
 
-            Assert.AreEqual(flaskId, loaded.CLSID);
-            Assert.IsTrue(loaded.Container);
-            Assert.AreEqual(1, loaded.Contents.Count);
-            Assert.AreEqual(torchId, loaded.Contents[0].CLSID);
-            Assert.AreEqual(ms.Length, ms.Position);
+                    Assert.AreEqual(flaskId, loaded.CLSID);
+                    Assert.IsTrue(loaded.Container);
+                    Assert.AreEqual(1, loaded.Contents.Count);
+                    Assert.AreEqual(torchId, loaded.Contents[0].CLSID);
+                    Assert.AreEqual(ms.Length, ms.Position);
+                }
+            }
         }
     }
 }
