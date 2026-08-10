@@ -50,6 +50,7 @@
     <Compile Include="Serialization\LocaleLoadsAndDisposesTests.cs" />
     <Compile Include="ExceptionRethrowTests.cs" />
     <Compile Include="NumericRoundtripTests.cs" />
+    <Compile Include="NullDerefCharacterizationTests.cs" />
     <Compile Include="Combat\CombatAttackInfoTests.cs" />
     <Compile Include="Effects\ProwlingEffectsTests.cs" />
     <Compile Include="Quests\QuestCoreTests.cs" />
