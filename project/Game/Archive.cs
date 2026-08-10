@@ -29,13 +29,11 @@ namespace NWR.Game
     {
         private ZipStorer fZipFile;
         private readonly string fArchiveName;
-        private readonly Dictionary<string, string> fNames;
 
         public Archive(string archiveName)
         {
             fArchiveName = archiveName;
             fZipFile = null;
-            fNames = new Dictionary<string, string>();
         }
 
         protected override void Dispose(bool disposing)

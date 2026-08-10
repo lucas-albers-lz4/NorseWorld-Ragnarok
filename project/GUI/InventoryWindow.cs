@@ -336,7 +336,7 @@ namespace NWR.GUI
                 if (Collocutor != null) {
                     debt = player.GetDebt(Collocutor.Name);
                     if (Collocutor.IsTrader) {
-                        Building house = (Building)Collocutor.FindHouse();
+                        Building house = Collocutor.FindHouse();
 
                         if (house.Area.Contains(player.PosX, player.PosY)) {
                             fMode = IWMODE_INSHOP;
@@ -401,7 +401,7 @@ namespace NWR.GUI
                                     AddListItem(fEquipList, item.GetName(blindness), item, onlyIcons);
                                 } else {
                                     if (item.Ware) {
-                                        AddListItem(fPackList, item.GetName(blindness) + " (" + Convert.ToString((int)item.GetTradePrice(Collocutor, player)) + "$)", item, onlyIcons);
+                                        AddListItem(fPackList, item.GetName(blindness) + " (" + Convert.ToString(item.GetTradePrice(Collocutor, player)) + "$)", item, onlyIcons);
                                     } else {
                                         AddListItem(fPackList, item.GetName(blindness), item, onlyIcons);
                                     }
@@ -421,7 +421,7 @@ namespace NWR.GUI
                                 for (int i = 0; i < num4; i++) {
                                     Item item = (Item)groundItems[i];
                                     item.Identified = true;
-                                    AddListItem(fOutList, item.GetName(blindness) + " (" + Convert.ToString((int)item.GetTradePrice(player, Collocutor)) + "$)", item, onlyIcons);
+                                    AddListItem(fOutList, item.GetName(blindness) + " (" + Convert.ToString(item.GetTradePrice(player, Collocutor)) + "$)", item, onlyIcons);
                                 }
 
                                 groundItems.Dispose();

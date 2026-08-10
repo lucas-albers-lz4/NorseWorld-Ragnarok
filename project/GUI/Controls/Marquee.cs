@@ -29,7 +29,7 @@ namespace NWR.GUI.Controls
     public sealed class Marquee : TextControl
     {
         private bool fActiveScroll;
-        private float fSpeed;
+        private readonly float fSpeed;
         private long fStartTime;
         private int fY;
 

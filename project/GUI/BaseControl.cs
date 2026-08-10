@@ -70,7 +70,7 @@ namespace NWR.GUI
         private int fAbsTop;
         private BaseControl fActiveControl;
         private string fCaption;
-        private ExtList<BaseControl> fControls;
+        private readonly ExtList<BaseControl> fControls;
         private BaseImage fCursor;
         private int fDragMode;
         private Font fFont;
@@ -413,7 +413,7 @@ namespace NWR.GUI
         {
             get {
                 BaseWindow wnd = (this is BaseWindow) ? (BaseWindow)this : null;
-                return (wnd != null) ? wnd.HasStyle(WindowStyles.wsKeyPreview) : false;
+                return (wnd != null) && wnd.HasStyle(WindowStyles.wsKeyPreview);
             }
         }
 
@@ -526,9 +526,6 @@ namespace NWR.GUI
                     }
                 } finally {
                     DragControl = null;
-                    if (DragSave != null) {
-                        DragSave = null;
-                    }
                 }
             }
         }

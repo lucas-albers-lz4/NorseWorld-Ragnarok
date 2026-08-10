@@ -153,7 +153,7 @@ namespace NWR.Universe
         public NWGameSpace Space
         {
             get {
-                return (NWGameSpace)fSpace;
+                return fSpace;
             }
         }
 

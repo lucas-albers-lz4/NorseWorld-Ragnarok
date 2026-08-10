@@ -105,7 +105,6 @@ namespace NWR.ScenarioDsl
             while (true) {
                 SkipWs(json, ref i);
                 if (Peek(json, i) == '}') {
-                    i++;
                     break;
                 }
                 string key = ReadString(json, ref i);
@@ -145,7 +144,6 @@ namespace NWR.ScenarioDsl
                     continue;
                 }
                 if (Peek(json, i) == '}') {
-                    i++;
                     break;
                 }
                 throw new InvalidOperationException("expected , or } at " + i);

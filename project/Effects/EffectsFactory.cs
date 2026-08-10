@@ -931,7 +931,7 @@ namespace NWR.Effects
             } else {
                 NWCreature mon = (NWCreature)aExtItem.Contents[0];
                 aExtItem.CLSID = GlobalVars.iid_Mummy;
-                aExtItem.Weight = (((float)mon.Weight * 0.1f));
+                aExtItem.Weight = ((mon.Weight * 0.1f));
                 string cs = mon.GetDeclinableName(Number.nSingle, Case.cGenitive);
                 GlobalVars.nwrHost.ShowText(GlobalVars.nwrHost, BaseLocale.Format(RS.rs_MummyCreated, new object[]{ cs }));
             }
@@ -4969,7 +4969,7 @@ namespace NWR.Effects
                 return;
             }
 
-            ushort tid = (ushort)tile_id;
+            ushort tid = tile_id;
             if ((StaticData.dbPlaces[tid].Signs.Contains(PlaceFlags.psBackground))) {
                 aTile.Background = tid;
                 return;

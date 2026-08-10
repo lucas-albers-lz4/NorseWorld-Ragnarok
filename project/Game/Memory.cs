@@ -55,7 +55,7 @@ namespace NWR.Game
         public MemoryEntry Find(string sign)
         {
             MemoryEntry result = null;
-            if (fTable.ContainsKey(sign) ? (result = fTable.GetValueOrNull(sign)) == result : false) {
+            if (fTable.ContainsKey(sign) && (result = fTable.GetValueOrNull(sign)) == result) {
                 return result;
             } else {
                 return null;
@@ -80,7 +80,7 @@ namespace NWR.Game
             StreamUtils.WriteInt(stream, fTable.Count);
 
             foreach (KeyValuePair<string, MemoryEntry> dicEntry in fTable) {
-                MemoryEntry data = (MemoryEntry)dicEntry.Value;
+                MemoryEntry data = dicEntry.Value;
                 byte kind = data.SerializeKind;
                 StreamUtils.WriteByte(stream, kind);
                 data.SaveToStream(stream, version);

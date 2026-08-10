@@ -115,7 +115,7 @@ namespace NWR.Creatures.Brain
                         break;
 
                     case GoalKind.gk_WareReturn:
-                        Building house = (Building)self.FindHouse();
+                        Building house = self.FindHouse();
                         if (house != null && house.Area.Contains(self.PosX, self.PosY)) {
                             goal.Value = 0.9f;
                         } else {
@@ -147,7 +147,7 @@ namespace NWR.Creatures.Brain
         public override void StepTo(int aX, int aY)
         {
             try {
-                Building house = (Building)((NWCreature)fSelf).FindHouse();
+                Building house = ((NWCreature)fSelf).FindHouse();
                 if (house == null) {
                     base.StepTo(aX, aY);
                     return;

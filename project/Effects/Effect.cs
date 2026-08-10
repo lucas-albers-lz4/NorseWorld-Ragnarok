@@ -240,7 +240,7 @@ namespace NWR.Effects
                 }
             } catch (Exception ex) {
                 //EffectsData.dbEffects[(int)effectID]
-                string msg = "Effect.invokeEffect(): " + effectID.ToString();
+                string msg = "Effect.invokeEffect(): " + effectID;
                 if (creature != null) {
                     msg = msg + "/" + ((NWCreature)creature).Entry.Sign;
                 }

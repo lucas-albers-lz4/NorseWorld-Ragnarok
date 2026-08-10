@@ -40,7 +40,7 @@ namespace NWR.GUI
 
             if (place != null && !place.EmptyStates) {
                 ushort bg = place.Background;
-                ushort fg = place.Foreground;
+                ushort fg;
 
                 fg = PtTransDoor(place);
                 short op = space.GetTileBrightness(field, place, true);
@@ -72,7 +72,7 @@ namespace NWR.GUI
 
             if (place != null && !place.EmptyStates) {
                 int bg = (int)place.Background;
-                int fg = (int)place.Foreground;
+                int fg;
                 int bgExt = (int)place.BackgroundExt;
                 int fgExt = (int)place.ForegroundExt;
                 int fog = place.FogID;
@@ -253,7 +253,7 @@ namespace NWR.GUI
                         break;
                 }
 
-                result = (int)res;
+                result = res;
             } else {
                 result = tid;
             }
